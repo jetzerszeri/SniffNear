@@ -19,14 +19,11 @@ h1,h2,h3,h4,h5,h6{
     --color-neutral-0: #FAFAFA;
     --color-neutral-10: #F5F5F5;
     --color-neutral-40: #AEAEAE;
+    --color-neutral-50: #9A9A9A;
     --color-neutral-90: #1D1A20;
 }
 
 body{
-    /* provisionalmente */
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     min-height: 100vh;
     background-color: var(--color-neutral-10);
 }
@@ -102,7 +99,7 @@ body{
 }
 
 
-.bottomNavBar ul li:not(:nth-child(3)) a::before {
+.bottomNavBar ul li:not(:nth-child(3)) a::before, .sidebar nav ul li::before {
     content: "";
     position: absolute;
     left: 0;
@@ -116,7 +113,7 @@ body{
     transition: scale 0.25s;
 }
 
-.bottomNavBar ul li:not(:nth-child(3)).active a::before{
+.bottomNavBar ul li:not(:nth-child(3)).active a::before, .sidebar nav ul li:hover::before{
 scale: 1;
 transform-origin: left;
 }
@@ -133,4 +130,65 @@ a{
 /* Sidebar */
 .sidebar svg{
     fill: var(--color-neutral-90);
+}
+
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1d1a208a;
+    /* box-shadow: 0px 0px 10px rgba(0,0,0,0.1); */
+    z-index: 100;
+    transition: all 0.2s ease;
+}
+
+.sidebar nav{
+    /* position: absolute; */
+    width: 75%;
+    min-width: 250px;
+    max-width: 600px;
+    height: 100%;
+    background-color: var(--color-neutral-0);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+    padding: 30px;
+}
+
+.sidebarLogo{
+    margin-bottom: 30px;
+}
+
+/* iconos del sidebar */
+.sidebar nav ul svg, .sidebar nav ul a {
+    fill: var(--color-neutral-50);
+    color: var(--color-neutral-50);
+}
+.sidebar nav ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.sidebar nav ul li{
+    position: relative;
+    font-size: 1em;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.sidebar nav ul a{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.sidebar nav ul li:hover{
+    margin-left: 10px;
+}
+
+.sidebar li:hover a, .sidebar li:hover svg, .sidebar li.active a, .sidebar li.active svg{
+    fill: var(--color-green);
+    color: var(--color-green);
 }
