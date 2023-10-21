@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
 *{
-    background-color: #F5F5F5;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Rubik', sans-serif;
+}
+
+:root {
+    --color-green: #006667;
+    --color-oragne: #FF8367;
+    --color-darkblue: #363A59;
+    --color-yellow: #FFD600;
+    --color-neutral-0: #FAFAFA;
+    --color-neutral-10: #F5F5F5;
+    --color-neutral-40: #AEAEAE;
+    --color-neutral-90: #1D1A20;
 }
