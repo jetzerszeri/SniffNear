@@ -24,9 +24,9 @@ h1,h2,h3,h4,h5,h6{
 
 body{
     /* provisionalmente */
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     min-height: 100vh;
     background-color: var(--color-neutral-10);
 }
@@ -114,9 +114,23 @@ body{
     scale: 0 1;
     transform-origin: right;
     transition: scale 0.25s;
-  }
+}
 
-  .bottomNavBar ul li:not(:nth-child(3)).active a::before{
-    scale: 1;
-    transform-origin: left;
-  }
+.bottomNavBar ul li:not(:nth-child(3)).active a::before{
+scale: 1;
+transform-origin: left;
+}
+
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+/* Sidebar */
+.sidebar svg{
+    fill: var(--color-neutral-90);
+}
