@@ -218,3 +218,37 @@ a{
     transform: scale(1.2);
     color: var(--color-oragne);
 }
+
+/* top nav bar */
+.topNavBar{
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    background-color: var(--color-neutral-10);
+}
+
+.topNavBar i{
+    font-size: 1.5em;
+    color: var(--color-neutral-50);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.topNavBar i:hover{
+    color: var(--color-green);
+}
+
+/* texto o titulo que se muestra en el top nav bar */
+.topNavBar h1{
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+}
