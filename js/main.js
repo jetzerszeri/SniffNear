@@ -9,10 +9,10 @@ bottomNavListItems.forEach(function (item) {
     });
 });
 
-const btnSidebarTest = document.querySelector('button');
+const menubtn = document.querySelector('.menubtn');
 const sidebar = document.querySelector('.sidebar');
 const sidebarNav = document.querySelector('.sidebar nav');
-btnSidebarTest.addEventListener('click', function () {
+menubtn.addEventListener('click', function () {
     sidebar.classList.add('show');
     sidebar.style.transform = 'translateX(0)';
     sidebarNav.classList.add('show');
