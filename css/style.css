@@ -13,9 +13,14 @@ h1,h2,h3,h4,h5,h6{
 
 :root {
     --color-green: #006667;
+    --color-green-background: #B2D1D1;
     --color-oragne: #FF8367;
+    --color-oragne-background: #FFDAD1;
     --color-darkblue: #363A59;
+    --color-darkblue-background: #C3C4CD;
     --color-yellow: #FFD600;
+    --color-yellow2: #FFBC00;
+    --color-yellow-background: #fff3b2ac;
     --color-neutral-0: #FAFAFA;
     --color-neutral-10: #F5F5F5;
     --color-neutral-40: #AEAEAE;
@@ -417,7 +422,7 @@ main h1, main h2{
 }
 
 .servicesCard ul li:nth-of-type(1){
-    background-color: #C3C4CD;
+    background-color: var(--color-darkblue-background);
 }
 
 .servicesCard ul li:nth-of-type(1) svg{
@@ -425,7 +430,7 @@ main h1, main h2{
 }
 
 .servicesCard ul li:nth-of-type(2){
-    background-color: #FFDAD1;
+    background-color: var(--color-oragne-background);
 }
 
 .servicesCard ul li:nth-of-type(2) svg{
@@ -433,7 +438,7 @@ main h1, main h2{
 }
 
 .servicesCard ul li:nth-of-type(3){
-    background-color: #B2D1D1;
+    background-color: var(--color-green-background);
 }
 
 .servicesCard ul li:nth-of-type(3) svg{
@@ -441,11 +446,11 @@ main h1, main h2{
 }
 
 .servicesCard ul li:nth-of-type(4){
-    background-color: #fff3b2ac;
+    background-color: var(--color-yellow-background);
 }
 
 .servicesCard ul li:nth-of-type(4) svg{
-    fill: #E9C300;
+    fill: var(--color-yellow2);
 }
 
 
