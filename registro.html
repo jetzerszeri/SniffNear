@@ -25,7 +25,7 @@
             <p>¡Bienvenido a SniffNear!</p>
         </div>
 
-        <form>
+        <form method="post">
             <input type="text" name="name" placeholder="Nombre">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Contraseña">
@@ -46,23 +46,35 @@
         const form = document.querySelector('form');
         console.log(form);
 
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            console.log(data);
 
+            try {
+                const response = await fetch('http://localhost:2024/api/usuarios/registro', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
 
-            fetch('http://localhost:2024/api/usuarios/registro', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-                
-            })
+                const json = await response.json();
+                console.log(json);
 
+                if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
+                    localStorage.setItem('userId', json.userId);
+                    window.location.href = './index.html';  // Redireccionar al usuario a index.html
+                } else {
+                    console.error('Error en el registro:', json.message);
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+            }
         });
+
 
     </script>
 
