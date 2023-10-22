@@ -252,3 +252,51 @@ a{
     text-overflow: ellipsis;
     padding: 0 10px;
 }
+
+
+/* Home */
+main{
+    padding: 20px;
+}
+
+main h1, main h2{
+    font-size: 1.2em;
+    font-weight: 500;
+    color: var(--color-neutral-90);
+    margin: 8px 0 14px 0;
+}
+
+/* secciones del main (puse una clase al main del home por si estos estilos no se aplican a las secciones de las demás páginas) */
+.homeMain section{
+    background-color: var(--color-neutral-0);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
+    padding: 12px;
+}
+
+.homeMain{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.welcomeCard{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.welcomeCard img{
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+}
+
+.welcomeCard h1{
+    margin-bottom: 2px;
+}
+
+.welcomeCard p{
+    font-size: 0.8em;
+    color: var(--color-neutral-50);
+}
