@@ -256,7 +256,7 @@ a{
 
 /* Home */
 main{
-    padding: 20px;
+    padding: 20px 20px 80px 20px;
 }
 
 main h1, main h2{
@@ -271,6 +271,7 @@ main h1, main h2{
     background-color: var(--color-neutral-0);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
     padding: 12px;
+    border-radius: 8px;
 }
 
 .homeMain{
@@ -283,7 +284,6 @@ main h1, main h2{
     display: flex;
     gap: 10px;
     align-items: center;
-    border-radius: 8px;
 }
 
 .welcomeCard img{
@@ -310,8 +310,22 @@ main h1, main h2{
     text-align: center;
 }
 .myPetsCard > div:nth-of-type(1){
-
+    display: flex;
+    gap: 12px;
+    overflow-x: scroll;
+    padding-bottom: 12px;
 }
+
+/* para ocultar el indicador del scroll horizontal */
+.myPetsCard > div:nth-of-type(1)::-webkit-scrollbar {
+    display: none; /* Ocultar para Chrome, Safari y Opera */
+}
+
+.myPetsCard > div:nth-of-type(1) {
+    -ms-overflow-style: none;  /* Ocultar para IE y Edge */
+    scrollbar-width: none; /* Ocultar para Firefox */
+}
+
 
 .myPetsCard .addPetBtn{
     width: 60px;
@@ -326,19 +340,50 @@ main h1, main h2{
     color: #FFD600;
     font-size: 3em;
     font-weight: bolder;
-    cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.myPetsCard .addPetBtn:hover{
+.myPetsCard > div:nth-of-type(1) > div:hover .addPetBtn{
     background-color: #FFD600;
     color: var(--color-neutral-0);
 }
 
-.myPetsCard > div:nth-of-type(1) > div{
+.myPetsCard > div:nth-of-type(1) > div, .myPetsCard ul li{
     width: 60px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    cursor: pointer;
 }
 
+.myPetsCard ul{
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+
+/* div contenedor de la imagen del pet */
+.myPetsCard ul li > div{
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.myPetsCard ul li > div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.2s ease;
+}
+
+.myPetsCard ul li:hover > div img{
+    transform: scale(1.1);
+}
+
+.myPetsCard ul li:hover > div{
+    border: 1px solid var(--color-green);
+}
