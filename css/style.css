@@ -499,3 +499,16 @@ main h1, main h2{
     font-size: 1em;
     font-weight: 500;
 }
+
+
+/* formulario de crear cuenta */
+.singUpView{
+    background-color: var(--color-neutral-0);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+    margin-top: 120px;
+    text-align: center;
+    border-radius: 41px 41px 0px 0px;
+    padding: 0 20px 150px 20px;
+    position: absolute;
+    bottom: 0;
+}
