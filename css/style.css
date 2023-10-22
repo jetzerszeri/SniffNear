@@ -584,7 +584,6 @@ main h1, main h2{
     padding: 10px 20px;
     border-radius: 8px;
     font-size: 1em;
-    /* text-align: left; */
 }
 
 .btn:hover, button:hover{
