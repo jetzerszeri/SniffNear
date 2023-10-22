@@ -499,3 +499,93 @@ main h1, main h2{
     font-size: 1em;
     font-weight: 500;
 }
+
+
+/* formulario de crear cuenta */
+.singUpView{
+    background-color: var(--color-neutral-0);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+    margin-top: 120px;
+    text-align: center;
+    border-radius: 41px 41px 0px 0px;
+    padding: 0 20px 50px 20px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.singUpView > div:nth-of-type(1){
+    transform: translateY(-50%);
+    background-color: var(--color-neutral-0);
+    width: fit-content;
+    margin: auto;
+    padding: 12px;
+    border-radius: 50%;
+    margin-bottom: -40px;
+}
+.singUpView h1{
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.singUpView h1 + p{
+    font-size: 1em;
+    color: var(--color-neutral-50);
+    margin-bottom: 30px;
+}
+
+.singUpView form{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 10px;
+}
+
+.singUpView form input{
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--color-neutral-40);
+    padding: 0 10px;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+.singUpView form > div:nth-of-type(1){
+    text-align: left;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap : 10px;
+    color: var(--color-neutral-50);
+    margin-bottom: 10px;
+}
+
+.singUpView form > div:nth-of-type(1) a{
+    color: var(--color-neutral-50);
+    font-weight: 600;
+}
+
+.singUpView form > div:nth-of-type(2){
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn, button{
+    border: 1.5px solid var(--color-green);
+    background-color: var(--color-green);
+    color: var(--color-neutral-0);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    min-width: min-content;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.btn:hover, button:hover{
+    background-color: #006567c4;
+}
