@@ -625,3 +625,58 @@ main section{
     justify-content: center;
     align-items: center;
 }
+.blogtitulo{
+align-self: stretch;
+color: var(--grey-grey-800, #39434F);
+text-align: center;
+font-family: Rubik;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: 22px; /* 137.5% */
+}
+
+
+.cardd{
+    margin-bottom: 20px;
+}
+.welcomeCard h3{
+    font-size: x-small;
+}
+.welcomeCard p{
+    font-size: 0.6rem;
+    margin-top: 3%;
+}
+hr{
+opacity: 0.5 !important;
+background: radial-gradient(2444399.94% 38.49% at 50% 50.12%, rgba(138, 138, 138, 0.30) 0%, rgba(138, 138, 138, 0.10) 100%);
+margin-top: 5px !important;
+margin-bottom: 9px !important;
+}
+
+
+.detalle-blog h2{
+    width: 260px;
+    color: #000;
+    font-family: Rubik;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 157.143% */
+}
+
+.detalle-blog p{
+width: 250px;
+color: #000;
+font-family: Outfit;
+font-size: 10px;
+font-style: normal;
+font-weight: 300;
+line-height: 22px; /* 220% */
+}
+.imagen img{
+margin-left: 85px;
+width: 91px;
+height: 129px;
+flex-shrink: 0;
+}
