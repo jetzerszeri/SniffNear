@@ -271,6 +271,12 @@
                     </svg>                        
                     <span>Chat</span>
                 </a></li>
+                <li class="logoutbtn">
+                    <a href="#">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </li>
             </ul>
 
         </nav>
@@ -327,6 +333,15 @@
             window.location.href = 'agregar-mascota.html';
         });
 
+        const logoutbtn = document.querySelector('.logoutbtn');
+        logoutbtn.addEventListener('click', () => {
+            localStorage.removeItem('userId');
+            window.location.href = 'login.html';
+        });
+
+
+
+
         async function getUser(){
             const response = await fetch(`http://localhost:2024/api/usuarios/${storedUserId}`);
 
@@ -356,7 +371,13 @@
             }
         }
 
-        getUser();
+
+        if(storedUserId){
+            getUser();
+        } else {
+            window.location.href = 'login.html';
+        }
+        // getUser();
 
 
     </script>
