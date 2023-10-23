@@ -21,23 +21,19 @@
         </div>
             
         <div>
-            <h1>Registrame</h1>
+            <h1>Iniciar sesión</h1>
             <p>¡Bienvenido a SniffNear!</p>
         </div>
 
         <form method="post">
-            <input type="text" name="name" placeholder="Nombre">
             <input type="email" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Contraseña">
 
-            <div>
-                <input type="checkbox" name="aceptar">
-                <label for="aceptar">Acepto los <a href="">Términos y Condiciones</a></label>
-            </div>
+            <div> <a href="#">Olvidé mi contraseña</a></div>
 
             <div>
-                <button type="submit" >Crear mi cuenta</button>
-                <p>¿Ya tienes una cuenta? <a href="login.html">Ingresá</a></p>
+                <button type="submit" >Iniciar Sesión</button>
+                <p>¿Ya tienes una cuenta? <a href="registro.html">Registrate</a></p>
             </div>
         </form>
     </div>
@@ -50,9 +46,10 @@
             e.preventDefault();
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
+            console.log(data);
 
             try {
-                const response = await fetch('http://localhost:2024/api/usuarios/registro', {
+                const response = await fetch('http://localhost:2024/api/usuarios/auth', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,6 +62,7 @@
 
                 if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
                     localStorage.setItem('userId', json.userId);
+                    // console.log('Usuario logueado:', json.userId);
                     window.location.href = './index.html';  // Redireccionar al usuario a index.html
                 } else {
                     console.error('Error en el registro:', json.message);
