@@ -272,7 +272,8 @@ main h1, main h2{
 }
 
 /* secciones del main (puse una clase al main del home por si estos estilos no se aplican a las secciones de las demás páginas) */
-.homeMain section{
+/* .homeMain section{ */
+main section{
     background-color: var(--color-neutral-0);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
     padding: 12px;
@@ -588,4 +589,9 @@ main h1, main h2{
 
 .btn:hover, button:hover{
     background-color: #006567c4;
+}
+
+/* estilos de la vista de agregar mascota */
+.addNewPetForm h2{
+    text-align: center;
 }

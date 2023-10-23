@@ -25,6 +25,37 @@
     </div>
 
     <main>
+        <section class="addNewPetForm">
+            <form action="" method="post">
+                <h2>Crear perfil de mi mascota</h2>
+
+                <div>
+                    <label for="name">Nombre de tu mascota</label>
+                    <input type="text" name="name" placeholder="Ingresa el nombre de tu mascota">
+                </div>
+
+                <!-- <div>
+                    <label for="type">¿Qué tipo de mascota es?</label>
+                    <select name="type" id="type">
+                        <option value="perro">Perro</option>
+                        <option value="gato">Gato</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div> -->
+
+                <div>
+                    <label>¿Qué tipo de mascota es?</label>
+                    <div class="petTypeSelector">
+                        <img src="img/perro.png" alt="Perro" data-value="perro">
+                        <img src="img/gato.png" alt="Gato" data-value="gato">
+                    </div>
+                    <input type="hidden" name="type" id="type">
+                </div>
+
+
+            </form>
+        </section>
+
 
     </main>
 
@@ -64,6 +95,20 @@
     <script>
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
+
+        const images = document.querySelectorAll('.petTypeSelector img');
+        const hiddenInput = document.getElementById('type');
+
+        images.forEach(img => {
+            img.addEventListener('click', function() {
+                images.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                hiddenInput.value = this.dataset.value;
+            });
+        });
+
+
+
     </script>
 
 </body>
