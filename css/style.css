@@ -535,14 +535,14 @@ main section{
     margin-bottom: 30px;
 }
 
-.singUpView form{
+.singUpView form, .addNewPetForm form{
     display: flex;
     flex-direction: column;
     padding: 0 20px;
     gap: 10px;
 }
 
-.singUpView form input{
+.singUpView form input, .addNewPetForm form input{
     height: 40px;
     border-radius: 8px;
     border: 1px solid var(--color-neutral-40);
@@ -597,11 +597,31 @@ main section{
 }
 .addNewPetForm .petTypeSelector img{
     border-radius: 8px;
-    width: 60px;
-    height: 60px;
-    border: 1px solid transparent;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 .addNewPetForm .petTypeSelector img.selected{
-    border: 1px solid var(--color-green);
+    border: 2px solid var(--color-green);
+    opacity: 1;
+}
+
+.addNewPetForm form > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.addNewPetForm form > div:nth-of-type(2) div{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
