@@ -34,7 +34,7 @@
         <section class="welcomeCard">
             <img src="img/userAvatar.png" alt="Avatar del usuario">
             <div>
-                <h1>Hola, Ailen!</h1>
+                <h1>Cargando info...</h1>
                 <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
             </div>
         </section>
@@ -49,7 +49,7 @@
                     <p>Agregá</p>
                 </div>
                 <ul>
-                    <li>
+                    <!-- <li>
                         <div>
                             <img src="img/pet1.jpg" alt="Mascota 1">
                         </div>
@@ -84,7 +84,7 @@
                             <img src="img/pet3.jpg" alt="Mascota 3">
                         </div>
                         <p>Neel</p>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </section>
@@ -310,6 +310,47 @@
     <script>
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
+
+        //validar si hay un userId, sino mandarlo al login
+
+        const welcomeMsg = document.querySelector('.welcomeCard h1');
+        console.log(welcomeMsg);
+
+        const petsUl = document.querySelector('.myPetsCard ul');
+        console.log(petsUl);
+
+        async function getUser(){
+            const response = await fetch(`http://localhost:2024/api/usuarios/${storedUserId}`);
+
+            if(response.ok){
+                const data = await response.json();
+
+                user = data.usuario;
+                pets = data.mascotas;
+                console.log(user);
+                console.log(pets);
+
+                welcomeMsg.innerHTML = `Hola, ${user.name}!`;
+
+                pets.forEach(pet => {
+                    const petLi = document.createElement('li');
+                    petLi.innerHTML = `
+                        <div>
+                            <img src="${pet.img}" alt="Foto de ${pet.name}">
+                        </div>
+                            <p>${pet.name}</p>
+                    `;
+                    petsUl.appendChild(petLi);
+                });
+                // console.log(data);
+            } else {
+                cosole.log('Error en la petición');
+            }
+        }
+
+        getUser();
+
+
     </script>
 
 </body>
