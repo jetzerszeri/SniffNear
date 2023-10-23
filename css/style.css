@@ -272,7 +272,8 @@ main h1, main h2{
 }
 
 /* secciones del main (puse una clase al main del home por si estos estilos no se aplican a las secciones de las demás páginas) */
-.homeMain section{
+/* .homeMain section{ */
+main section{
     background-color: var(--color-neutral-0);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
     padding: 12px;
@@ -534,14 +535,14 @@ main h1, main h2{
     margin-bottom: 30px;
 }
 
-.singUpView form{
+.singUpView form, .addNewPetForm form{
     display: flex;
     flex-direction: column;
     padding: 0 20px;
     gap: 10px;
 }
 
-.singUpView form input{
+.singUpView form input, .addNewPetForm form input{
     height: 40px;
     border-radius: 8px;
     border: 1px solid var(--color-neutral-40);
@@ -588,4 +589,39 @@ main h1, main h2{
 
 .btn:hover, button:hover{
     background-color: #006567c4;
+}
+
+/* estilos de la vista de agregar mascota */
+.addNewPetForm h2{
+    text-align: center;
+}
+.addNewPetForm .petTypeSelector img{
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.addNewPetForm .petTypeSelector img.selected{
+    border: 2px solid var(--color-green);
+    opacity: 1;
+}
+
+.addNewPetForm form > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.addNewPetForm form > div:nth-of-type(2) div{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
