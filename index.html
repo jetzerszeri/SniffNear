@@ -318,7 +318,6 @@
         console.log(storedUserId);
 
         //validar si hay un userId, sino mandarlo al login
-
         const welcomeMsg = document.querySelector('.welcomeCard h1');
         // console.log(welcomeMsg);
 
@@ -332,6 +331,35 @@
         addPetBtnDiv.addEventListener('click', () => {
             window.location.href = 'agregar-mascota.html';
         });
+
+        //mostrar y ocultar el sidebar:
+        const menubtn = document.querySelector('.menubtn');
+        let sidebar = document.querySelector('.sidebar');
+        let sidebarNav = document.querySelector('.sidebar nav');
+
+        menubtn.addEventListener('click', function () {
+            sidebar.classList.add('show');
+            sidebar.style.transform = 'translateX(0)';
+            sidebarNav.classList.add('show');
+        });
+        
+        function closeSidebar() {
+            
+            sidebarNav.classList.remove('show');
+            sidebar.classList.remove('show');
+            setTimeout(function () {
+                sidebar.style.transform = 'translateX(-100%)';
+            }, 1000);
+        }
+        
+        let btnCloseSidebar = document.querySelector('.closebtn');
+        btnCloseSidebar.addEventListener('click', closeSidebar);
+        sidebar.addEventListener('click', closeSidebar);
+        
+        sidebarNav.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+
 
         const logoutbtn = document.querySelector('.logoutbtn');
         logoutbtn.addEventListener('click', () => {
@@ -367,7 +395,7 @@
                 });
                 // console.log(data);
             } else {
-                cosole.log('Error en la petición');
+                console.log('Error en la petición');
             }
         }
 
