@@ -589,3 +589,139 @@ hr{
 background: radial-gradient(2444399.94% 38.49% at 50% 50.12%, rgba(138, 138, 138, 0.30) 0%, rgba(138, 138, 138, 0.10) 100%);
 margin-top: -6px !important;
 }
+
+/* estilos de la vista de agregar mascota */
+.addNewPetForm h2{
+    text-align: center;
+}
+.addNewPetForm .petTypeSelector img{
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.addNewPetForm .petTypeSelector img.selected{
+    border: 2px solid var(--color-green);
+    opacity: 1;
+}
+
+.addNewPetForm form > div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.addNewPetForm form > div:nth-of-type(2) div{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+/* alertfind */
+.alert_find h1{
+    text-align: center;
+}
+.alert_find form{
+    display: flex;
+    flex-direction: column;
+     padding: 0 20px;
+    gap: 10px;
+    margin: 5%;
+}
+.alert_find form input{
+    background: #F7F2FA;
+    border-radius: 6px;
+    border-color: #F7F2FA;
+}
+.alert_find form textarea{ 
+    background: #F7F2FA;
+    border-radius: 6px;
+    border-color: #F7F2FA;
+    font-size: 1em;
+    transition: all 0.2s ease;
+    padding: 5px;
+   
+}
+
+.alert_find .petTypeSelector{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+.alert_find .petTypeSelector img {
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 16px;
+    background:  #F7F2FA;
+    margin: 5px;
+    /* M3/Elevation Light/1 */
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+    
+}
+.alert_find .petTypeSelector img.selected{
+    border: 2px solid var(--color-green);
+    opacity: 1;
+}
+.alert_find .select_color {
+    display: flex; 
+    flex-direction: row;
+ }
+  
+ .select_color label {
+    margin:2px;
+  }
+ .alert_find form input[type="color"] {
+    width: 30px;
+    height: 30px; 
+    padding: 0; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 6px;
+    border-color: none;
+    background-color: none;
+ }
+.alert_find .fecha{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.divBtnContinuar{
+    display: flex; 
+    justify-content: space-between; 
+    padding: 10px;
+}
+.btnContinuar{
+    align-self: flex-end;
+    border-radius: 8px;
+    color: #FFF;
+    text-align: center;
+    font-family: "Rubik";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: #363A59;
+}
+.alert_find .sectionSuccess{
+    background-color:#FFD600;
+}
+.alert_find .sectionSuccess .divSuccess{
+    display: flex;
+    width: 320px;
+    height: 568px;
+    padding: 0px 69px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
