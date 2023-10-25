@@ -250,6 +250,7 @@ a{
 
 /* texto o titulo que se muestra en el top nav bar */
 .topNavBar h1{
+    margin-left: 20px;
     font-size: 16px;
     font-weight: 600;
     white-space: nowrap;
@@ -625,19 +626,7 @@ main section{
     justify-content: center;
     align-items: center;
 }
-.titulo{
-    margin-top: 10px;
-    margin-bottom: 35px;
-}
-.titulo h1{
-    color: var(--grey-grey-800, #39434F);
-    text-align: center;
-    font-family: Rubik;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 22px; /* 137.5% */
-}
+
 
 .mypet{
     margin: auto;
@@ -675,4 +664,5 @@ margin-top: 6px !important;
 }
 .container{
     margin-bottom: 100px;
+    margin-top: 40px;
 }
