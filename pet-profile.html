@@ -40,13 +40,13 @@
             <div class="petNameCard">
                 <img src="img/pet2.jpg" alt="Avatar de la mascota 2">
                 <div>
-                    <h2>Sky</h2>
+                    <h2>Cargando...</h2>
                     <p>Gato</p>
                 </div>
                 <i class="bi bi-pencil"></i>
             </div>
 
-            <ul class="femalePetInfo">
+            <!-- <ul class="femalePetInfo">
                 <li>
                     <p><span>Género: </span> Femenino</p>
                 </li>
@@ -65,7 +65,7 @@
                 <li>
                     <p><span>Raza: </span> Callejero</p>
                 </li>
-            </ul>
+            </ul> -->
     </main>
 
 
@@ -100,5 +100,63 @@
 
     </nav>
 
+    <script>
+        const petIdTest = "653828c0398d11afd96d534d";
+        const petNameH2 = document.querySelector('.petNameCard h2');
+        const petTypeP = document.querySelector('.petNameCard p');
+        const petImg = document.querySelector('.petNameCard img');
+        const sectionPetInfo = document.querySelector('.mainPetProfile > section');
+
+        function createLiOfPetInfo(infoName, info, ul){
+            // if (!info){
+            //     return;
+            // }
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<p><span>${infoName}:</span> <span>${info}</span></p>`
+            ul.appendChild(listItem);
+        }
+
+        function getGenero (mascota){
+            if (mascota.sex == "male"){
+                return "Masculino"
+            } else if (mascota.sex == "female"){
+                return "Femenino"
+            } else {
+                return "No especificado"
+            }
+        }
+        
+        async function getPetInfo(){
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/pets/${petIdTest}`);
+
+            if(response.ok){
+                const data = await response.json();
+                // console.log(data);
+
+                pet = data.pet;
+                console.log(pet);
+
+                petImg.src = pet.img;
+                petNameH2.innerHTML = pet.name;
+                petTypeP.innerHTML = pet.type;
+
+                const petsUl = document.createElement('ul');
+                petsUl.classList.add(`${pet.sex}PetInfo`);
+
+                createLiOfPetInfo('Género', getGenero(pet), petsUl);
+                createLiOfPetInfo('Edad', pet.age, petsUl);
+                createLiOfPetInfo('Tamaño', pet.size, petsUl);
+                createLiOfPetInfo('Color', pet.color, petsUl);
+                createLiOfPetInfo('Ubicación', pet.location, petsUl);
+                createLiOfPetInfo('Raza', pet.breed, petsUl);
+
+                sectionPetInfo.appendChild(petsUl);
+            } else {
+                cosole.log('Error en la petición');
+            }
+        }
+
+        getPetInfo();
+    </script>
 </body>
 </html>
