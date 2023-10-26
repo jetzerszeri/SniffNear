@@ -262,6 +262,9 @@ a{
 /* Home */
 main{
     padding: 20px 20px 80px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 main h1, main h2{
@@ -272,32 +275,27 @@ main h1, main h2{
 }
 
 /* secciones del main (puse una clase al main del home por si estos estilos no se aplican a las secciones de las demás páginas) */
-.homeMain section{
+main section{
     background-color: var(--color-neutral-0);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
     padding: 12px;
     border-radius: 8px;
 }
 
-.homeMain{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
-.welcomeCard{
+.welcomeCard, .petNameCard{
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
 }
 
-.welcomeCard img{
-    width: 60px;
-    height: 60px;
+.welcomeCard img, .petNameCard img{
+    width: 70px;
+    height: 70px;
     border-radius: 8px;
 }
 
-.welcomeCard h1{
+.welcomeCard h1, .petNameCard h2{
     margin-bottom: 2px;
 }
 
@@ -500,95 +498,89 @@ main h1, main h2{
     font-weight: 500;
 }
 
-.titulo{
-    margin-top: 10px;
-    margin-bottom: 35px;
-}
-.titulo h1{
-    color: var(--grey-grey-800, #39434F);
-    text-align: center;
-    font-family: Rubik;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 22px; /* 137.5% */
-}
-.mascota{
+
+
+
+/* inicio de estilos de pet profile */
+
+.mainPetProfile section{
+    padding: 20px;
     display: flex;
-    width: 32px;
-    height: 32px;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    border: 1px solid #F2F4F5;
-    background: #D9D9D9;
-    margin-left: auto;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mainPetProfile h1{
+    text-align: center;
+    font-weight: 600;
 
 }
-.mascota i{
+
+/* icono de editar el perfil del pet */
+.mainPetProfile i{
     font-size: 1.2em;
     color: var(--color-neutral-50);
     cursor: pointer;
     transition: color 0.2s ease;
-}
-.detalle-dos{
-width: 135px !important;
-height: 65px;
-border-radius: 17px;
-background: #F8D3CB;
-padding: 14px;
-margin-bottom: 12px;
+    margin-left: auto;
 }
 
-.detalle-dos p{
-    margin-bottom: 0 !important;
-font-family: Outfit;
-font-size: 13px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
-    }
-
-   .detalle-dos h3 {
-font-family: Rubik;
-font-size: 15px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-    }
-
-.detalle{
-    padding-top: 30px;
+.mainPetProfile i:hover{
+    color: var(--color-green);
+    transform: scale(1.1);
 }
-.telephone{
+
+
+.petNameCard{
+    margin-bottom: 20px;
+}
+
+
+.mainPetProfile ul{
     display: flex;
-width: 32px;
-height: 32px;
-padding: 8px;
-justify-content: center;
-align-items: center;
-gap: 10px;
-flex-shrink: 0;
-border-radius: 8px;
-border: 1px solid #F2F4F5;
-background: #D9D9D9;
-margin-left: auto;
-margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
 }
-.telephone i{
-         font-size: 1.2em;
-        color: var(--color-neutral-50);
-        cursor: pointer;
-        transition: color 0.2s ease;
+
+.mainPetProfile ul li{
+    flex: 1;
+    min-width: 135px;
+    display: flex;
+    /* height: 100px; */
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 12px;
 }
-hr{
-    opacity: 0.5 !important;
-background: radial-gradient(2444399.94% 38.49% at 50% 50.12%, rgba(138, 138, 138, 0.30) 0%, rgba(138, 138, 138, 0.10) 100%);
-margin-top: -6px !important;
+
+.mainPetProfile ul li span{
+    display: block;
+    font-size: 0.8em;
+    font-weight: 300;
 }
+
+.mainPetProfile ul li p{
+    font-weight: 500;
+}
+
+.femalePetInfo li{
+    background-color: var(--color-oragne-background);
+}
+
+.malePetInfo li{
+    background-color: var(--color-green-background);
+}
+
+
+/* fin de los estilos de la vista de detalles de mascotas */
+
+
+
+
+
+
+
+
 
 /* estilos de la vista de agregar mascota */
 .addNewPetForm h2{
