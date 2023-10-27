@@ -626,10 +626,15 @@ main section{
     align-items: center;
 }
 
+
+
+
+/* estilos en alertas */
+
+
 .alerts h1{
     text-align: center;
     text-transform: uppercase;
-    height: 22px;
 }
 
 .alerts p {

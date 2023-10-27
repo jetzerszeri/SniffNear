@@ -112,8 +112,28 @@
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
+        async function getUser(){
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
+
+            if(response.ok){
+                const data = await response.json();
+
+                user = data.user;
+                pets = data.pets;
+                console.log(user);
+                console.log(pets);
+
+
+            } else {
+                console.log('Error en la petición');
+            }
+        }
+
+        getUser();
+
+
         
     </script>
-    <script src="js/alert.js"></script>
+    <!-- <script src="js/alert.js"></script> -->
 </body>
 </html>
