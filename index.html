@@ -391,6 +391,10 @@
                         </div>
                             <p>${pet.name}</p>
                     `;
+
+                    petLi.addEventListener('click', () => {
+                        window.location.href = `/pet-profile.html?petId=${pet._id}`;
+                    });
                     petsUl.appendChild(petLi);
                 });
                 // console.log(data);
