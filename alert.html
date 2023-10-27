@@ -88,14 +88,15 @@
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
         const lose = document.querySelector('.lose');
-            lose.addEventListener('click', () => {
-                        window.location.href = "alert_lose.html";
-            });
+        
+        lose.addEventListener('click', () => {
+                    window.location.href = "./alert_lose.html";
+        });
 
-            const find = document.querySelector(".find");
-            find.addEventListener('click', () =>{
-                window.location.href = "alert_find.html";
-            })
+        const find = document.querySelector(".find");
+        find.addEventListener('click', () =>{
+            window.location.href = "./alert_find.html";
+        })
         
     </script>
    
