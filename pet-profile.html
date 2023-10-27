@@ -38,10 +38,10 @@
             <h1>Detalle mascota</h1>
 
             <div class="petNameCard">
-                <img src="img/pet2.jpg" alt="Avatar de la mascota 2">
+                <img src="img/pet2.jpg" alt="Avatar de la mascota">
                 <div>
                     <h2>Cargando...</h2>
-                    <p>Gato</p>
+                    <p>...</p>
                 </div>
                 <i class="bi bi-pencil"></i>
             </div>
@@ -101,11 +101,13 @@
     </nav>
 
     <script>
-        const petIdTest = "653828c0398d11afd96d534d";
+        const urlParams = new URLSearchParams(window.location.search);
+        const petIdTest = urlParams.get('petId');
         const petNameH2 = document.querySelector('.petNameCard h2');
         const petTypeP = document.querySelector('.petNameCard p');
         const petImg = document.querySelector('.petNameCard img');
         const sectionPetInfo = document.querySelector('.mainPetProfile > section');
+        const editPetBtn = document.querySelector('.petNameCard i');
 
         function createLiOfPetInfo(infoName, info, ul){
             // if (!info){
@@ -151,8 +153,17 @@
                 createLiOfPetInfo('Raza', pet.breed, petsUl);
 
                 sectionPetInfo.appendChild(petsUl);
+
+                editPetBtn.addEventListener('click', () => {
+                    window.location.href = `/editar-pet-profile.html?petId=${petIdTest}`;
+                });
             } else {
-                cosole.log('Error en la petición');
+                sectionPetInfo.innerHTML = `
+                    <div class="errorMsgPetProfile">
+                        <p>Hubo un error en el servidor, por favor intenta más tarde.</p>
+
+                        <a href="/index.html" class="btn">Regresar al Home</a>
+                    </div>`;
             }
         }
 
