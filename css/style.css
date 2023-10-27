@@ -262,6 +262,9 @@ a{
 /* Home */
 main{
     padding: 20px 20px 80px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 main h1, main h2{
@@ -272,7 +275,6 @@ main h1, main h2{
 }
 
 /* secciones del main (puse una clase al main del home por si estos estilos no se aplican a las secciones de las demás páginas) */
-/* .homeMain section{ */
 main section{
     background-color: var(--color-neutral-0);
     box-shadow: 0px 0px 20px rgba(0,0,0,0.02);
@@ -280,25 +282,20 @@ main section{
     border-radius: 8px;
 }
 
-.homeMain{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
-.welcomeCard{
+.welcomeCard, .petNameCard{
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
 }
 
-.welcomeCard img{
-    width: 60px;
-    height: 60px;
+.welcomeCard img, .petNameCard img{
+    width: 70px;
+    height: 70px;
     border-radius: 8px;
 }
 
-.welcomeCard h1{
+.welcomeCard h1, .petNameCard h2{
     margin-bottom: 2px;
 }
 
@@ -502,6 +499,98 @@ main section{
 }
 
 
+
+
+/* inicio de estilos de pet profile */
+
+.mainPetProfile section{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.mainPetProfile h1{
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+/* icono de editar el perfil del pet */
+.mainPetProfile i{
+    font-size: 1.2em;
+    color: var(--color-neutral-50);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    margin-left: auto;
+}
+
+.mainPetProfile i:hover{
+    color: var(--color-green);
+    transform: scale(1.1);
+}
+
+
+.petNameCard{
+    margin-bottom: 20px;
+}
+
+
+.mainPetProfile ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.mainPetProfile ul li{
+    flex: 1;
+    min-width: 135px;
+    display: flex;
+    /* height: 100px; */
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 12px;
+}
+
+.mainPetProfile ul li span:nth-of-type(1){
+    display: block;
+    font-size: 0.8em;
+    font-weight: 300;
+    text-transform: capitalize;
+}
+
+.mainPetProfile ul li span:nth-of-type(2){
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.femalePetInfo li{
+    background-color: var(--color-oragne-background);
+}
+
+.malePetInfo li{
+    background-color: var(--color-green-background);
+}
+
+.errorMsgPetProfile{
+    text-align: center;
+    color: red;
+    margin: 80px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* fin de los estilos de la vista de detalles de mascotas */
+
+
+
+
+
+
+
+
 /* formulario de crear cuenta */
 .singUpView{
     background-color: var(--color-neutral-0);
@@ -591,6 +680,10 @@ main section{
     background-color: #006567c4;
 }
 
+
+
+
+
 /* estilos de la vista de agregar mascota */
 .addNewPetForm h2{
     text-align: center;
@@ -624,4 +717,112 @@ main section{
     gap: 10px;
     justify-content: center;
     align-items: center;
+}
+
+
+
+
+
+
+/* alertfind */
+.alert_find h1{
+    text-align: center;
+}
+.alert_find form{
+    display: flex;
+    flex-direction: column;
+     padding: 0 20px;
+    gap: 10px;
+    margin: 5%;
+}
+.alert_find form input{
+    background: #F7F2FA;
+    border-radius: 6px;
+    border-color: #F7F2FA;
+}
+.alert_find form textarea{ 
+    background: #F7F2FA;
+    border-radius: 6px;
+    border-color: #F7F2FA;
+    font-size: 1em;
+    transition: all 0.2s ease;
+    padding: 5px;
+   
+}
+
+.alert_find .petTypeSelector{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+.alert_find .petTypeSelector img {
+    border-radius: 8px;
+    width: 70px;
+    height: 70px;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-radius: 16px;
+    background:  #F7F2FA;
+    margin: 5px;
+    /* M3/Elevation Light/1 */
+    box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.30);
+    
+}
+.alert_find .petTypeSelector img.selected{
+    border: 2px solid var(--color-green);
+    opacity: 1;
+}
+.alert_find .select_color {
+    display: flex; 
+    flex-direction: row;
+ }
+  
+ .select_color label {
+    margin:2px;
+  }
+ .alert_find form input[type="color"] {
+    width: 30px;
+    height: 30px; 
+    padding: 0; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 6px;
+    border-color: none;
+    background-color: none;
+ }
+.alert_find .fecha{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.divBtnContinuar{
+    display: flex; 
+    justify-content: space-between; 
+    padding: 10px;
+}
+.btnContinuar{
+    align-self: flex-end;
+    border-radius: 8px;
+    color: #FFF;
+    text-align: center;
+    font-family: "Rubik";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background: #363A59;
+}
+.alert_find .sectionSuccess{
+    background-color:#FFD600;
+}
+.alert_find .sectionSuccess .divSuccess{
+    display: flex;
+    width: 320px;
+    height: 568px;
+    padding: 0px 69px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
 }
