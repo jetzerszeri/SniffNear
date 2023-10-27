@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link  href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <script src="js/main.js" defer></script>
+    <script src="./js/main.js" defer></script>
 
 </head>
 <body>
@@ -34,7 +34,7 @@
         <section class="welcomeCard">
             <img src="img/userAvatar.png" alt="Avatar del usuario">
             <div>
-                <h1>Hola, Ailen!</h1>
+                <h1>Cargando info...</h1>
                 <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
             </div>
         </section>
@@ -42,14 +42,14 @@
         <section class="myPetsCard">
             <h2>Tus Mascotas</h2>
             <div>
-                <div>
+                <div >
                     <span class="addPetBtn">
                         <i class="bi bi-plus"></i>
                     </span>
                     <p>Agregá</p>
                 </div>
                 <ul>
-                    <li>
+                    <!-- <li>
                         <div>
                             <img src="img/pet1.jpg" alt="Mascota 1">
                         </div>
@@ -84,7 +84,7 @@
                             <img src="img/pet3.jpg" alt="Mascota 3">
                         </div>
                         <p>Neel</p>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </section>
@@ -271,6 +271,12 @@
                     </svg>                        
                     <span>Chat</span>
                 </a></li>
+                <li class="logoutbtn">
+                    <a href="#">
+                        <i class="bi bi-box-arrow-left"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </li>
             </ul>
 
         </nav>
@@ -289,7 +295,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="agregar-mascota.html">
                     <i class="bi bi-plus"></i>
                 </a>
             </li>
@@ -310,6 +316,98 @@
     <script>
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
+
+        //validar si hay un userId, sino mandarlo al login
+        const welcomeMsg = document.querySelector('.welcomeCard h1');
+        // console.log(welcomeMsg);
+
+        const petsUl = document.querySelector('.myPetsCard ul');
+        // console.log(petsUl);
+
+        const addPetBtn = document.querySelector('.addPetBtn');
+        const addPetBtnDiv = addPetBtn.parentElement;
+        // console.log(addPetBtnDiv);
+
+        addPetBtnDiv.addEventListener('click', () => {
+            window.location.href = 'agregar-mascota.html';
+        });
+
+        //mostrar y ocultar el sidebar:
+        const menubtn = document.querySelector('.menubtn');
+        let sidebar = document.querySelector('.sidebar');
+        let sidebarNav = document.querySelector('.sidebar nav');
+
+        menubtn.addEventListener('click', function () {
+            sidebar.classList.add('show');
+            sidebar.style.transform = 'translateX(0)';
+            sidebarNav.classList.add('show');
+        });
+        
+        function closeSidebar() {
+            
+            sidebarNav.classList.remove('show');
+            sidebar.classList.remove('show');
+            setTimeout(function () {
+                sidebar.style.transform = 'translateX(-100%)';
+            }, 1000);
+        }
+        
+        let btnCloseSidebar = document.querySelector('.closebtn');
+        btnCloseSidebar.addEventListener('click', closeSidebar);
+        sidebar.addEventListener('click', closeSidebar);
+        
+        sidebarNav.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+
+
+        const logoutbtn = document.querySelector('.logoutbtn');
+        logoutbtn.addEventListener('click', () => {
+            localStorage.removeItem('userId');
+            window.location.href = 'login.html';
+        });
+
+
+
+
+        async function getUser(){
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
+
+            if(response.ok){
+                const data = await response.json();
+
+                user = data.user;
+                pets = data.pets;
+                console.log(user);
+                console.log(pets);
+
+                welcomeMsg.innerHTML = `Hola, ${user.name}!`;
+
+                pets.forEach(pet => {
+                    const petLi = document.createElement('li');
+                    petLi.innerHTML = `
+                        <div>
+                            <img src="${pet.img}" alt="Foto de ${pet.name}">
+                        </div>
+                            <p>${pet.name}</p>
+                    `;
+                    petsUl.appendChild(petLi);
+                });
+                // console.log(data);
+            } else {
+                console.log('Error en la petición');
+            }
+        }
+
+
+        if(storedUserId){
+            getUser();
+        } else {
+            window.location.href = 'login.html';
+        }
+        // getUser();
+
+
     </script>
 
 </body>
