@@ -23,6 +23,7 @@ h1,h2,h3,h4,h5,h6{
     --color-yellow-background: #fff3b2ac;
     --color-neutral-0: #FAFAFA;
     --color-neutral-10: #F5F5F5;
+    --color-neutral-20: #DEDEDE;
     --color-neutral-40: #AEAEAE;
     --color-neutral-50: #9A9A9A;
     --color-neutral-90: #1D1A20;
@@ -237,6 +238,15 @@ a{
     background-color: var(--color-neutral-10);
 }
 
+.logoContainerTopBar{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-right: 24px;
+}
+
+
+
 .topNavBar i{
     font-size: 1.5em;
     color: var(--color-neutral-50);
@@ -257,6 +267,8 @@ a{
     text-overflow: ellipsis;
     padding: 0 10px;
 }
+
+
 
 
 /* Home */
@@ -624,14 +636,14 @@ main section{
     margin-bottom: 30px;
 }
 
-.singUpView form, .addNewPetForm form{
+.singUpView form, .addNewPetForm{
     display: flex;
     flex-direction: column;
     padding: 0 20px;
     gap: 10px;
 }
 
-.singUpView form input, .addNewPetForm form input{
+.singUpView form input, .addNewPetForm input{
     height: 40px;
     border-radius: 8px;
     border: 1px solid var(--color-neutral-40);
@@ -680,14 +692,95 @@ main section{
     background-color: #006567c4;
 }
 
-
+button[disabled] {
+    background-color: var(--color-neutral-20);
+    color: var(--color-neutral-0);
+    cursor: not-allowed;
+    border-color: var(--color-neutral-20);
+}
 
 
 
 /* estilos de la vista de agregar mascota */
+.addNewPetForm{
+    margin-top: -10px;
+}
+.stepsForm{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stepsForm svg.active{
+    fill: var(--color-oragne);
+}
+.addNewPetForm h1{
+    font-size: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
 .addNewPetForm h2{
     text-align: center;
 }
+
+.petsIconList{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 30px;
+    margin: 50px 0;
+    /* min-height: 280px; */
+    flex-wrap: wrap;
+    padding: 0 45px;
+}
+
+.petsIconList li{
+    flex: 1 1 calc(50% - 30px);
+}
+
+.petsIconList li div{
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.petsIconList li div:hover{
+    background-color: var(--color-green-background);
+}
+
+
+.petsIconList li.selected div{
+    background-color: var(--color-green-background);
+    
+}
+
+.petsIconList + p {
+    text-align: center;
+    color: var(--color-neutral-50);
+    margin-top: 20px;
+    text-decoration: underline;
+    margin: 30px auto 200px;
+    /* height: 150px; */
+    font-weight: 300;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+.petsIconList + p:hover{
+    color: var(--color-green);
+}
+
+
+/* 
 .addNewPetForm .petTypeSelector img{
     border-radius: 8px;
     width: 70px;
@@ -703,21 +796,19 @@ main section{
     opacity: 1;
 }
 
-.addNewPetForm form > div{
+.addNewPetForm > div{
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px 0;
-    /* justify-content: center; */
-    /* align-items: center; */
 }
 
-.addNewPetForm form > div:nth-of-type(2) div{
+.addNewPetForm > div:nth-of-type(2) div{
     display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
-}
+} */
 
 
 
