@@ -76,7 +76,7 @@
                 </div>
                 <!-- mapa -->
                 <div>
-                    <label for="ubicacion">Ubicación donde se encontro a la mascota:</label>
+                    <label for="ubicacion">Arrastre el marcador a la zona donde encontro la mascota</label>
                     <div id="mi_mapa"></div>
                     <input type="text" id="ubicacion" name="ubicacion" readonly>
                 </div>
@@ -162,41 +162,47 @@
         let ubicacionSelectMarker;
         let ubicacionInput = document.getElementById('ubicacion');
 
-        //Traemos la ubicacion actual
+        //ubi actual 
         function ubicacionActual(position) {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
-      if (typeof myMap === 'undefined') {
-        // Si el mapa no está inicializado, inicialízalo
-        myMap = L.map('mi_mapa').setView([lat, lng], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(myMap);
-        //ubicación actual 
-        currentLocationMarker = L.marker([lat, lng], {
-          icon: L.icon({
-            iconUrl: 'img/locationActual.png', 
-            iconSize: [32, 32],
-          })
-        }).addTo(myMap).bindPopup('Ubicación actual').openPopup();
-      } else {
-        currentLocationMarker.setLatLng([lat, lng]);
-      }
-      ubicacionInput.value = lat + ', ' + lng;
-    }
-     // Función para manejar errores
-     function errorUbicacion(error) {
-      console.error(`Error obteniendo la ubicación: ${error.message}`);
-    }
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            if(!myMap){
+                 myMap = L.map('mi_mapa').setView([lat, lng], 15);
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(myMap);
+                
+              //Marcador posicionado en la ubicacion actual
+                ubicacionActualMarker = L.marker([lat, lng], {
+                    draggable: true,
+                    icon: L.icon({
+                        iconUrl: 'img/locationActual.png',
+                        iconSize: [32, 32],
+                    })
+                }).addTo(myMap).bindPopup('Ubicación').openPopup();   
+                
+                //Evento para poder arrastar el marcador desde la ubi
+                ubicacionActualMarker.on('dragend', (e) => {
+                    const marker = e.target;
+                    const position = marker.getLatLng();
+                    ubicacionInput.value = `${position.lat}, ${position.lng}`;
+                });
+            } else {
+                ubicacionActualMarker.setLatLng([lat, lng]);
+            }
+            
+            ubicacionInput.value = lat + ', ' + lng;
+        }
 
-    // Verifica si el navegador admite geolocalización
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
-    } else {
-      console.log("Geolocalización no está disponible en este navegador.");
-    }
-
-   
+        function errorUbicacion(error) {
+            console.error(`Error obteniendo la ubicación: ${error.message}`);
+        }
+        
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
+        } else {
+            console.log("Geolocalización no está disponible en este navegador.");
+        }
     </script>
     <script src="js/alert.js"></script>
 </body>
