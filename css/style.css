@@ -643,7 +643,8 @@ main section{
     gap: 10px;
 }
 
-.singUpView form input, .addNewPetForm input{
+/* .singUpView form input, .addNewPetForm input{ */
+input, select{
     height: 40px;
     border-radius: 8px;
     border: 1px solid var(--color-neutral-40);
@@ -699,6 +700,13 @@ button[disabled] {
     border-color: var(--color-neutral-20);
 }
 
+form label + p {
+    font-size: 0.9em;
+    margin: 0;
+    color: var(--color-neutral-50);
+    font-weight: 300;
+}
+
 
 
 /* estilos de la vista de agregar mascota */
@@ -726,12 +734,15 @@ button[disabled] {
     text-align: center;
 }
 
+.step1, .step2{
+    margin-bottom: 50px;
+}
 .petsIconList{
     display: flex;
     justify-content: center;
     /* align-items: center; */
     gap: 30px;
-    margin: 50px 0;
+    margin-top: 50px;
     /* min-height: 280px; */
     flex-wrap: wrap;
     padding: 0 45px;
@@ -779,6 +790,90 @@ button[disabled] {
     color: var(--color-green);
 }
 
+.sexSelector{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sexSelector div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sexSelector div span{
+    font-weight: 300;
+    font-size: 0.8em;
+    margin-top: 8px;
+    color: var(--color-neutral-50);
+}
+
+.sexSelector div.selected svg{
+    border: 2px solid var(--color-green);
+    border-radius: 50%;
+}
+
+.sexSelector div.selected span{
+    color: var(--color-green);
+    font-weight: 500;
+}
+
+.sizeSelector{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sizeSelector li{
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.sizeSelector li svg{
+    fill: var(--color-neutral-0);
+    transition: all 0.1s ease;
+}
+
+.sizeSelector li:hover svg, .sizeSelector li.selected svg{
+    fill: var(--color-darkblue);
+    transform: scale(1.1);
+}
+
+#petSizeText.selected{
+    text-transform: capitalize;
+    color: var(--color-darkblue);
+    font-size: 1em;
+}
+
+.colorInputs{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.colorInputs label{
+    cursor: pointer;
+    color: var(--color-neutral-50);
+    padding: 8px 12px;
+    border: 1px solid var(--color-neutral-50);
+    border-radius: 8px;
+}
+
+.colorInputs input[type="radio"]:checked + label {
+    background-color: var(--color-darkblue);
+    color: var(--color-neutral-0);
+}
+
+
+
 
 /* 
 .addNewPetForm .petTypeSelector img{
@@ -794,15 +889,16 @@ button[disabled] {
 .addNewPetForm .petTypeSelector img.selected{
     border: 2px solid var(--color-green);
     opacity: 1;
-}
+}*/
 
-.addNewPetForm > div{
+.addNewPetForm .step2 > div{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
+/* 
 .addNewPetForm > div:nth-of-type(2) div{
     display: flex;
     gap: 10px;
