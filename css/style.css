@@ -1013,3 +1013,13 @@ form label + p {
     align-items: center;
 
 }
+.sidebar i{
+    font-size: 1.5em;
+    color: var(--color-neutral-50);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.sidebar i:hover{
+    color: var(--color-green);
+}
