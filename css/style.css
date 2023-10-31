@@ -872,7 +872,15 @@ form label + p {
     color: var(--color-neutral-0);
 }
 
+.errorInput{
+    color: red;
+    font-size: 0.9em;
+    margin-top: -8px;
+}
 
+input.error{
+    border: red 2px solid;
+}
 
 
 /* 
