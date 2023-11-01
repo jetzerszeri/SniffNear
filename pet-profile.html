@@ -100,7 +100,8 @@
 
     </nav>
 
-    <script>
+    <script >
+        // import { calculateAge } from './js/functions.js';
         const urlParams = new URLSearchParams(window.location.search);
         const petIdTest = urlParams.get('petId');
         const petNameH2 = document.querySelector('.petNameCard h2');
@@ -146,9 +147,9 @@
                 petsUl.classList.add(`${pet.sex}PetInfo`);
 
                 createLiOfPetInfo('Género', getGenero(pet), petsUl);
-                createLiOfPetInfo('Edad', pet.age, petsUl);
+                createLiOfPetInfo('Edad', calculateAge(pet.birthdate), petsUl);
                 createLiOfPetInfo('Tamaño', pet.size, petsUl);
-                createLiOfPetInfo('Color', pet.color, petsUl);
+                createLiOfPetInfo('Color', pet.color1, petsUl);
                 createLiOfPetInfo('Ubicación', pet.location, petsUl);
                 createLiOfPetInfo('Raza', pet.breed, petsUl);
 
@@ -168,6 +169,53 @@
         }
 
         getPetInfo();
+
+        function calculateAge(isoDate) {
+            const birthDate = new Date(isoDate);
+            const currentDate = new Date();
+
+            let years = currentDate.getFullYear() - birthDate.getFullYear();
+            let months = currentDate.getMonth() - birthDate.getMonth();
+
+            // Si el mes actual es menor que el mes de nacimiento, disminuye un año y suma 12 a los meses
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Si estamos en el mismo mes pero el día actual es menor que el día de nacimiento, disminuye un mes
+            if (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate()) {
+                months--;
+            }
+
+            // return {
+            //     years: years,
+            //     months: months
+            // };
+
+            let texto = `${years} años`;
+            switch (years) {
+                case 0:
+                    texto = `${months} meses`;
+                    break;
+                case 1:
+                    if (months === 0) {
+                        texto = `${years} año`;
+                    } else {
+                        texto = `${years} año y ${months} meses`;
+                    }
+                    break;
+                default:
+                    if (months === 0) {
+                        texto = `${years} años`;
+                    } else {
+                        texto = `${years} años y ${months} meses`;
+                    }
+                    break;
+            }
+
+            return texto;
+        }
     </script>
 </body>
 </html>
