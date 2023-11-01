@@ -598,17 +598,24 @@
 
             // intentando agregar la imagen a firebase
             const file = img.files[0];
-            const customName = name.value;
-            uploadImage(file, customName).then( async (url) => {
-                console.log('File URL:', url);
-
-                data.img = url;
-                console.log(data);
-
-                postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './index.html')
 
 
-            });
+            // Comprobar si hay un archivo seleccionado
+            if (file && file.size > 0) {
+                const customName = name.value;
+                uploadImage(file, customName).then(async (url) => {
+                    console.log('File URL:', url);
+
+                    data.img = url;
+                    console.log(data);
+
+                    postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html')
+                });
+            } else {
+                data.img = '';
+                // Si no hay archivo, ejecutar directamente postFormInfoToDB
+                postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html');
+            }
         
 
         }
