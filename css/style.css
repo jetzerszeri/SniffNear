@@ -305,6 +305,8 @@ main section{
     width: 70px;
     height: 70px;
     border-radius: 8px;
+    overflow: hidden;
+    object-fit: cover; 
 }
 
 .welcomeCard h1, .petNameCard h2{
