@@ -50,7 +50,7 @@
                 
                 
         </div>
-        <form class="addNewPetForm">
+        <form method="post" class="addNewPetForm">
             <h1>Agregar mascota</h1>
 
             <div class="step1">
@@ -226,7 +226,7 @@
 
 
 
-            <button type="submit">Continuar</button>
+            <button >Continuar</button>
         </form>
 
 
@@ -237,7 +237,7 @@
     <script type="module">
         import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent} from './js/functions.js';
 
-        let currentStep = 3;
+        let currentStep = 1;
         const stepsProgress = document.querySelectorAll('.stepsForm svg');
         const step1 = document.querySelector('.step1')
         const step2 = document.querySelector('.step2')
@@ -245,6 +245,8 @@
         step2.style.display = 'none';
         const form = document.querySelector('form');
         let {name, type, birthdate, breed, sex, size, color1, color2} = form;
+        let isValid = false;
+
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
         
@@ -425,15 +427,6 @@
 
         console.log(inputsStep2);
 
-    
-
-        
-
-
-
-
-
-
 
 
         
@@ -445,7 +438,14 @@
                 } else {
                     btnAddNewPetForm.disabled = true;
                 }
-            } else if(currentStep == 2){
+            } else if(currentStep == 3){
+                btnAddNewPetForm.setAttribute('type', 'submit');
+                if(!isValid){
+                    // btnAddNewPetForm.classList.add('secundary');
+                    btnAddNewPetForm.innerHTML = 'Lo haré después';
+                } else {
+                    btnAddNewPetForm.innerHTML = 'Crear perfil';
+                }
 
             }
         }
@@ -493,103 +493,25 @@
             } else
             if (currentStep == 2){
                 inputsStep2.forEach(input => {
-                    validateInput(input, 'Este campo es obligatorio*');
+                    isValid = validateInput(input, 'Este campo es obligatorio*', isValid);
                 });
+                console.log('isValid resultado de funcion: ', isValid)
+                if (isValid) {
+                    currentStep++;
+                    // isValid = false;
+                    checkButtonState();
+                }
             }
 
 
             console.log('currentStep: ', currentStep)
+            console.log('isValid: ', isValid)
             displaySteps()
-
-            // const errorText = document.createElement('p');
-            // errorText.classList.add('errorInput');
-            // errorText.innerHTML = 'Por favor, completá este campo';
-
-            // if (name.value.trim()) {
-            //     console.log('hay nombre');
-            //     name.classList.remove('error');
-
-
-			// }else{
-            //     name.classList.add('error');
-            //     name.insertAdjacentElement('afterend', errorText);
-			// 	console.log('no hay nombre');
-			// }
-
-            // name.addEventListener('keyup', (e) => {
-            //     if (name.value.trim()) {
-            //         console.log('hay nombre');
-            //         name.classList.remove('error');
-            //     }else{
-            //         name.classList.add('error');
-            //         console.log('no hay nombre');
-            //     }
-            // })
-
-            // name.addEventListener('keyup', (e) => {
-            //     // Obtener el siguiente nodo hermano (puede que no sea un elemento, por ejemplo, si es un nodo de texto)
-            //     let nextNode = name.nextSibling;
-                
-            //     // Si el siguiente nodo es un nodo de texto (no un elemento), saltar al siguiente nodo
-            //     while (nextNode && nextNode.nodeType !== 1) {
-            //         nextNode = nextNode.nextSibling;
-            //     }
-
-            //     if (!name.value.trim()) {
-            //         name.classList.add('error');
-            //         if (!nextNode || (nextNode && !nextNode.classList.contains('errorInput'))) {
-            //             name.insertAdjacentElement('afterend', errorText);
-            //         }
-            //         console.log('no hay nombre');
-            //     } else {
-            //         name.classList.remove('error');
-            //         if (nextNode && nextNode.classList.contains('errorInput')) {
-            //             nextNode.remove();
-            //         }
-            //         console.log('hay nombre');
-            //     }
-            // });
-
-            // validateInput(name, 'Por favor, completá este campo');
-
-
-
-
-
 
 
         })
 
 
-
-
-
-
-        // btnAddNewPetForm.addEventListener('click', (e) => {
-        //     e.preventDefault();
-        //     currentStep++;
-        //     const steps = document.querySelectorAll('.stepsForm svg');
-
-        //     steps.forEach((step, index) => {
-        //         if (index < currentStep) {
-        //             step.classList.add('active');
-        //         }
-        //     });
-
-
-
-        //     const form = document.querySelector('.addNewPetForm');
-        //     const step1 = document.querySelector('.step');
-        //     const step2 = document.createElement('div');
-        //     step2.classList.add('step');
-        //     step2.innerHTML = `
-        //         <h2>¿Cómo se llama?</h2>
-        //         <input type="text" name="name" placeholder="Nombre">
-        //         <button disabled>Continuar</button>
-        //     `;
-        //     form.replaceChild(step2, step1);
-        // });
-    
 
 
         

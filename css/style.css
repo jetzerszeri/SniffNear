@@ -700,6 +700,12 @@ button[disabled] {
     border-color: var(--color-neutral-20);
 }
 
+/* .button .secundary{
+    background-color: var(--color-neutral-0) !important;
+    color: var(--color-green) !important;
+    border-color: var(--color-green) !important;
+} */
+
 form label + p {
     font-size: 0.9em;
     margin: 0;
