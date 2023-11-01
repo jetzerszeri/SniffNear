@@ -57,18 +57,8 @@ function validateInput(input, textoAMostrar, variable) {
     errorText.innerHTML = textoAMostrar;
 
     let valueToCheck = input.value.trim();
-    
-    // if (input instanceof NodeList) { // Si es un conjunto de radios
-    //     const selectedRadio = Array.from(input).find(radio => radio.checked);
-    //     valueToCheck = selectedRadio ? selectedRadio.value : "";
-    // } else {
-    //     valueToCheck = input.value.trim();
-    // }
 
     let targetForError = input;
-    // if (input instanceof NodeList) {
-    //     targetForError = input[input.length - 1];  // último radio
-    // }
 
     let nextNode = targetForError.nextSibling;
     while (nextNode && nextNode.nodeType !== 1) {
