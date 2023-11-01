@@ -887,6 +887,33 @@ input.error, select.error{
     border: red 2px solid;
 }
 
+#imageInput{
+    display: none;
+}
+
+.labelImgInput{
+    /* display: block; */
+    width: clamp(120px, 90%, 300px);
+    height: 230px;
+    border-radius: 8px;
+    background-color: var(--color-neutral-0);
+    border: 2px dashed var(--color-neutral-20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin: 50px auto;
+    gap: 10px;
+}
+
+.labelImgInput p {
+    color: var(--color-neutral-50);
+}
+/* .labelImgInput{
+    cursor: pointer;
+} */
 
 /* 
 .addNewPetForm .petTypeSelector img{
