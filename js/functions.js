@@ -156,5 +156,31 @@ function getCurrentTimestamp() {
 }
 
 
+// funcion para agregar datos a la base de datos
+async function postFormInfoToDB ( endpoint, datos, redirect ) {
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(datos),
+        });
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp };
+        const json = await response.json();
+        console.log(json);
+
+        if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
+            window.location.href = redirect;  // Redireccionar al usuario 
+        } else {
+            console.error('Error en el registro:', json.message);
+        }
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB };

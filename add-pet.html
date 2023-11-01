@@ -235,7 +235,7 @@
 
 
     <script type="module">
-        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, getCurrentTimestamp } from './js/functions.js';
+        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, getCurrentTimestamp, postFormInfoToDB } from './js/functions.js';
         import app from './js/config.js'; //importo la configuracion de firebase
         import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
 
@@ -593,43 +593,25 @@
 
             console.log(data);
 
+            
+
 
             // intentando agregar la imagen a firebase
             const file = img.files[0];
             const customName = name.value;
             uploadImage(file, customName).then( async (url) => {
-            console.log('File URL:', url);
+                console.log('File URL:', url);
 
-            data.img = url;
-            console.log(data);
+                data.img = url;
+                console.log(data);
 
-                try {
-                    const response = await fetch('https://sniffnear-api.onrender.com/api/pets/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data),
-                    });
+                postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './index.html')
 
-                    const json = await response.json();
-                    console.log(json);
-
-                    if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
-                        window.location.href = './index.html';  // Redireccionar al usuario a index.html
-                    } else {
-                        console.error('Error en el registro:', json.message);
-                    }
-
-                } catch (error) {
-                    console.error('Error:', error);
-                }
 
             });
         
 
         }
-
 
 
 
