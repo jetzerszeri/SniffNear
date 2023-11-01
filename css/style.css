@@ -859,7 +859,7 @@ form label + p {
     margin-top: 10px;
 }
 
-.colorInputs label{
+.colorInputs li{
     cursor: pointer;
     color: var(--color-neutral-50);
     padding: 8px 12px;
@@ -867,7 +867,12 @@ form label + p {
     border-radius: 8px;
 }
 
-.colorInputs input[type="radio"]:checked + label {
+.colorInputs li:hover{
+    background-color: var(--color-darkblue);
+    color: var(--color-neutral-0);
+}
+
+.colorInputs li.selected {
     background-color: var(--color-darkblue);
     color: var(--color-neutral-0);
 }
@@ -878,7 +883,7 @@ form label + p {
     margin-top: -8px;
 }
 
-input.error{
+input.error, select.error{
     border: red 2px solid;
 }
 

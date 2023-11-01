@@ -1,15 +1,30 @@
 //funcion para marcar algo como seleccionado sin usar un select, y usando un input hidden para guardar el valor.
-function markSomethingAsSelectedWithHideInput(array, input, funcion, textToDisplay){
+function markSomethingAsSelectedWithHideInput(array, input, funcion, textToDisplay, validar){
     array.forEach(element => {
         element.addEventListener('click', function() {
-            array.forEach(i => i.classList.remove('selected'));
-            this.classList.add('selected');
-            input.value = this.dataset.value;
-            console.log(input.value);
+            // Verificar si el elemento ya tiene la clase 'selected'
+            if (this.classList.contains('selected')) {
+                // Si ya tiene la clase, quitársela
+                this.classList.remove('selected');
+                input.value = "";
+                if (textToDisplay) {
+                    textToDisplay.innerHTML = "Pequeño, mediano o grande";
+                    textToDisplay.classList.remove('selected');
+                }
+                if (validar){
+                validateInput(input, 'Selecciona una opción');
+                }
+            } else {
+                // Si no tiene la clase, quitar 'selected' de todos los demás elementos y añadírsela a este
+                array.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                input.value = this.dataset.value;
 
-            if (textToDisplay) {
-                textToDisplay.innerHTML = this.dataset.value;
-                textToDisplay.classList.add('selected');
+                if (textToDisplay) {
+                    textToDisplay.innerHTML = this.dataset.value;
+                    textToDisplay.classList.add('selected');
+                }
+                validateInput(input, 'Selecciona una opción');
             }
             funcion();
         });
@@ -36,41 +51,51 @@ function checkAndUncheckARadioInput(inputs){
 
 
 // funcion para validar un input, si no valida agregarle el texto de error
-function validateInput(input, textoAMostrar, variable){
-    //la variable es para validar si el input es correcto o no, si es correcto es true, si no es false pero viene de arriba para poder usarlo en el submit
+function validateInput(input, textoAMostrar, variable) {
     const errorText = document.createElement('p');
     errorText.classList.add('errorInput');
     errorText.innerHTML = textoAMostrar;
 
-    // Obtener el siguiente nodo hermano (puede que no sea un elemento, por ejemplo, si es un nodo de texto)
-    let nextNode = input.nextSibling;
+    let valueToCheck = input.value.trim();
+    
+    // if (input instanceof NodeList) { // Si es un conjunto de radios
+    //     const selectedRadio = Array.from(input).find(radio => radio.checked);
+    //     valueToCheck = selectedRadio ? selectedRadio.value : "";
+    // } else {
+    //     valueToCheck = input.value.trim();
+    // }
 
-    // Si el siguiente nodo es un nodo de texto (no un elemento), saltar al siguiente nodo
+    let targetForError = input;
+    // if (input instanceof NodeList) {
+    //     targetForError = input[input.length - 1];  // último radio
+    // }
+
+    let nextNode = targetForError.nextSibling;
     while (nextNode && nextNode.nodeType !== 1) {
         nextNode = nextNode.nextSibling;
     }
 
-    if (!input.value.trim()) {
-        input.classList.add('error');
+    if (!valueToCheck) {
+        targetForError.classList.add('error');
         if (!nextNode || (nextNode && !nextNode.classList.contains('errorInput'))) {
-            input.insertAdjacentElement('afterend', errorText);
+            targetForError.insertAdjacentElement('afterend', errorText);
         }
-
-        if (variable) {
+        if (variable !== undefined) {
             variable = false;
         }
-        // console.log('no hay nombre');
     } else {
-        input.classList.remove('error');
+        targetForError.classList.remove('error');
         if (nextNode && nextNode.classList.contains('errorInput')) {
             nextNode.remove();
         }
-        if (variable) {
+        if (variable !== undefined) {
             variable = true;
         }
-        // console.log('hay nombre');
     }
+
+    return variable; // Podrías retornar el valor de variable para usarlo después
 }
+
 
 
 export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput };
