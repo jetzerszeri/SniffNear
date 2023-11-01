@@ -430,6 +430,18 @@
         
 
         // console.log(inputsStep2);
+        let btnBack = document.querySelector('.bi-chevron-left')
+
+        btnBack.addEventListener('click', (e) => {  
+            e.preventDefault();
+
+            if (currentStep == 1){
+                window.location.href = './index.html';
+            } else{
+                currentStep--;
+                displaySteps();
+            }
+        })
 
 
 
@@ -459,6 +471,7 @@
 
         function stepsProgressBar(steps){
             steps.forEach((step, index) => {
+                step.classList.remove('active');
                 if (index < currentStep) {
                     step.classList.add('active');
                 }
@@ -470,17 +483,17 @@
         
         function displaySteps(){
             if (currentStep ==1){
-                step1.style.display = 'block'
-                step2.style.display = 'none'
-                step3.style.display = 'none'
+                step1.style.display = 'block';
+                step2.style.display = 'none';
+                step3.style.display = 'none';
             } else if (currentStep ==2){
-                step1.style.display = 'none'
-                step2.style.display = 'block'
-                step3.style.display = 'none'
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                step3.style.display = 'none';
             } else if (currentStep ==3){
-                step1.style.display = 'none'
-                step2.style.display = 'none'
-                step3.style.display = 'block'
+                step1.style.display = 'none';
+                step2.style.display = 'none';
+                step3.style.display = 'block';
             }
 
             stepsProgressBar(stepsProgress);
@@ -495,8 +508,13 @@
             if (currentStep == 1){
                 currentStep++;
             } else if (currentStep == 2){
+
+                isValid = true;
+
                 inputsStep2.forEach(input => {
-                    isValid = validateInput(input, 'Este campo es obligatorio*', isValid);
+                    if (!validateInput(input, 'Este campo es obligatorio*')) {
+                        isValid = false;
+                    }
                 });
                 // console.log('isValid resultado de funcion: ', isValid)
                 if (isValid) {
@@ -508,11 +526,7 @@
                     addFormInfoToDB();
             }
 
-
-            // console.log('currentStep: ', currentStep)
-            // console.log('isValid: ', isValid)
             displaySteps()
-
 
         })
 

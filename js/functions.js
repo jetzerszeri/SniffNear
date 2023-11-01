@@ -70,20 +70,22 @@ function validateInput(input, textoAMostrar, variable) {
         if (!nextNode || (nextNode && !nextNode.classList.contains('errorInput'))) {
             targetForError.insertAdjacentElement('afterend', errorText);
         }
-        if (variable !== undefined) {
-            variable = false;
-        }
+        // if (variable !== undefined) {
+        //     variable = false;
+        // }
+        return false;
     } else {
         targetForError.classList.remove('error');
         if (nextNode && nextNode.classList.contains('errorInput')) {
             nextNode.remove();
         }
-        if (variable !== undefined) {
-            variable = true;
-        }
+        // if (variable !== undefined) {
+        //     variable = true;
+        // }
+        return true;
     }
 
-    return variable; // Podrías retornar el valor de variable para usarlo después
+    // return variable; // Podrías retornar el valor de variable para usarlo después
 }
 
 function addValidationEvent(input) {
