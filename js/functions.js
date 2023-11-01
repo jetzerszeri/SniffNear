@@ -86,6 +86,20 @@ function validateInput(input, textoAMostrar, variable) {
     return variable; // Podrías retornar el valor de variable para usarlo después
 }
 
+function addValidationEvent(input) {
+    let eventToUse = 'keyup'; // por defecto
+
+    if (input.type === 'date') {
+        eventToUse = 'input';
+    } else if (input.nodeName === 'SELECT') {
+        eventToUse = 'change';
+    }
+
+    input.addEventListener(eventToUse, (e) => {
+        validateInput(input, 'Este campo es obligatorio');
+    });
+}
 
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput };
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent };

@@ -220,7 +220,7 @@
 
 
     <script type="module">
-        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput} from './js/functions.js';
+        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent} from './js/functions.js';
 
         let currentStep = 1;
         const stepsProgress = document.querySelectorAll('.stepsForm svg');
@@ -406,19 +406,7 @@
 
 
         inputsStep2.forEach(input => {
-            if (input.type === 'date') {
-                input.addEventListener('input', (e) => {
-                    validateInput(input, 'Este campo es obligatorio');
-                });
-            } else if (input.nodeName === 'SELECT') {
-                input.addEventListener('change', (e) => {
-                    validateInput(input, 'Este campo es obligatorio');
-                });
-            } else {
-                input.addEventListener('keyup', (e) => {
-                    validateInput(input, 'Este campo es obligatorio');
-                });
-            }
+            addValidationEvent(input);
         });
 
         
