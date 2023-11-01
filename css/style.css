@@ -899,8 +899,9 @@ input.error, select.error{
 
 .labelImgInput{
     /* display: block; */
-    width: clamp(120px, 90%, 300px);
-    height: 230px;
+    /* width: clamp(120px, 90%, 300px); */
+    width: 200px;
+    height: 200px;
     border-radius: 8px;
     background-color: var(--color-neutral-0);
     border: 2px dashed var(--color-neutral-20);
@@ -912,6 +913,9 @@ input.error, select.error{
     cursor: pointer;
     margin: 50px auto;
     gap: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .labelImgInput p {

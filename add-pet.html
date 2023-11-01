@@ -219,7 +219,7 @@
                             </svg>                            
                         <p>Cargar foto</p>
                     </label>
-                    <input type="file" id="imageInput" accept="image/*" >
+                    <input type="file" id="imageInput" accept="image/*" name="img">
                 <!-- </div> -->
 
             </div>
@@ -235,7 +235,11 @@
 
 
     <script type="module">
-        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent} from './js/functions.js';
+        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, getCurrentTimestamp } from './js/functions.js';
+        import app from './js/config.js'; //importo la configuracion de firebase
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
+
+        const storage = getStorage(app);
 
         let currentStep = 1;
         const stepsProgress = document.querySelectorAll('.stepsForm svg');
@@ -244,7 +248,7 @@
         const step3 = document.querySelector('.step3')
         step2.style.display = 'none';
         const form = document.querySelector('form');
-        let {name, type, birthdate, breed, sex, size, color1, color2} = form;
+        let {name, type, birthdate, breed, sex, size, color1, color2, img} = form;
         let isValid = false;
 
         const storedUserId = localStorage.getItem('userId');
@@ -514,6 +518,54 @@
 
 
 
+        // empezando a trabajar con la imagen
+        let labelImgInput = document.querySelector('.labelImgInput');
+        // labelImgInput.addEventListener('click', () => {
+        //     img.click();
+        // });
+
+        img.addEventListener('change', function() {
+            // Aquí puedes agregar código para mostrar la imagen seleccionada si lo deseas
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Por ejemplo, podrías cambiar el fondo del .icon-placeholder para mostrar la imagen
+                    // labelImgInput.style.backgroundSize = 'cover';
+                    labelImgInput.style.backgroundImage = `url(${e.target.result})`;
+                    labelImgInput.innerHTML = '';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function uploadImage(file, customName) {
+            // Obtener la extensión del archivo
+            const extension = file.name.split('.').pop();
+            
+            // Crear el nombre del archivo con el customName, el timestamp y la extensión
+            const fileName = `${customName}_${getCurrentTimestamp()}.${extension}`;
+
+            // Crea una referencia en Firebase Storage con el nombre personalizado
+            const storageRef = ref(storage, fileName);
+
+            await uploadBytes(storageRef, file);
+
+            // Devuelve la URL de descarga del archivo.
+            return getDownloadURL(storageRef);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         
 
@@ -526,29 +578,37 @@
             data.owner = storedUserId;
 
             console.log(data);
+
+
+            // intentando agregar la imagen a firebase
+            const file = img.files[0];
+            const customName = name.value;
+            uploadImage(file, customName).then(url => {
+            console.log('File URL:', url);
+            });
         
 
-            try {
-                const response = await fetch('https://sniffnear-api.onrender.com/api/pets/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                });
+            // try {
+            //     const response = await fetch('https://sniffnear-api.onrender.com/api/pets/', {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(data),
+            //     });
 
-                const json = await response.json();
-                console.log(json);
+            //     const json = await response.json();
+            //     console.log(json);
 
-                if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
-                    window.location.href = './index.html';  // Redireccionar al usuario a index.html
-                } else {
-                    console.error('Error en el registro:', json.message);
-                }
+            //     if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
+            //         window.location.href = './index.html';  // Redireccionar al usuario a index.html
+            //     } else {
+            //         console.error('Error en el registro:', json.message);
+            //     }
 
-            } catch (error) {
-                console.error('Error:', error);
-            }
+            // } catch (error) {
+            //     console.error('Error:', error);
+            // }
 
         }
 
