@@ -620,7 +620,7 @@ main section{
 .singUpView > div:nth-of-type(1){
     transform: translateY(-50%);
     background-color: var(--color-neutral-0);
-    width: fit-content;
+    /* width: fit-content; */
     margin: auto;
     padding: 12px;
     border-radius: 50%;
@@ -956,13 +956,110 @@ input.error, select.error{
     gap: 10px;
     justify-content: center;
     align-items: center;
-} */
+}
 
 
 
 
+/* estilos en alertas */
 
 
+.alerts h1{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.alerts p {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300px;
+    text-align: center;
+}
+
+.alerts .lose{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-flow: column;
+    border-radius: 8px;
+    margin-bottom: 22px;
+    margin-top: 5%;
+    width: 201px;
+    height: 82px;
+    flex-shrink: 0;
+    background: #FFDAD2;
+    cursor: pointer;
+}
+
+.lose svg{
+    width: 33.165px;
+    height: 37.536px;
+    flex-shrink: 0;
+}
+.alerts .find{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-flow: column;
+    border-radius: 8px;
+    background: rgba(255, 214, 0, 0.30);
+     width: 201px;
+    height: 82px;
+    flex-shrink: 0;
+    margin-bottom: 22px;  
+    cursor: pointer;
+}
+.find svg{
+    width: 33.165px;
+    height: 37.536px;
+    flex-shrink: 0;
+}
+.alert_lose h1{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.alert_lose p {
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    font-weight: 400px;
+    text-align: center;
+}
+.myPetsLose{
+    display: flex;
+    justify-content: center;
+}
+
+.alert_lose h2{
+    color: rgba(0, 0, 0, 0.50);
+font-family: Rubik;
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 135%; /* 17.55px */
+text-align: center;
+}
+
+.alert_lose h3{
+text-align: center;
+font-size: 15px;
+}
+
+.myPetsAddLose{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-flow: column;
+}
+
+.myPetsAddLose .addPetBtn{
+    margin-top: 5%;
+}
 /* alertfind */
 .alert_find h1{
     text-align: center;
@@ -1052,6 +1149,22 @@ input.error, select.error{
     line-height: normal;
     background: #363A59;
 }
+ .info_contact{
+    display: none;
+}
+.info_contact p{
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 200;  
+}
+.info_contact .option_login {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 100%;
+}
 .alert_find .sectionSuccess{
     background-color:#FFD600;
 }
@@ -1063,15 +1176,4 @@ input.error, select.error{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-}
-.sidebar i{
-    font-size: 1.5em;
-    color: var(--color-neutral-50);
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.sidebar i:hover{
-    color: var(--color-green);
 }

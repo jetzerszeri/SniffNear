@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicacion Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        #mi_mapa {
+            height: 400px;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ubicacion</h1>
+    <div id="mi_mapa"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Función para manejar la ubicación actual
+        function ubicacionActual(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            if (typeof myMap === 'undefined') {
+                // Si el mapa no está inicializado, inicialízalo
+                myMap = L.map('mi_mapa').setView([lat, lng], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        
+                }).addTo(myMap);
+
+                // Añade un marcador en la ubicación actual
+                L.marker([lat, lng]).addTo(myMap)
+                    .bindPopup('Ubicación actual').openPopup();
+            } else {
+                // Actualiza la ubicación del marcador si el mapa ya está inicializado
+                marker.setLatLng([lat, lng]);
+            }
+        }
+        // Función para manejar errores
+        function errorUbicacion(error) {
+            console.error(`Error obteniendo la ubicación: ${error.message}`);
+        }
+
+        // Verifica si el navegador admite geolocalización
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
+        } else {
+            console.log("Geolocalización no está disponible en este navegador.");
+        }
+    </script>
+</body>
+</html>
