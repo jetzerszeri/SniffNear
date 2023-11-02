@@ -646,13 +646,19 @@ main section{
 }
 
 /* .singUpView form input, .addNewPetForm input{ */
-input, select{
+input, select, textarea{
     height: 40px;
     border-radius: 8px;
     border: 1px solid var(--color-neutral-40);
     padding: 0 10px;
     font-size: 1em;
     transition: all 0.2s ease;
+}
+
+textarea{
+    height: auto;
+    resize: none;
+    padding: 10px;
 }
 
 .singUpView form > div:nth-of-type(1){
@@ -702,11 +708,16 @@ button[disabled] {
     border-color: var(--color-neutral-20);
 }
 
-/* .button .secundary{
+.btn.secundary{
     background-color: var(--color-neutral-0) !important;
     color: var(--color-green) !important;
     border-color: var(--color-green) !important;
-} */
+}
+
+.btn.secundary:hover{
+    background-color: var(--color-neutral-20) !important;
+    /* color: var(--color-neutral-0) !important; */
+}
 
 form label + p {
     font-size: 0.9em;
@@ -961,7 +972,59 @@ input.error, select.error{
 
 
 
+
+
 /* estilos en alertas */
+/* -- estilos para alerta de mascota encontrada luego de refactorizar */
+.containerFormStepsSelectors{
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 0;
+    text-align: center;
+    /* min-height: fit-content; */
+}
+
+.stepSubHeading{
+    text-align: center;
+    color: var(--color-neutral-50);
+}
+
+.containerFormStepsSelectors .inputDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* padding: 0 20px; */
+    text-align: left;
+    width: 100%;
+}
+
+#mi_mapa{
+    width: 100%;
+    height: 250px;
+    border-radius: 8px;
+}
+
+.btnStepForm{
+    display: flex;
+    gap: 10px;
+}
+
+.btnStepForm button{
+    flex: 1;
+}
+/* .stepSubHeading.selected{
+    text-transform: capitalize;
+    color: var(--color-darkblue);
+} */
+
+.containerFormStepsSelectors .errorInput{
+    margin: 0;
+}
+
 
 
 .alerts h1{
