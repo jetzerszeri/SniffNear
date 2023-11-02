@@ -241,5 +241,42 @@ function stepsProgressBar(arrayProgressIndicator, counter){
 }
 
 
+// funcion para cargar una imagen y previsualizarla en el html
+function previewImage(imgInput, previewDiv) {
+    previewDiv = document.querySelector(previewDiv);
+    imgInput.addEventListener('change', function() {
+        // Aquí puedes agregar código para mostrar la imagen seleccionada si lo deseas
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewDiv.style.backgroundImage = `url(${e.target.result})`;
+                previewDiv.innerHTML = '';
+            }
+            reader.readAsDataURL(file);
+        }
+    });
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting };
+    console.log('previewImage Activado');
+}
+
+
+
+// funcion para subir una imagen a firebase
+async function uploadImage(storageInstance, file, customName) {
+    // Obtener la extensión del archivo
+    const extension = file.name.split('.').pop();
+    
+    // Crear el nombre del archivo con el customName, el timestamp y la extensión
+    const fileName = `${customName}_${getCurrentTimestamp()}.${extension}`;
+
+    // Crea una referencia en Firebase Storage con el nombre personalizado
+    const storageRef = ref(storageInstance, fileName);
+
+    await uploadBytes(storageRef, file);
+
+    // Devuelve la URL de descarga del archivo.
+    return getDownloadURL(storageRef);
+}
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage };
