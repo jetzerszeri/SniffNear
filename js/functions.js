@@ -31,6 +31,47 @@ function markSomethingAsSelectedWithHideInput(array, input, funcion, textToDispl
     });
 }
 
+//funcion para marcar algo como seleccionado sin usar un select, y usando un input hidden para guardar el valor.
+function markSomethingAsSelectedWithHideInputGetting(array, input, funcion, textToDisplay, validar){
+    array = document.querySelectorAll(array);
+    input = document.querySelector(input);
+
+    array.forEach(element => {
+        element.addEventListener('click', function() {
+            // Verificar si el elemento ya tiene la clase 'selected'
+            if (this.classList.contains('selected')) {
+                // Si ya tiene la clase, quitársela
+                this.classList.remove('selected');
+                input.value = "";
+                if (textToDisplay) {
+                    textToDisplay.innerHTML = "Pequeño, mediano o grande";
+                    textToDisplay.classList.remove('selected');
+                }
+                if (validar){
+                validateInput(input, 'Selecciona una opción*');
+                }
+            } else {
+                // Si no tiene la clase, quitar 'selected' de todos los demás elementos y añadírsela a este
+                array.forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                input.value = this.dataset.value;
+                console.log(input.value);
+
+                if (textToDisplay) {
+                    textToDisplay.innerHTML = this.dataset.value;
+                    textToDisplay.classList.add('selected');
+                }
+                validateInput(input, 'Selecciona una opción*');
+            }
+            if (funcion){
+                funcion();
+            }
+        });
+    });
+}
+
+
+
 
 // funcion para poder marcar y desmarcar un radio input
 function checkAndUncheckARadioInput(inputs){
@@ -73,6 +114,7 @@ function validateInput(input, textoAMostrar, variable) {
         // if (variable !== undefined) {
         //     variable = false;
         // }
+        addValidationEvent(input);
         return false;
     } else {
         targetForError.classList.remove('error');
@@ -200,4 +242,4 @@ function stepsProgressBar(arrayProgressIndicator, counter){
 
 
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar };
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting };
