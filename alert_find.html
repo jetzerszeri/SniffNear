@@ -67,6 +67,9 @@
             <svg width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M20.507 2.98467C20.3017 1.83214 19.3556 0.919716 18.2168 0.764651C16.9418 0.591857 15.8265 1.33706 15.4109 2.43495C15.2426 2.87423 14.8358 3.1687 14.3709 3.17142L7.28646 3.1951C6.82028 3.19467 6.40041 2.90385 6.21759 2.46487C5.759 1.36806 4.61585 0.63149 3.34555 0.812639C2.21099 0.975052 1.30054 1.89708 1.13983 3.04865C1.0086 3.98272 1.34989 4.84494 1.95038 5.42889C1.37311 6.01679 1.06891 6.87841 1.23071 7.81024C1.43681 8.97346 2.40034 9.89344 3.55314 10.0391C4.85888 10.1993 5.99255 9.4026 6.37022 8.24683C6.5168 7.7981 6.94708 7.50869 7.41634 7.50786L14.4068 7.48221C14.8761 7.48138 15.3144 7.76468 15.48 8.21433C15.9036 9.3658 17.0655 10.1571 18.365 9.98603C19.5121 9.83683 20.441 8.90725 20.604 7.74375C20.7322 6.81093 20.3922 5.95186 19.7947 5.36666C20.372 4.77876 20.6793 3.91588 20.5131 2.98216L20.507 2.98467Z" stroke="#FF8367" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+            <svg width="22" height="11" viewBox="0 0 22 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.507 2.98467C20.3017 1.83214 19.3556 0.919716 18.2168 0.764651C16.9418 0.591857 15.8265 1.33706 15.4109 2.43495C15.2426 2.87423 14.8358 3.1687 14.3709 3.17142L7.28646 3.1951C6.82028 3.19467 6.40041 2.90385 6.21759 2.46487C5.759 1.36806 4.61585 0.63149 3.34555 0.812639C2.21099 0.975052 1.30054 1.89708 1.13983 3.04865C1.0086 3.98272 1.34989 4.84494 1.95038 5.42889C1.37311 6.01679 1.06891 6.87841 1.23071 7.81024C1.43681 8.97346 2.40034 9.89344 3.55314 10.0391C4.85888 10.1993 5.99255 9.4026 6.37022 8.24683C6.5168 7.7981 6.94708 7.50869 7.41634 7.50786L14.4068 7.48221C14.8761 7.48138 15.3144 7.76468 15.48 8.21433C15.9036 9.3658 17.0655 10.1571 18.365 9.98603C19.5121 9.83683 20.441 8.90725 20.604 7.74375C20.7322 6.81093 20.3922 5.95186 19.7947 5.36666C20.372 4.77876 20.6793 3.91588 20.5131 2.98216L20.507 2.98467Z" stroke="#FF8367" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
 
         <form class="addNewPetForm createAlert">
@@ -254,6 +257,65 @@
 
                 </div>
             </div>
+
+
+            <div class="step7">
+                <h2>Datos de contacto</h2>
+                <p>Gracias por ayudar a una mascota perdida. Por favor dinos cómo podemos contactarte.</p>
+                <p>Tu información está protegida y no se compartirá con nadie.</p>
+                <div class="containerFormStepsSelectors">
+                    <div class="inputDiv">
+                        <label for="personName">Nombre</label>
+                        <input type="text" name="personName">
+                    </div>
+                    <div class="inputDiv">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" name="email" placeholder="ejemplo@mail.com">
+                    </div>
+                    <div class="inputDiv">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password">
+                    </div>
+
+                    <div class="logInOptions">
+                        <p>¿Ya eres miembro? <span class="logInBtn">Ingresá</span></p>
+                        <p>¿Querés crear una cuenta? <span class="singInBtn">Registrate</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step8">
+                <h2>Verificación</h2>
+                <!-- <div class="containerFormStepsSelectors"> -->
+                    <div class="alertPreview">
+                        <p>Muchas gracias por ayudarnos a que el regreso a casa sea una realidad. Por favor verificá que la información sea correcta.</p>
+                        <h3>Información de la mascota</h3>
+                        <!-- <div class="prevInfoContainter">
+                            <div class="imgPrevContainer"></div>
+                            <div>
+                                <ul>
+                                    <li>Tipo de animal: <span>perro</span></li>
+                                    <li>Tamaño: <span>mediano</span></li>
+                                    <li>Color: <span>Blanco, negro</span></li>
+                                    <li>Raza: <span>Sin especificar</span></li>
+                                    <li>Encontrado en <span>Palermo</span>, a las <span>12pm</span></li>
+                                    <li>Descripción: Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit ullam est illum ea autem rem iure eligendi accusamus alias eius, doloremque laboriosam vero numquam aliquam et itaque ex laborum commodi.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div id="mi_mapa" class="previewMap"></div>
+
+                        <h3>Información de contacto</h3>
+                        <p>Jake Ramirez, jake@mail.com</p>
+
+                        <p class="editLink">Editar</p> -->
+                        
+                    </div>
+
+                <!-- </div> -->
+            </div>
+
             <div class="btnStepForm">
                 <button class="btn secundary" id="prev">Regresar</button>
                 <button id="next">Continuar</button>
@@ -359,57 +421,57 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script type="module">
-        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage} from './js/functions.js';
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview} from './js/functions.js';
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
-        // //mapa
-        // let myMap;
-        // let ubicacionActualMarker;
-        // let ubicacionSelectMarker;
+        //mapa
+        let myMap;
+        let ubicacionActualMarker;
+        let ubicacionSelectMarker;
         // let ubicacionInput = document.getElementById('ubicacion');
 
-        // //ubi actual 
-        // function ubicacionActual(position) {
-        //     const lat = position.coords.latitude;
-        //     const lng = position.coords.longitude;
-        //     if(!myMap){
-        //          myMap = L.map('mi_mapa').setView([lat, lng], 15);
-        //           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        //             }).addTo(myMap);
+        //ubi actual 
+        function ubicacionActual(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            if(!myMap){
+                 myMap = L.map('mi_mapa').setView([lat, lng], 15);
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(myMap);
                 
-        //       //Marcador posicionado en la ubicacion actual
-        //         ubicacionActualMarker = L.marker([lat, lng], {
-        //             draggable: true,
-        //             icon: L.icon({
-        //                 iconUrl: 'img/pinFind.png',
-        //                 iconSize: [32, 32],
-        //             })
-        //         }).addTo(myMap).bindPopup('Ubicación').openPopup();   
+              //Marcador posicionado en la ubicacion actual
+                ubicacionActualMarker = L.marker([lat, lng], {
+                    draggable: true,
+                    icon: L.icon({
+                        iconUrl: 'img/pinFind.png',
+                        iconSize: [32, 32],
+                    })
+                }).addTo(myMap).bindPopup('Ubicación').openPopup();   
                 
-        //         //Evento para poder arrastar el marcador desde la ubi
-        //         ubicacionActualMarker.on('dragend', (e) => {
-        //             const marker = e.target;
-        //             const position = marker.getLatLng();
-        //             ubicacionInput.value = `${position.lat}, ${position.lng}`;
-        //         });
-        //     } else {
-        //         ubicacionActualMarker.setLatLng([lat, lng]);
-        //     }
+                //Evento para poder arrastar el marcador desde la ubi
+                ubicacionActualMarker.on('dragend', (e) => {
+                    const marker = e.target;
+                    const position = marker.getLatLng();
+                    // ubicacionInput.value = `${position.lat}, ${position.lng}`;
+                });
+            } else {
+                ubicacionActualMarker.setLatLng([lat, lng]);
+            }
             
-        //     ubicacionInput.value = lat + ', ' + lng;
-        // }
+            // ubicacionInput.value = lat + ', ' + lng;
+        }
 
-        // function errorUbicacion(error) {
-        //     console.error(`Error obteniendo la ubicación: ${error.message}`);
-        // }
+        function errorUbicacion(error) {
+            console.error(`Error obteniendo la ubicación: ${error.message}`);
+        }
         
-        // if ("geolocation" in navigator) {
-        //     navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
-        // } else {
-        //     console.log("Geolocalización no está disponible en este navegador.");
-        // }
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
+        } else {
+            console.log("Geolocalización no está disponible en este navegador.");
+        }
 
 
 
@@ -426,12 +488,19 @@
         const step4 = document.querySelector('.step4')
         const step5 = document.querySelector('.step5')
         const step6 = document.querySelector('.step6')
-        const steps = [step1, step2, step3, step4, step5, step6];
+        const step7 = document.querySelector('.step7')
+        const step8 = document.querySelector('.step8')
+        const steps = [step1, step2, step3, step4, step5, step6, step7, step8];
         const nextBtn = document.querySelector('#next');
         const prevBtn = document.querySelector('#prev');
         const btnContainer = document.querySelector('.btnStepForm');
         const form = document.querySelector('.addNewPetForm.createAlert');
-        const {type, size, color1, color2, breed, description, cords, date, time, img} = form;
+        const {type, size, color1, color2, breed, description, cords, date, time, img, personName, email, password} = form;
+        let userType = 'gest';
+        const logInBtn = document.querySelector('.logInBtn');
+        const singInBtn = document.querySelector('.singInBtn');
+
+        
 
         function displaySteps() {
             steps.forEach(step => {
@@ -452,6 +521,47 @@
             } else {
                 prevBtn.style.display = 'block';
             }
+
+            if(currentStep == 7){
+                if (storedUserId) {
+                    
+                    console.log('se encontro un usuario logueado')
+
+                } 
+                switch (userType) {
+                    case 'gest':
+                        // nextBtn.textContent = 'Continuar';
+                        console.log('gest')
+                        password.parentElement.style.display = 'none';
+                        nextBtn.addEventListener('click', () => goNextStep([personName, email]));
+                        break;
+                    case 'newUser':
+                        // nextBtn.textContent = 'Publicar';
+                        personName.parentElement.style.display = 'flex';
+                        password.parentElement.style.display = 'flex';
+                        nextBtn.addEventListener('click', () => goNextStep([personName, email, password]));
+                        
+                        console.log('newUser')
+                        break;
+                    case 'member':
+                        password.parentElement.style.display = 'flex';
+                        personName.parentElement.style.display = 'none';
+                        console.log('newUser')
+                        //pero aquí en lugar de hacer una validaciön normal debería hacer una validación de logueo
+                        nextBtn.addEventListener('click', () => goNextStep([password, email]));
+                        break;
+                }
+            }
+
+            if (currentStep == 8){
+                displayPreviewData()
+                // previewImage(img, '.imgPrevContainer');
+                prevBtn.style.display = 'none';
+                nextBtn.innerHTML = 'Publicar alerta';
+
+            }
+
+            
         }
         
         displaySteps();
@@ -522,12 +632,116 @@
             } else if (currentStep === 5) {
                 goNextStep([date, time]);
             } else if (currentStep === 6) {
-                goNextStep();
-            }
+                goNextStep([img]);
+            } 
+            // else if (currentStep == 7){
+                // goNextStep([personName, email, password]);
+
+                // if (storedUserId) {
+                //     goNextStep();
+                // } else {
+                //     goNextStep([personName, email, password]);
+                // }
+            // }
         });
 
 
+        logInBtn.addEventListener('click', () => {
+            userType = 'member';
+            displaySteps();
+        });
 
+        singInBtn.addEventListener('click', () => {
+            userType = 'newUser';
+            displaySteps();
+        });
+
+
+        function displayPreviewData (){
+            const alertPreview = document.querySelector('.alertPreview');
+            alertPreview.innerHTML = '';
+            const parrafoInicial = document.createElement('p');
+            parrafoInicial.textContent = 'Muchas gracias por ayudarnos a que el regreso a casa sea una realidad. Por favor verificá que la información sea correcta.';
+            alertPreview.appendChild(parrafoInicial);
+            const h3InfoMascota = document.createElement('h3');
+            h3InfoMascota.textContent = 'Información de la mascota';
+            alertPreview.appendChild(h3InfoMascota);
+            const prevInfoContainter = document.createElement('div');
+            prevInfoContainter.classList.add('prevInfoContainter');
+            const imgPrevContainer = document.createElement('div');
+            imgPrevContainer.classList.add('imgPrevContainer');
+            // imgPrevContainer.style.backgroundImage = `url(${img.value})`;
+            addPreviewImgOnReview(img, imgPrevContainer);
+            const prevInfo = document.createElement('div');
+            const prevInfoUl = document.createElement('ul');
+            const colorValue = color2.value ? `${color1.value}, ${color2.value}` : color1.value;
+            const breedValue = breed.value ? breed.value : 'Sin especificar';
+            prevInfoUl.innerHTML = `
+                <li>Tipo de animal: <span>${type.value}</span></li>
+                <li>Tamaño: <span>${size.value}</span></li>
+                <li>Color: <span>${colorValue}</span></li>
+                <li>Raza: <span>${breedValue}</span></li>
+                <li>Encontrado en <span>${cords.value}</span>, a las <span>${time.value}</span></li>
+                <li>Descripción: ${description.value}</li>
+            `;
+            prevInfo.appendChild(prevInfoUl);
+            prevInfoContainter.appendChild(imgPrevContainer);
+            prevInfoContainter.appendChild(prevInfo);
+
+            alertPreview.appendChild(prevInfoContainter);
+
+
+            const previewMap = document.createElement('div');
+            previewMap.id = 'mi_mapa';
+            previewMap.classList.add('previewMap');
+            alertPreview.appendChild(previewMap);
+
+            const infoContactoH3 = document.createElement('h3');
+            infoContactoH3.textContent = 'Información de contacto';
+            const infoContactoP = document.createElement('p');
+            infoContactoP.textContent = `${personName.value}, ${email.value}`;
+            infoContactoP.classList.add('infoContactoP');
+            alertPreview.appendChild(infoContactoH3);
+            alertPreview.appendChild(infoContactoP);
+
+            const editLink = document.createElement('p');
+            editLink.classList.add('editLink');
+            editLink.textContent = 'Editar';
+
+            editLink.addEventListener('click', () => {
+                currentStep = 1;
+                displaySteps();
+            });
+
+            alertPreview.appendChild(editLink);
+        }
+
+
+        // step8.appendChild(prevInfoContainter);
+
+
+
+
+        // <div class="prevInfoContainter">
+        //     <div class="imgPrevContainer"></div>
+        //     <div>
+        //         <ul>
+        //             <li>Tipo de animal: <span>perro</span></li>
+        //             <li>Tamaño: <span>mediano</span></li>
+        //             <li>Color: <span>Blanco, negro</span></li>
+        //             <li>Raza: <span>Sin especificar</span></li>
+        //             <li>Encontrado en <span>Palermo</span>, a las <span>12pm</span></li>
+        //             <li>Descripción: Lorem ipsum, </li>
+        //         </ul>
+        //     </div>
+        // </div>
+
+        // <div id="mi_mapa" class="previewMap"></div>
+
+        // <h3>Información de contacto</h3>
+        // <p>Jake Ramirez, jake@mail.com</p>
+
+        // <p class="editLink">Editar</p>
 
 
 

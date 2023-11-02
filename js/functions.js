@@ -135,12 +135,12 @@ function addValidationEvent(input) {
 
     if (input.type === 'date') {
         eventToUse = 'input';
-    } else if (input.nodeName === 'SELECT') {
+    } else if (input.nodeName === 'SELECT' || input.type === 'file') {
         eventToUse = 'change';
     }
 
     input.addEventListener(eventToUse, (e) => {
-        validateInput(input, 'Este campo es obligatorio');
+        validateInput(input, 'Este campo es obligatorio*');
     });
 }
 
@@ -260,6 +260,17 @@ function previewImage(imgInput, previewDiv) {
     console.log('previewImage Activado');
 }
 
+function addPreviewImgOnReview(input, previewDiv){
+    const file = input.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewDiv.style.backgroundImage = `url(${e.target.result})`;
+            previewDiv.innerHTML = '';
+        }
+        reader.readAsDataURL(file);
+    }
+}
 
 
 // funcion para subir una imagen a firebase
@@ -279,4 +290,4 @@ async function uploadImage(storageInstance, file, customName) {
     return getDownloadURL(storageRef);
 }
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage };
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview};
