@@ -235,7 +235,7 @@
 
 
     <script type="module">
-        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, getCurrentTimestamp, postFormInfoToDB } from './js/functions.js';
+        import {markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar } from './js/functions.js';
         import app from './js/config.js'; //importo la configuracion de firebase
         import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
 
@@ -469,14 +469,14 @@
         checkButtonState();
 
 
-        function stepsProgressBar(steps){
-            steps.forEach((step, index) => {
-                step.classList.remove('active');
-                if (index < currentStep) {
-                    step.classList.add('active');
-                }
-            });
-        }
+        // function stepsProgressBar(steps){
+        //     steps.forEach((step, index) => {
+        //         step.classList.remove('active');
+        //         if (index < currentStep) {
+        //             step.classList.add('active');
+        //         }
+        //     });
+        // }
 
 
 
@@ -496,7 +496,7 @@
                 step3.style.display = 'block';
             }
 
-            stepsProgressBar(stepsProgress);
+            stepsProgressBar(stepsProgress, currentStep);
         }
 
         displaySteps(); //esto hay que ocultarlo luego

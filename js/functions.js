@@ -188,5 +188,16 @@ async function postFormInfoToDB ( endpoint, datos, redirect ) {
 }
 
 
+// funcion para marcador del indicador de pasos en un formulario miltistep
+function stepsProgressBar(arrayProgressIndicator, counter){
+    arrayProgressIndicator.forEach((step, index) => {
+        step.classList.remove('active');
+        if (index < counter) {
+            step.classList.add('active');
+        }
+    });
+}
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB };
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar };
