@@ -359,7 +359,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script type="module">
-        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput} from './js/functions.js';
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage} from './js/functions.js';
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
@@ -460,6 +460,8 @@
         markSomethingAsSelectedWithHideInputGetting('.sizeSelector li', '#size',  () => goNextStep([size]));
         markSomethingAsSelectedWithHideInputGetting('.colorInputs.principal li', '#color1', null, null, true);
         markSomethingAsSelectedWithHideInputGetting('.colorInputs.secundario li', '#color2');
+
+        previewImage(img, '.labelImgInput'); //le paso el input  de la imagen y el queryselector del div donde quiero que se previsualice la imagen
 
 
         function goNextStep(arrayAValidar) {
