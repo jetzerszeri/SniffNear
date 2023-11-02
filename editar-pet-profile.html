@@ -31,48 +31,50 @@
 
     <main>
 
-        <section class="alert_lose">
-            <h1>Crear alerta mascota perdida</h1>
-            <p>Selecciona la mascota perdida</p>
-
-            <!-- tengo que mostrar las mascotas que esten asociadas con el perfil dinamicamente-->
-            <section class="myPetsCard">
-                <div class="myPetsLose">
-                    <ul>
-                        <li>
-                            <div>
-                                <img src="img/pet1.jpg" alt="Mascota 1">
-                            </div>
-                            <p>Oliver</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/pet2.jpg" alt="Mascota 2">
-                            </div>
-                            <p>Sky</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/pet3.jpg" alt="Mascota 3">
-                            </div>
-                            <p>Neel</p>
-                        </li>
-                    </ul>
+        <section class="addNewPetForm alert_find ">
+           
+            <form action="" method="post" id="find_1">
+                 <h1>Editar el perfil de mi mascota</h1>
+                 <div>
+                    <label>Nombre de tu mascota</label>
+                    <input type="text" name="nombre" id="nombre">
                 </div>
-            </section>
-            <h2>Si tu mascota no tiene un perfil</h2>
-            <p>Porfavor agregá una nueva mascota</p>
 
-            <div class="myPetsCard">
-                <div class="myPetsAddLose">
-                      <span class="addPetBtn">
-                        <i class="bi bi-plus"></i>
-                        </span>
-                    <p>Agregá</p>
+                <div>
+                    <label for="tamano">¿Qué edad tiene?</label>
+                   
+                    <input type="text" name="edad" placeholder="1 año">
                 </div>
-                  
-            </div>
+
+
+                <div class="select_color"> 
+                    <label for="color">¿Cuál es su color ?</label>
+                    <input type="color" id="colorInput" name="color" placeholder="seleccione el color">
+                </div>
+                <div> 
+                    <label for="raza">¿Cuál es su tamaño ?</label>
+                    <input type="text" id="raza" name="tamanio" placeholder="grande">
+                </div>
+
+                <div> 
+                    <label for="raza">¿Cuál es su raza ?</label>
+                    <input type="text" id="raza" name="raza" placeholder="Ingrese la raza de la mascota, si la conoce">
+                </div>
+                <div>
+                    <label for="genero">¿Cuál es su género?</label>
+                    <textarea name="genero" id="genero"  placeholder="hembra"></textarea>
+                </div>
+                <div>
+                    <label for="img">Añade fotos de la mascota</label>
+                    <input type="file" id="img" name="file" accept=".png" />
+                </div>    
+
+                <div class="divBtnContinuar">
+                    <button type="submit" class="btnContinuar">Continuar</button>
+                </div>
+            </form>
         </section>
+       
 
     </main>
 
@@ -111,48 +113,9 @@
     <script>
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
-        const petsUl = document.querySelector('.myPetsCard ul');
-        console.log(petsUl);
-
-        async function getUser(){
-            const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
-
-            petsUl.innerHTML = '';
-            
-
-            if(response.ok){
-                const data = await response.json();
-
-                user = data.user;
-                pets = data.pets;
-                console.log(user);
-                console.log(pets);
-
-                pets.forEach(pet => {
-                    const petLi = document.createElement('li');
-                    petLi.innerHTML = `
-                        <div>
-                            <img src="${pet.img}" alt="Foto de ${pet.name}">
-                        </div>
-                            <p>${pet.name}</p>
-                    `;
-
-                    //aquí habría que agregar un evento click para que al seleccionar a la mascota continúe con la alerta y lleve los datos de la mascota seleccionada
-
-                    petsUl.appendChild(petLi);
-                });
-
-
-            } else {
-                console.log('Error en la petición');
-            }
-        }
-
-        getUser();
-
 
         
     </script>
-    <!-- <script src="js/alert.js"></script> -->
+    <script src="js/alert.js"></script>
 </body>
 </html>
