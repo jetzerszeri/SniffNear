@@ -61,7 +61,7 @@
         let alertas;
 
 
-        async function getAlertas(){
+        async function getAlertas(map){
             createLoader();
             const response = await fetch(`https://sniffnear-api.onrender.com/api/alerts/`);
 
@@ -74,6 +74,18 @@
                     console.log(alerta.type, alerta.latitude, alerta.longitude);
                 });
 
+                
+                alertas.forEach(alerta => {
+                    const marker = new google.maps.Marker({
+                        position: { lat: alerta.latitude, lng: alerta.longitude },
+                        map,
+                        // title: alerta.type,
+                        icon: {
+                            url: './img/foundMarker.png',
+                            scaledSize: new google.maps.Size(22, 32),
+                        },
+                    });
+                });
                 removeLoader();
             } else {
                 console.log('Error en la petición');
@@ -81,7 +93,7 @@
             }
         }
 
-        getAlertas();
+        // getAlertas();
 
 
 
@@ -95,13 +107,16 @@
         //esto es para que el initMap sea global y pueda ser llamado por el script de google maps
 
         function initMap(){
-            let centerMap = { lat: -34.603722, lng: -58.381592 };
+            let centerMap = { lat: 35.2713493, lng: -80.9588694 };
             const mapOptions = {
                 zoom: 15,
                 center: centerMap,
                 disableDefaultUI: true,
             };
+
             const map = new google.maps.Map(document.getElementById("mapaAlertas"), mapOptions);
+
+            getAlertas(map);
         }
     </script>
 
