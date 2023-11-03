@@ -61,7 +61,7 @@
         let alertas;
 
 
-        async function getAlertas(map){
+        async function getAlertas(map, createInfoWindows){
             createLoader();
             const response = await fetch(`https://sniffnear-api.onrender.com/api/alerts/`);
 
@@ -85,6 +85,9 @@
                             scaledSize: new google.maps.Size(22, 32),
                         },
                     });
+                    createInfoWindows(marker);
+
+
                 });
                 removeLoader();
             } else {
@@ -116,7 +119,26 @@
 
             const map = new google.maps.Map(document.getElementById("mapaAlertas"), mapOptions);
 
-            getAlertas(map);
+
+            const infoWindow = new google.maps.InfoWindow({
+                minWidth: 200,
+                maxWidth: 200,
+            });
+
+            
+
+            function createInfoWindows(marker){
+                const content = `<div class="markerInfoWindow">
+                    
+                    </div>`;
+
+                google.maps.event.addListener(marker, "click", () => {
+                    infoWindow.setContent(content);
+                    infoWindow.open(map, marker);
+                });
+            }
+
+            getAlertas(map, createInfoWindows);
         }
     </script>
 
