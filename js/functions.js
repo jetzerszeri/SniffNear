@@ -353,4 +353,40 @@ function removeLoader(){
 }
 
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, createLoader, removeLoader};
+function addBottomNavBar(){
+    let btnNav = document.createElement('nav');
+    btnNav.classList.add('bottomNavBar');
+    btnNav.innerHTML = `
+    <ul>
+        <li class="active">
+            <a href="#">
+                <i class="bi bi-house-door"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-search"></i>
+            </a>
+        </li>
+        <li>
+            <a href="./alert.html">
+                <i class="bi bi-plus"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-shield-exclamation"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-person"></i>
+            </a>
+        </li>
+    </ul>
+    `
+    document.body.appendChild(btnNav);
+}
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, createLoader, removeLoader, addBottomNavBar};
