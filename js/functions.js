@@ -353,18 +353,18 @@ function removeLoader(){
 }
 
 
-function addBottomNavBar(){
+function addBottomNavBar(active){
     let btnNav = document.createElement('nav');
     btnNav.classList.add('bottomNavBar');
     btnNav.innerHTML = `
     <ul>
-        <li class="active">
-            <a href="#">
+        <li>
+            <a href="./index.html">
                 <i class="bi bi-house-door"></i>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="./mapa_alertas.html">
                 <i class="bi bi-search"></i>
             </a>
         </li>
@@ -386,6 +386,18 @@ function addBottomNavBar(){
     </ul>
     `
     document.body.appendChild(btnNav);
+
+    let listItems = btnNav.querySelectorAll('.bottomNavBar ul li');
+
+    // Verificar que el índice activo esté en el rango de los elementos li
+    if(active >= 1 && active <= listItems.length) {
+        // Quitar la clase 'active' de todos los elementos li por si acaso
+        listItems.forEach(li => li.classList.remove('active'));
+
+        // Añadir la clase 'active' al elemento li correspondiente
+        // Se resta 1 porque los arrays son base 0 y los índices empiezan en 1 en tu pregunta
+        listItems[active - 1].classList.add('active');
+    }
 }
 
 

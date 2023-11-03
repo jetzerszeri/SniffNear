@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SniffNear</title>
+    <title>SniffNear | Alertas</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link  href="./css/style.css" rel="stylesheet">
@@ -31,6 +31,13 @@
     </div>
 
     <main class="mapMain">
+        <div class="buttonscontainer">
+            <button class="small btn secundary">Lista</button>
+            <button class="small ">Mapa</button>
+            <i class="bi bi-filter"></i>
+        </div>
+
+        <div id="mapaAlertas"></div>
 
 
     </main>
@@ -47,7 +54,7 @@
 
         // addBottomNavBar();
 
-        addBottomNavBar();
+        addBottomNavBar(2);
 
 
 
