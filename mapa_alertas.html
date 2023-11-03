@@ -56,6 +56,53 @@
 
         addBottomNavBar(2);
 
+        let alertas;
+
+
+        async function getAlertas(){
+            createLoader();
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/alerts/`);
+
+            if(response.ok){
+                const data = await response.json();
+                alertas = data;
+                console.log(alertas);
+
+                alertas.forEach(alerta => {
+                    console.log(alerta.type, alerta.latitude, alerta.longitude);
+                });
+
+
+                // welcomeMsg.innerHTML = `Hola, ${user.name}!`;
+
+                // pets.forEach(pet => {
+                //     const petLi = document.createElement('li');
+                //     petLi.innerHTML = `
+                //         <div>
+                //             <img src="${pet.img}" alt="Foto de ${pet.name}">
+                //         </div>
+                //             <p>${pet.name}</p>
+                //     `;
+
+                //     petLi.addEventListener('click', () => {
+                //         window.location.href = `./pet-profile.html?petId=${pet._id}`;
+                //     });
+                //     petsUl.appendChild(petLi);
+                // });
+                removeLoader();
+                // console.log(data);
+            } else {
+                console.log('Error en la petición');
+                removeLoader();
+            }
+        }
+
+        getAlertas();
+
+
+
+
+
 
 
 
