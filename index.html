@@ -260,7 +260,7 @@
     </nav>
 
 
-    <div class="loadingBackground">
+    <!-- <div class="loadingBackground">
         <div class="loadingContainer">
             <div class="bouncer">
                 <div></div>
@@ -270,9 +270,11 @@
             </div>
             <p>Cargando...</p>
         </div>
-    </div>
+    </div> -->
 
-    <script>
+    <script type="module">
+        import {createLoader, removeLoader} from './js/functions.js';
+
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
@@ -330,13 +332,14 @@
 
 
         async function getUser(){
+            createLoader();
             const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
 
             if(response.ok){
                 const data = await response.json();
 
-                user = data.user;
-                pets = data.pets;
+                let user = data.user;
+                let pets = data.pets;
                 console.log(user);
                 console.log(pets);
 
@@ -356,9 +359,11 @@
                     });
                     petsUl.appendChild(petLi);
                 });
+                removeLoader();
                 // console.log(data);
             } else {
                 console.log('Error en la petición');
+                removeLoader();
             }
         }
 

@@ -416,7 +416,8 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script type="module">
-        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, postFormInfoToDB} from './js/functions.js';
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, postFormInfoToDB, createLoader, removeLoader} from './js/functions.js';
+
         import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
 
         import app from './js/config.js'; //importo la configuracion de firebase
@@ -733,7 +734,7 @@
 
         async function getUser(){
             const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
-
+            createLoader();
             if(response.ok){
                 const data = await response.json();
 
@@ -742,9 +743,11 @@
                 email.value = user.email;
 
                 console.log('datos de usuario cargados exitosamente');
+                removeLoader();
 
             } else {
                 console.log('Error en la petición');
+                removeLoader();
             }
         }
 

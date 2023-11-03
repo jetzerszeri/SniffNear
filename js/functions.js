@@ -203,6 +203,7 @@ function getCurrentTimestamp() {
 // funcion para agregar datos a la base de datos
 async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
     try {
+        createLoader();
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -224,9 +225,10 @@ async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
             console.log(redirección);
         }
 
+        
 
         if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
-
+            removeLoader();
             window.location.href = redirección;  // Redireccionar al usuario 
         // console.log(redirect)
         // console.log('console del json', json)
@@ -235,6 +237,7 @@ async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
         }
 
     } catch (error) {
+        removeLoader();
         console.error('Error:', error);
     }
 }
@@ -318,5 +321,36 @@ function renderAMap(id, lat, lng, zoom, marker){
 
 
 
+//funcion para crear un loader
+function createLoader(texto){
+    let loaderBack = document.createElement('div');
+    loaderBack.classList.add('loadingBackground');
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap};
+    let loaderContainer = document.createElement('div');
+    loaderContainer.classList.add('loadingContainer');
+
+    let loader = document.createElement('div');
+    loader.classList.add('bouncer');
+    loader.innerHTML = `<div></div><div></div><div></div><div></div>`
+    loaderContainer.appendChild(loader);
+
+    if (texto) {
+        let loaderText = document.createElement('p');
+        loaderText.innerText = texto;
+        loaderContainer.appendChild(loaderText);
+    }
+
+    loaderBack.appendChild(loaderContainer);
+    document.body.appendChild(loaderBack);
+}
+
+// function para remover un loader
+function removeLoader(){
+    let loaderBack = document.querySelectorAll('.loadingBackground');
+    loaderBack.forEach(element => {
+        element.remove();
+    });
+}
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, createLoader, removeLoader};
