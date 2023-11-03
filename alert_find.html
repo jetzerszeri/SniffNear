@@ -416,7 +416,12 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script type="module">
-        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap} from './js/functions.js';
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, postFormInfoToDB} from './js/functions.js';
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
+
+        import app from './js/config.js'; //importo la configuracion de firebase
+        const storage = getStorage(app);
+
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
@@ -649,6 +654,10 @@
                 //     goNextStep([personName, email, password]);
                 // }
             // }
+
+            if (currentStep === 8) {
+                addFormInfoToDB();
+            }
         });
 
 
@@ -740,6 +749,53 @@
         }
 
         getUser();
+
+
+
+
+
+
+
+
+
+
+
+        // subiendo la alerta a la bd
+        async function addFormInfoToDB(){
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            // data.owner = storedUserId;
+
+            console.log(data);
+
+            
+
+
+            // intentando agregar la imagen a firebase
+            const file = img.files[0];
+
+
+            // Comprobar si hay un archivo seleccionado
+            if (file && file.size > 0) {
+                const customName = name.value;
+                uploadImage(storage, file, customName).then(async (url) => {
+                    console.log('File URL:', url);
+
+                    data.img = url;
+                    console.log(data);
+
+                    // postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html')
+                });
+            } 
+            // else {
+            //     data.img = '';
+            //     // Si no hay archivo, ejecutar directamente postFormInfoToDB
+            //     postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html');
+            // }
+        
+
+        }
+
 
 
     </script>

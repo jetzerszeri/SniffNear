@@ -1,3 +1,5 @@
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
+
 //funcion para marcar algo como seleccionado sin usar un select, y usando un input hidden para guardar el valor.
 function markSomethingAsSelectedWithHideInput(array, input, funcion, textToDisplay, validar){
     array.forEach(element => {
