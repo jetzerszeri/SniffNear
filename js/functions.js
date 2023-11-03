@@ -201,7 +201,7 @@ function getCurrentTimestamp() {
 
 
 // funcion para agregar datos a la base de datos
-async function postFormInfoToDB ( endpoint, datos, redirect ) {
+async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
     try {
         const response = await fetch(endpoint, {
             method: 'POST',
@@ -213,9 +213,17 @@ async function postFormInfoToDB ( endpoint, datos, redirect ) {
 
         const json = await response.json();
         console.log(json);
+        let redirección;
 
-        let redirección = redirect + '?petId=' + json.pet._id;
-        console.log(redirección);
+        if (redirectType === 'alert') {
+            redirección = redirect + '?alertId=' + json.data._id;
+            console.log(redirección);
+        } else {
+
+            redirección = redirect + '?petId=' + json.pet._id;
+            console.log(redirección);
+        }
+
 
         if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
 
