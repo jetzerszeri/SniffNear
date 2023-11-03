@@ -722,59 +722,24 @@
             alertPreview.appendChild(editLink);
         }
 
+        async function getUser(){
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
 
+            if(response.ok){
+                const data = await response.json();
 
-        //refactor del mapa para renderizar dos
+                let user = data.user;
+                personName.value = user.name;
+                email.value = user.email;
 
+                console.log('datos de usuario cargados exitosamente');
 
-        //Esto es todo lo que renderiza el mapa
-        // let map = L.map('mi_mapa').setView([-34.603722, -58.381592], 15);
-        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            } else {
+                console.log('Error en la petición');
+            }
+        }
 
-        // L.marker([-34.603722, -58.381592], {
-        //     draggable: true,
-        //     icon: L.icon({
-        //         iconUrl: 'img/pinFind.png',
-        //         iconSize: [32, 32],
-        //     })
-        // }).addTo(map).bindPopup('Ubicación').openPopup();
-
-
-
-
-
-
-
-
-
-        // step8.appendChild(prevInfoContainter);
-
-
-
-
-        // <div class="prevInfoContainter">
-        //     <div class="imgPrevContainer"></div>
-        //     <div>
-        //         <ul>
-        //             <li>Tipo de animal: <span>perro</span></li>
-        //             <li>Tamaño: <span>mediano</span></li>
-        //             <li>Color: <span>Blanco, negro</span></li>
-        //             <li>Raza: <span>Sin especificar</span></li>
-        //             <li>Encontrado en <span>Palermo</span>, a las <span>12pm</span></li>
-        //             <li>Descripción: Lorem ipsum, </li>
-        //         </ul>
-        //     </div>
-        // </div>
-
-        // <div id="mi_mapa" class="previewMap"></div>
-
-        // <h3>Información de contacto</h3>
-        // <p>Jake Ramirez, jake@mail.com</p>
-
-        // <p class="editLink">Editar</p>
-
-
-
+        getUser();
 
 
     </script>
