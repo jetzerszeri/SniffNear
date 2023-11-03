@@ -44,7 +44,9 @@
 
 
 
-
+    <script defer async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcqXxMijjl-i15NgGHljhsf7tArQU7kDU&callback=initMap">
+    </script>
 
     <script type="module">
         import {createLoader, removeLoader, addBottomNavBar} from './js/functions.js';
@@ -72,25 +74,7 @@
                     console.log(alerta.type, alerta.latitude, alerta.longitude);
                 });
 
-
-                // welcomeMsg.innerHTML = `Hola, ${user.name}!`;
-
-                // pets.forEach(pet => {
-                //     const petLi = document.createElement('li');
-                //     petLi.innerHTML = `
-                //         <div>
-                //             <img src="${pet.img}" alt="Foto de ${pet.name}">
-                //         </div>
-                //             <p>${pet.name}</p>
-                //     `;
-
-                //     petLi.addEventListener('click', () => {
-                //         window.location.href = `./pet-profile.html?petId=${pet._id}`;
-                //     });
-                //     petsUl.appendChild(petLi);
-                // });
                 removeLoader();
-                // console.log(data);
             } else {
                 console.log('Error en la petición');
                 removeLoader();
@@ -105,7 +89,20 @@
 
 
 
+        // API KEY GOOGLE MAPS
+        // AIzaSyDcqXxMijjl-i15NgGHljhsf7tArQU7kDU
+        window.initMap = initMap; 
+        //esto es para que el initMap sea global y pueda ser llamado por el script de google maps
 
+        function initMap(){
+            let centerMap = { lat: -34.603722, lng: -58.381592 };
+            const mapOptions = {
+                zoom: 15,
+                center: centerMap,
+                disableDefaultUI: true,
+            };
+            const map = new google.maps.Map(document.getElementById("mapaAlertas"), mapOptions);
+        }
     </script>
 
 </body>
