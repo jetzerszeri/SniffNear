@@ -201,7 +201,8 @@
             <div class="step5">
                 <h2>¿Dónde y cuándo encontraste la mascota?</h2>
                 <p class="stepSubHeading">Arrastra el marcador a la zona donde encontraste la mascota</p>
-                <input type="hidden" name="cords" id="cords" >
+                <input type="hidden" name="latitude" id="latitude" >
+                <input type="hidden" name="longitude" id="longitude" >
                 <div class="containerFormStepsSelectors">
                     <div id="mi_mapa"></div>
                     <div class="inputDiv">
@@ -415,57 +416,62 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
     <script type="module">
-        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview} from './js/functions.js';
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap} from './js/functions.js';
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
-        // //mapa
-        // let myMap;
-        // let ubicacionActualMarker;
-        // let ubicacionSelectMarker;
-        // // let ubicacionInput = document.getElementById('ubicacion');
+        //mapa
+        let myMap;
+        let ubicacionActualMarker;
+        let ubicacionSelectMarker;
+        // let ubicacionInput = document.getElementById('ubicacion');
 
-        // //ubi actual 
-        // function ubicacionActual(position) {
-        //     const lat = position.coords.latitude;
-        //     const lng = position.coords.longitude;
-        //     if(!myMap){
-        //          myMap = L.map('mi_mapa').setView([lat, lng], 15);
-        //           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        //             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        //             }).addTo(myMap);
+        //ubi actual 
+        function ubicacionActual(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            latitude.value = lat;
+            longitude.value = lng;
+
+            if(!myMap){
+                 myMap = L.map('mi_mapa').setView([lat, lng], 15);
+                  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(myMap);
                 
-        //       //Marcador posicionado en la ubicacion actual
-        //         ubicacionActualMarker = L.marker([lat, lng], {
-        //             draggable: true,
-        //             icon: L.icon({
-        //                 iconUrl: 'img/pinFind.png',
-        //                 iconSize: [32, 32],
-        //             })
-        //         }).addTo(myMap).bindPopup('Ubicación').openPopup();   
+              //Marcador posicionado en la ubicacion actual
+                ubicacionActualMarker = L.marker([lat, lng], {
+                    draggable: true,
+                    icon: L.icon({
+                        iconUrl: 'img/pinFind.png',
+                        iconSize: [32, 32],
+                    })
+                }).addTo(myMap).bindPopup('Ubicación').openPopup();   
                 
-        //         //Evento para poder arrastar el marcador desde la ubi
-        //         ubicacionActualMarker.on('dragend', (e) => {
-        //             const marker = e.target;
-        //             const position = marker.getLatLng();
-        //             // ubicacionInput.value = `${position.lat}, ${position.lng}`;
-        //         });
-        //     } else {
-        //         ubicacionActualMarker.setLatLng([lat, lng]);
-        //     }
+                //Evento para poder arrastar el marcador desde la ubi
+                ubicacionActualMarker.on('dragend', (e) => {
+                    const marker = e.target;
+                    const position = marker.getLatLng();
+                    latitude.value = position.lat;
+                    longitude.value = position.lng;
+                    // ubicacionInput.value = `${position.lat}, ${position.lng}`;
+                });
+            } else {
+                ubicacionActualMarker.setLatLng([lat, lng]);
+            }
             
-        //     // ubicacionInput.value = lat + ', ' + lng;
-        // }
+            // ubicacionInput.value = lat + ', ' + lng;
+        }
 
-        // function errorUbicacion(error) {
-        //     console.error(`Error obteniendo la ubicación: ${error.message}`);
-        // }
+        function errorUbicacion(error) {
+            console.error(`Error obteniendo la ubicación: ${error.message}`);
+        }
         
-        // if ("geolocation" in navigator) {
-        //     navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
-        // } else {
-        //     console.log("Geolocalización no está disponible en este navegador.");
-        // }
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
+        } else {
+            console.log("Geolocalización no está disponible en este navegador.");
+        }
 
 
 
@@ -473,7 +479,7 @@
 
 
         // script de la refactorización del form
-        let currentStep = 5;
+        let currentStep = 1;
         let maxStepReached = 0;
         const stepsProgress = document.querySelectorAll('.stepsForm svg');
         const step1 = document.querySelector('.step1')
@@ -489,7 +495,7 @@
         const prevBtn = document.querySelector('#prev');
         const btnContainer = document.querySelector('.btnStepForm');
         const form = document.querySelector('.addNewPetForm.createAlert');
-        const {type, size, color1, color2, breed, description, cords, date, time, img, personName, email, password} = form;
+        const {type, size, color1, color2, breed, description, latitude, longitude, date, time, img, personName, email, password} = form;
         let userType = 'gest';
         const logInBtn = document.querySelector('.logInBtn');
         const singInBtn = document.querySelector('.singInBtn');
@@ -508,12 +514,18 @@
                 btnContainer.style.display = 'flex';
             } else{
                 btnContainer.style.display = 'none';
+                
             }
 
             if(currentStep <= 1) {
                 prevBtn.style.display = 'none';
             } else {
                 prevBtn.style.display = 'block';
+            }
+
+            if (currentStep == 1){
+                currentStep = 1;
+                nextBtn.innerHTML = 'Continuar';
             }
 
             if(currentStep == 7){
@@ -552,7 +564,7 @@
                 // previewImage(img, '.imgPrevContainer');
                 prevBtn.style.display = 'none';
                 nextBtn.innerHTML = 'Publicar alerta';
-
+                renderAMap('mi_mapa2', latitude.value, longitude.value, 15, {drag: false, text: `${type.value} perdido` })
             }
 
             
@@ -675,7 +687,7 @@
                 <li>Tamaño: <span>${size.value}</span></li>
                 <li>Color: <span>${colorValue}</span></li>
                 <li>Raza: <span>${breedValue}</span></li>
-                <li>Encontrado en <span>${cords.value}</span>, a las <span>${time.value}</span></li>
+                <li>Encontrado en <span>${latitude.value}, ${longitude.value}</span>, a las <span>${time.value}</span></li>
                 <li>Descripción: ${description.value}</li>
             `;
             prevInfo.appendChild(prevInfoUl);
@@ -686,7 +698,7 @@
 
 
             const previewMap = document.createElement('div');
-            previewMap.id = 'mi_mapa';
+            previewMap.id = 'mi_mapa2';
             previewMap.classList.add('previewMap');
             alertPreview.appendChild(previewMap);
 
@@ -714,16 +726,20 @@
 
         //refactor del mapa para renderizar dos
 
-        let map = L.map('mi_mapa').setView([-34.603722, -58.381592], 15);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-        L.marker([-34.603722, -58.381592], {
-            draggable: true,
-            icon: L.icon({
-                iconUrl: 'img/pinFind.png',
-                iconSize: [32, 32],
-            })
-        }).addTo(map).bindPopup('Ubicación').openPopup();
+        //Esto es todo lo que renderiza el mapa
+        // let map = L.map('mi_mapa').setView([-34.603722, -58.381592], 15);
+        // L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // L.marker([-34.603722, -58.381592], {
+        //     draggable: true,
+        //     icon: L.icon({
+        //         iconUrl: 'img/pinFind.png',
+        //         iconSize: [32, 32],
+        //     })
+        // }).addTo(map).bindPopup('Ubicación').openPopup();
+
+
 
 
 

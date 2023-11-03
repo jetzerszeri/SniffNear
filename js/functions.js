@@ -290,4 +290,23 @@ async function uploadImage(storageInstance, file, customName) {
     return getDownloadURL(storageRef);
 }
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview};
+
+// funcion para renderizar un mapa
+        //Esto es todo lo que renderiza el mapa
+function renderAMap(id, lat, lng, zoom, marker){
+    let map = L.map(id).setView([lat, lng], zoom);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    L.marker([lat, lng], {
+        draggable: marker.drag,
+        icon: L.icon({
+            iconUrl: 'img/pinFind.png',
+            iconSize: [32, 32],
+        })
+    }).addTo(map).bindPopup(marker.text).openPopup();
+}
+
+
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap};

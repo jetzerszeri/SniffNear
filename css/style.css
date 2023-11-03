@@ -1008,7 +1008,7 @@ input.error, select.error{
     width: 100%;
 }
 
-#mi_mapa{
+#mi_mapa, #mi_mapa2{
     width: 100%;
     height: 250px;
     border-radius: 8px;
