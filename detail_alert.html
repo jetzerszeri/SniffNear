@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SniffNear</title>
+    <title>SniffNear | Detalle alerta</title>
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link  href="css/style.css" rel="stylesheet">
@@ -35,10 +35,10 @@
     <main class="mainPetProfile">
 
         <section>
-            <h1>Detalle mascota</h1>
+            <h1>Detalle de alerta</h1>
 
             <div class="petNameCard">
-                <img src="img/pet2.jpg" alt="Avatar de la mascota">
+                <img src="img/pet2.jpg" alt="Avatar de la mascota" class="imagenAlerta">
                 <div>
                     <h2>Cargando...</h2>
                     <p>...</p>
@@ -46,7 +46,7 @@
                 <i class="bi bi-pencil"></i>
             </div>
 
-            <!-- <ul class="femalePetInfo">
+            <ul class="femalePetInfo">
                 <li>
                     <p><span>Género: </span> Femenino</p>
                 </li>
@@ -65,7 +65,7 @@
                 <li>
                     <p><span>Raza: </span> Callejero</p>
                 </li>
-            </ul> -->
+            </ul>
     </main>
 
 
@@ -99,6 +99,59 @@
         </ul>
 
     </nav>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertId = urlParams.get('id');
+        console.log('id de la alerta:',alertId);
+        const imagenAlerta = document.querySelector('.imagenAlerta');
+
+
+        async function getAlertInfo(){
+            const response = await fetch(`https://sniffnear-api.onrender.com/api/alerts/${alertId}`);
+
+            if(response.ok){
+                const data = await response.json();
+
+                console.log(data);
+
+                imagenAlerta.src = data.img;
+                // petNameH2.innerHTML = data.name;
+                // petTypeP.innerHTML = data.type;
+
+                // const petsUl = document.createElement('ul');
+                // petsUl.classList.add(`${pet.sex}PetInfo`);
+
+                // createLiOfPetInfo('Género', getGenero(pet), petsUl);
+                // createLiOfPetInfo('Edad', calculateAge(pet.birthdate), petsUl);
+                // createLiOfPetInfo('Tamaño', pet.size, petsUl);
+                // createLiOfPetInfo('Color', pet.color1, petsUl);
+                // createLiOfPetInfo('Ubicación', pet.location, petsUl);
+                // createLiOfPetInfo('Raza', pet.breed, petsUl);
+
+                // sectionPetInfo.appendChild(petsUl);
+
+                // editPetBtn.addEventListener('click', () => {
+                //     window.location.href = `./editar-pet-profile.html?petId=${petIdTest}`;
+                // });
+            } else {
+                // sectionPetInfo.innerHTML = `
+                //     <div class="errorMsgPetProfile">
+                //         <p>Hubo un error en el servidor, por favor intenta más tarde.</p>
+
+                //         <a href="/index.html" class="btn">Regresar al Home</a>
+                //     </div>`;
+
+                console.log('Hubo un error en el servidor, por favor intenta más tarde.');
+            }
+        }
+
+
+        getAlertInfo();
+
+
+
+    </script>
 
 </body>
 </html>
