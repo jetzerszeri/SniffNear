@@ -1467,3 +1467,48 @@ font-size: 15px;
     padding: 0;
     margin: 0;
 }
+
+.markerInfoWindow{
+    /* width: 250px;
+    background-color: white; */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    font-size: 0.9em;
+}
+
+.markerInfoWindow > div:nth-of-type(1){
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.markerInfoWindow > div img{
+    width: 90px;
+    height: 90px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.markerInfoWindow  span{
+    text-transform: capitalize;
+} 
+
+/* .markerInfoWindow > div:first-child span:nth-of-type(1){
+    font-weight: 500;
+    font-size: 1.2em;
+} */
+
+.markerInfoWindow .petType{
+    font-weight: 500;
+    font-size: 1.2em;
+    display: block;
+}
+
+.markerInfoWindow .foundAt{
+    font-weight: 300;
+    font-size: 0.9em;
+    color: var(--color-neutral-50);
+}

@@ -85,7 +85,7 @@
                             scaledSize: new google.maps.Size(22, 32),
                         },
                     });
-                    createInfoWindows(marker);
+                    createInfoWindows(marker, alerta);
 
 
                 });
@@ -99,6 +99,14 @@
         // getAlertas();
 
 
+        function convertISOToDate(isoStr) {
+            const date = new Date(isoStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            const year = date.getFullYear().toString().substr(-2); // Obtener los últimos dos dígitos
+
+            return `${day}/${month}/${year}`;
+        }
 
 
 
@@ -298,14 +306,26 @@
 
             const infoWindow = new google.maps.InfoWindow({
                 minWidth: 200,
-                maxWidth: 200,
+                maxWidth: 250,
             });
 
             
 
-            function createInfoWindows(marker){
+            function createInfoWindows(marker, data){
                 const content = `<div class="markerInfoWindow">
-                    
+                        <div>
+                            <img src="${data.img}">
+                            <div >
+                                <p><span class="petType">${data.type}</span> encontrado</p>
+                                <p>en Mendoza, AR</p>
+                                <p><span>${data.size}</span></p><p>color: <span>${data.color1} </span></p>
+
+                            </div>
+                        </div>
+                        <div>
+                            <p class="foundAt">Encontrado el: <span>${convertISOToDate(data.date)}</span> a las <span>${data.time}</span> apx</p>
+                        </div>
+                        <button class="small">Ver detalles</button>
                     </div>`;
 
                 google.maps.event.addListener(marker, "click", () => {
