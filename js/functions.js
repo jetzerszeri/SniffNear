@@ -214,22 +214,23 @@ async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
 
         const json = await response.json();
         console.log(json);
-        let redirección;
+        let redireccion;
 
-        if (redirectType === 'alert') {
-            redirección = redirect + '?alertId=' + json.data._id;
-            console.log(redirección);
-        } else {
-
-            redirección = redirect + '?petId=' + json.pet._id;
-            console.log(redirección);
-        }
 
         
 
         if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
+            if (redirectType === 'alert') {
+                redireccion = redirect + '?alertId=' + json.data._id;
+                console.log(redireccion);
+            } else {
+    
+                redireccion = redirect + '?petId=' + json.pet._id;
+                console.log(redireccion);
+            }
+    
             removeLoader();
-            window.location.href = redirección;  // Redireccionar al usuario 
+            window.location.href = redireccion;  // Redireccionar al usuario 
         // console.log(redirect)
         // console.log('console del json', json)
         } else {

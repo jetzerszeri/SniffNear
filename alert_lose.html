@@ -103,7 +103,7 @@
                 </div>
             </div>
 
-            <div class="verificacion">
+            <div class="verificacion" style="display: none;">
                 <h2>Verificación</h2>
                 <!-- <div class="containerFormStepsSelectors"> -->
                     <div class="alertPreview">
@@ -160,6 +160,7 @@
             alertType: 'lost',
             sex: '',
             pet:'',
+            creator: '',
         }
 
 
@@ -657,6 +658,7 @@
                 case 'inicio':
                     document.querySelector('form').style.display = 'none';
                     document.querySelector('.alert_lose').style.display = 'block';
+                    document.querySelector('.verificacion').style.display = 'none';
                     break;
                 case 'lugarYFecha':
                     document.querySelector('form').style.display = 'block';
@@ -676,6 +678,11 @@
 
         prevBtn.addEventListener('click', (e) => {
             e.preventDefault();
+            nextBtn.textContent = 'Continuar';
+            if (pasoActual === 'inicio'){
+                pasoActual = 'lugarYFecha';
+                displaySteps(pasoActual);
+            }
             if (pasoActual === 'lugarYFecha'){
                 pasoActual = 'inicio';
                 displaySteps(pasoActual);
@@ -696,6 +703,9 @@
                 pasoActual = 'verificacion';
                 displaySteps(pasoActual);
                 console.log(informacionAlerta);
+                nextBtn.textContent = 'Publicar alerta';
+            } else if (pasoActual === 'verificacion'){
+                postFormInfoToDB('https://sniffnear-api.onrender.com/api/alerts/', informacionAlerta, './mapa_alertas.html', 'alert')
             }
         })
         
@@ -764,6 +774,42 @@
 
 
 
+                // subiendo la alerta a la bd
+        // async function addFormInfoToDB(){
+
+
+        //     console.log(data);
+
+            
+
+
+        //     // intentando agregar la imagen a firebase
+        //     const file = img.files[0];
+
+
+        //     // Comprobar si hay un archivo seleccionado
+        //     if (file && file.size > 0) {
+        //         const customName = name.value;
+        //         uploadImage(storage, file, customName).then(async (url) => {
+        //             console.log('File URL:', url);
+
+        //             data.img = url;
+        //             console.log(data);
+
+        //             postFormInfoToDB('https://sniffnear-api.onrender.com/api/alerts/', data, './mapa_alertas.html', 'alert');
+        //         });
+        //     } 
+        //     // else {
+        //     //     data.img = '';
+        //     //     // Si no hay archivo, ejecutar directamente postFormInfoToDB
+        //     //     postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html');
+        //     // }
+        
+
+        // }
+
+
+
     </script>
 
     
@@ -772,6 +818,7 @@
         import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, postFormInfoToDB, createLoader, removeLoader} from './js/functions.js';
 
         window.addPreviewImgOnReview = addPreviewImgOnReview
+        window.postFormInfoToDB = postFormInfoToDB;
 
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
@@ -800,8 +847,9 @@
 
             if(response.ok){
                 const data = await response.json();
-
                 let user = data.user;
+                informacionAlerta.creator = user._id;
+
                 let pets = data.pets;
                 console.log(user);
                 console.log(pets);
