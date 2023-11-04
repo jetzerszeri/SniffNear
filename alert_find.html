@@ -204,6 +204,7 @@
                 <input type="hidden" name="latitude" id="latitude" >
                 <input type="hidden" name="longitude" id="longitude" >
                 <div class="containerFormStepsSelectors">
+                    <div class="mapacontainer"></div>
                     <div id="mi_mapa"></div>
                     <div class="inputDiv">
                         <label for="date">¿Cuándo?</label>
@@ -214,7 +215,6 @@
                         <label for="time">¿A qué horas?</label>
                         <select name="time" >
                             <option value="" disabled selected>Selecciona una hora</option>
-                            <option value="madrugada">Madrugada</option>
                             <option value="6am">6 AM</option>
                             <option value="7am">7 AM</option>
                             <option value="8am">8 AM</option>
@@ -231,7 +231,6 @@
                             <option value="7pm">7 PM</option>
                             <option value="8pm">8 PM</option>
                             <option value="9pm">9 PM</option>
-                            <option value="noche">Noche</option>
                         </select>
                     </div>
                     
@@ -880,6 +879,7 @@
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
+        
         //mapa
         // let myMap;
         // let ubicacionActualMarker;
@@ -931,7 +931,7 @@
 
 
         // script de la refactorización del form
-        let currentStep = 5;
+        let currentStep = 1;
         let maxStepReached = 0;
         const stepsProgress = document.querySelectorAll('.stepsForm svg');
         const step1 = document.querySelector('.step1')
@@ -951,6 +951,12 @@
         let userType = 'gest';
         const logInBtn = document.querySelector('.logInBtn');
         const singInBtn = document.querySelector('.singInBtn');
+
+
+        let today = new Date();
+        let dateStr = today.toISOString().substring(0, 10);
+        date.value = dateStr;
+        date.max = dateStr;
 
         
 
