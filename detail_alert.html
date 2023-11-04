@@ -37,12 +37,11 @@
         <section>
             <h1>Detalle de alerta</h1>
 
-            <div class="petNameCard">
+            <div >
+                <div class="tituloAlerta"><img src="./img/lostIcon.svg" alt="icono"><h2>gato perdido</h2></div>
+
                 <img src="img/pet2.jpg" alt="Avatar de la mascota" class="imagenAlerta">
-                <div>
-                    <h2>Cargando...</h2>
-                    <p>...</p>
-                </div>
+
                 <i class="bi bi-pencil"></i>
             </div>
 
@@ -105,6 +104,9 @@
         const alertId = urlParams.get('id');
         console.log('id de la alerta:',alertId);
         const imagenAlerta = document.querySelector('.imagenAlerta');
+        // const petNameH2 = document.querySelector('h2');
+        const tituloAlertaIcono = document.querySelector('.tituloAlerta img');
+        const tituloAlertaH2 = document.querySelector('.tituloAlerta h2');
 
 
         async function getAlertInfo(){
@@ -116,6 +118,16 @@
                 console.log(data);
 
                 imagenAlerta.src = data.img;
+                // tituloAlertaIcono.src = data.icon;
+
+                if(data.alertType == 'found'){
+                    tituloAlertaIcono.src = './img/foundIcon.svg';
+                    tituloAlertaH2.textContent = `${data.type} encontrado`;
+                } else if(data.alertType == 'lost'){
+                    tituloAlertaIcono.src = './img/lostIcon.svg';
+                    tituloAlertaH2.textContent = `${data.type} perdido`;
+                }
+
                 // petNameH2.innerHTML = data.name;
                 // petTypeP.innerHTML = data.type;
 

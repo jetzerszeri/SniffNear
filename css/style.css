@@ -1549,7 +1549,7 @@ padding-bottom: 60px;
     flex-direction: column;
     gap: 8px;
 }
-.listAlertas li div{
+.listAlertas li div, .tituloAlerta{
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1557,13 +1557,13 @@ padding-bottom: 60px;
     justify-content: center;
 }
 
-.listAlertas li div h2{
+.listAlertas li div h2, .tituloAlerta h2{
     font-size: 1em;
     font-weight: 500;
     text-transform: capitalize;
 }
 
-.listAlertas li div img{
+.listAlertas li div img, .tituloAlerta img{
     width: 20px;
     height: 20px;
 }
