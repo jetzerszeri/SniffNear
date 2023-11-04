@@ -32,12 +32,51 @@
 
     <main class="mapMain">
         <div class="buttonscontainer">
+            <button class="small btn">Mapa</button>
             <button class="small btn secundary">Lista</button>
-            <button class="small ">Mapa</button>
             <i class="bi bi-filter"></i>
         </div>
 
         <div id="mapaAlertas"></div>
+
+        <!-- <div class="listAlertas">
+            <h1>Listado de alertas</h1>
+            <ul>
+                <li>
+                    <div>
+                        <img src="./img/foundIcon.svg" alt="icono">
+                        <h2>Perro encontrado</h2>
+                    </div>
+                    <img src="./img/pet1.jpg" alt="gato">
+                    <p>Color: blanco, tamaño: pequeño</p>
+                    <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
+                    <p><i class="bi bi-calendar4-week"></i> 20/11/2023, 7pm</p>
+                    <button class="btn secundary small">Ver detalles</button>
+                </li>
+                <li>
+                    <div>
+                        <img src="./img/foundIcon.svg" alt="icono">
+                        <h2>Perro encontrado</h2>
+                    </div>
+                    <img src="./img/pet1.jpg" alt="gato">
+                    <p>Color: blanco, tamaño: pequeño</p>
+                    <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
+                    <p><i class="bi bi-calendar4-week"></i> 20/11/2023, 7pm</p>
+                    <button class="btn secundary small">Ver detalles</button>
+                </li>
+                <li>
+                    <div>
+                        <img src="./img/foundIcon.svg" alt="icono">
+                        <h2>Perro encontrado</h2>
+                    </div>
+                    <img src="./img/pet1.jpg" alt="gato">
+                    <p>Color: blanco, tamaño: pequeño</p>
+                    <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
+                    <p><i class="bi bi-calendar4-week"></i> 20/11/2023, 7pm</p>
+                    <button class="btn secundary small">Ver detalles</button>
+                </li>
+            </ul>
+        </div> -->
 
 
     </main>
@@ -53,6 +92,10 @@
 
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
+        let mapBtn = document.querySelector('.buttonscontainer button:first-child');
+        let listBtn = document.querySelector('.buttonscontainer button:nth-child(2)');
+
+
 
         // addBottomNavBar();
 
@@ -81,8 +124,8 @@
                         map,
                         // title: alerta.type,
                         icon: {
-                            url: './img/foundMarker.png',
-                            scaledSize: new google.maps.Size(22, 32),
+                            url: `./img/${alerta.alertType}IconMarker.svg`,
+                            scaledSize: new google.maps.Size(40, 49),
                         },
                     });
                     createInfoWindows(marker, alerta);
@@ -335,7 +378,97 @@
             }
 
             getAlertas(map, createInfoWindows);
+
+
         }
+
+
+
+        // listado de cards de alertas
+
+        function displayAlertCards (array){
+            const checkifexist = document.querySelector('.listAlertas');
+            if(checkifexist){
+                checkifexist.remove();
+            }
+
+                const divListAlertas = document.createElement('div');
+                divListAlertas.classList.add('listAlertas');
+                const h1 = document.createElement('h1');
+                h1.textContent = 'Listado de alertas';
+                divListAlertas.appendChild(h1);
+                const ul = document.createElement('ul');
+                divListAlertas.appendChild(ul);
+    
+                array.forEach(alerta => {
+                    const li = document.createElement('li');
+                    const div = document.createElement('div');
+                    const imgIcon = document.createElement('img');
+                    const h2 = document.createElement('h2');
+                    const img = document.createElement('img');
+                    const p1 = document.createElement('p');
+                    const p2 = document.createElement('p');
+                    const p3 = document.createElement('p');
+                    const p4 = document.createElement('p');
+                    const button = document.createElement('button');
+    
+                    div.appendChild(imgIcon);
+                    div.appendChild(h2);
+                    li.appendChild(div);
+                    li.appendChild(img);
+                    li.appendChild(p1);
+                    li.appendChild(p2);
+                    li.appendChild(p3);
+                    li.appendChild(p4);
+                    li.appendChild(button);
+    
+                    if(alerta.alertType == 'found'){
+                        imgIcon.src = './img/foundIcon.svg';
+                        h2.textContent = `${alerta.type} encontrado`;
+                    } else if(alerta.alertType == 'lost'){
+                        imgIcon.src = './img/lostIcon.svg';
+                        h2.textContent = `${alerta.type} perdido`;
+                    }
+                    imgIcon.alt = 'icono';
+    
+                    img.src = alerta.img;
+                    img.alt = alerta.type;
+                    p1.textContent = `Color: ${alerta.color1}, tamaño: ${alerta.size}`;
+                    p2.innerHTML = '<i class="bi bi-geo-alt"></i> Mendoza, Argentina';
+                    p3.innerHTML = `<i class="bi bi-calendar4-week"></i> ${convertISOToDate(alerta.date)}, ${alerta.time}`;
+                    button.textContent = 'Ver detalles';
+                    button.addEventListener('click', () => {
+                        window.location.href = `./alerta.html?id=${alerta._id}`;
+                    });
+    
+                    ul.appendChild(li);
+                });
+
+                document.querySelector('main').appendChild(divListAlertas);
+            
+
+
+        }
+
+        mapBtn.addEventListener('click', () => {
+            mapBtn.classList.remove('secundary');
+            listBtn.classList.add('secundary');
+            let listado = document.querySelector('.listAlertas');
+            if(listado){
+                listado.remove();
+            }
+            document.querySelector('#mapaAlertas').style.display = 'block'
+        });
+
+        listBtn.addEventListener('click', () => {
+            listBtn.classList.remove('secundary');
+            mapBtn.classList.add('secundary');
+            document.querySelector('#mapaAlertas').style.display = 'none';
+            displayAlertCards(alertas);
+        });
+
+        
+
     </script>
 
 </body>

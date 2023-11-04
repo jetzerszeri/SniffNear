@@ -728,6 +728,11 @@ button[disabled] {
     /* color: var(--color-neutral-0) !important; */
 }
 
+.listAlertas .btn.secundary:hover{
+    background-color: var(--color-green) !important;
+    color: var(--color-neutral-0) !important;
+}
+
 form label + p {
     font-size: 0.9em;
     margin: 0;
@@ -750,7 +755,7 @@ form label + p {
 .stepsForm svg.active{
     fill: var(--color-oragne);
 }
-.addNewPetForm h1{
+.addNewPetForm h1, .mapMain h1{
     font-size: 0;
     height: 0;
     margin: 0;
@@ -1430,7 +1435,7 @@ font-size: 15px;
     display: flex;
     flex-direction: column;
     gap: 5px;
-    height: 90vh;
+    /* height: 90vh; */
 }
 
 .buttonscontainer{
@@ -1460,12 +1465,14 @@ font-size: 15px;
 
 #mapaAlertas{
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    height: calc(100vh - 165px);
     /* border-radius: 8px; */
     /* margin: 20px 0; */
     background-color: #1D1A20;
     padding: 0;
     margin: 0;
+    /* display: none; */
 }
 
 .markerInfoWindow{
@@ -1519,4 +1526,64 @@ font-size: 15px;
     font-weight: 300;
     font-size: 0.9em;
     color: var(--color-neutral-50);
+}
+
+.listAlertas{
+    padding: 20px;
+}
+.listAlertas ul{
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+gap: 20px;
+padding-bottom: 60px;
+}
+
+.listAlertas ul li{
+    /* flex: 1; */
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    padding: 12px;
+    background-color: var(--color-neutral-0);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.listAlertas li div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+    justify-content: center;
+}
+
+.listAlertas li div h2{
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.listAlertas li div img{
+    width: 20px;
+    height: 20px;
+}
+
+.listAlertas li {
+
+
+}
+
+.listAlertas li > img{
+    width: 100px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+}
+
+.listAlertas li p{
+    font-size: 0.9em;
+    font-weight: 300;
+    color: var(--color-neutral-50);
+    text-align: center;
 }

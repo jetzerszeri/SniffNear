@@ -767,7 +767,7 @@
         async function addFormInfoToDB(){
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            // data.owner = storedUserId;
+            data.alertType = 'found';
 
             console.log(data);
 
