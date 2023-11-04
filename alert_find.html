@@ -427,7 +427,7 @@
         const {type, size, color1, color2, breed, description, latitude, longitude, date, time, img, personName, email, password} = form;
         
         function initMap(){
-            let centerMap = { lat: 35.2713493, lng: -80.9588694  };
+            let centerMap = getSavedLocationOrDefault();
             const mapOptions = {
                 zoom: 16,
                 center: centerMap,
@@ -615,6 +615,7 @@
         }
 
         function ubicacionActual(position) {
+            guardarUltimaUbicacion(position);
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
             latitude.value = lat;
@@ -863,6 +864,49 @@
                     scaledSize: new google.maps.Size(30, 44),
                 },
             });
+        }
+
+
+        function guardarUltimaUbicacion(position) {
+            // Obtén las coordenadas actuales
+            const currentCoords = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            // Verifica si ya existen coordenadas guardadas en el localStorage
+            const savedCoords = localStorage.getItem('lastCoords');
+
+            // Verifica si las coordenadas guardadas son diferentes a las actuales
+            if (savedCoords) {
+                const lastCoords = JSON.parse(savedCoords);
+
+                // Compara las coordenadas actuales con las guardadas
+                if (lastCoords.lat !== currentCoords.lat || lastCoords.lng !== currentCoords.lng) {
+                    // Si son diferentes, actualiza el localStorage con las nuevas coordenadas
+                    localStorage.setItem('lastCoords', JSON.stringify(currentCoords));
+                    console.log('Nuevas coordenadas guardadas:', currentCoords);
+                } else {
+                    console.log('Las coordenadas no han cambiado.');
+                }
+            } else {
+                // Si no hay coordenadas guardadas, guarda las actuales
+                localStorage.setItem('lastCoords', JSON.stringify(currentCoords));
+                console.log('Coordenadas guardadas por primera vez:', currentCoords);
+            }
+        }
+
+
+        function getSavedLocationOrDefault() {
+            // Intenta obtener las últimas coordenadas guardadas del localStorage
+            const savedCoords = localStorage.getItem('lastCoords');
+            if (savedCoords) {
+                // Si hay coordenadas guardadas, las parsea y las devuelve
+                return JSON.parse(savedCoords);
+            } else {
+                // Si no hay coordenadas guardadas, devuelve las coordenadas predeterminadas
+                return { lat: 35.2713493, lng: -80.9588694 };
+            }
         }
 
 
@@ -1251,6 +1295,9 @@
         
 
         }
+
+
+
 
 
 
