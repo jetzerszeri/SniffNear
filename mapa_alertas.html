@@ -438,7 +438,7 @@
                     p3.innerHTML = `<i class="bi bi-calendar4-week"></i> ${convertISOToDate(alerta.date)}, ${alerta.time}`;
                     button.textContent = 'Ver detalles';
                     button.addEventListener('click', () => {
-                        window.location.href = `./alerta.html?id=${alerta._id}`;
+                        window.location.href = `./detail_alert.html?id=${alerta._id}`;
                     });
     
                     ul.appendChild(li);
