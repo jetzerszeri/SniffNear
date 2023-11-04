@@ -1560,6 +1560,7 @@ padding-bottom: 60px;
 .listAlertas li div h2{
     font-size: 1em;
     font-weight: 500;
+    text-transform: capitalize;
 }
 
 .listAlertas li div img{
