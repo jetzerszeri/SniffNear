@@ -193,8 +193,6 @@
                         <label for="description">Describe la mascota</label>
                         <textarea name="description" placeholder="Puedes compartir todos los datos que consideres necesarios" rows="10"></textarea>
                     </div>
-    
-
                 </div>
             </div>
 
@@ -612,6 +610,24 @@
 
             map = new google.maps.Map(document.getElementById("mi_mapa"), mapOptions);
 
+            ubicacionSelectMarker = new google.maps.Marker({
+                position: centerMap,
+                map: map,
+                draggable: true, // Hace el marcador arrastrable
+                title: "Arrástrame!",
+                icon: {
+                    url: `./img/sniffnearmarkergreen.png`,
+                    scaledSize: new google.maps.Size(30, 44),
+                },
+
+            });
+
+            google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                latitude.value.value = evt.latLng.lat().toFixed(6);
+                longitude.value = evt.latLng.lng().toFixed(6);
+                console.log('se actualizaron las coordenadas', latitude.value, longitude.value)
+            });
+
         }
 
         function ubicacionActual(position) {
@@ -650,6 +666,8 @@
                         console.log('se actualizaron las coordenadas', latitude.value, longitude.value)
                     });
                 }
+            } else{
+                console.log('mapa no inicializado')
             }
 
 
@@ -659,6 +677,42 @@
 
         function errorUbicacion(error) {
             console.error(`Error obteniendo la ubicación: ${error.message}`);
+
+            let coordenadasGuardadas = getSavedLocationOrDefault();
+                
+            latitude.value = parseFloat(coordenadasGuardadas.lat);
+            longitude.value = parseFloat(coordenadasGuardadas.lng);
+
+            if (map) {
+                let newCenter = new google.maps.LatLng(latitude.value, longitude.value);
+                
+
+                
+                map.setCenter(newCenter);
+                // Crea un marcador arrastrable en la nueva ubicación
+                if (ubicacionSelectMarker) { // Si ya existe, actualiza su posición
+                    ubicacionSelectMarker.setPosition(newCenter);
+                } else { // Si no existe, crea uno nuevo
+                    ubicacionSelectMarker = new google.maps.Marker({
+                        position: coordenadasGuardadas,
+                        map: map,
+                        draggable: true, // Hace el marcador arrastrable
+                        title: "Arrástrame!",
+                        icon: {
+                            url: `./img/sniffnearmarkergreen.png`,
+                            scaledSize: new google.maps.Size(30, 44),
+                        },
+
+                    });
+
+                    // // Añade un 'listener' para actualizar las coordenadas en los inputs cuando el marcador es arrastrado
+                    google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                        latitude.value = parseFloat(evt.latLng.lat().toFixed(6));
+                        longitude.value = parseFloat(evt.latLng.lng().toFixed(6));
+                        console.log('se actualizaron las coordenadas', latitude.value, longitude.value)
+                    });
+                }
+            }
         }
         
         if ("geolocation" in navigator) {

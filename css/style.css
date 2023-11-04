@@ -347,7 +347,7 @@ main section{
 }
 
 
-.myPetsCard .addPetBtn{
+ .addPetBtn{
     width: 60px;
     height: 60px;
     display: block;
@@ -361,9 +361,10 @@ main section{
     font-size: 3em;
     font-weight: bolder;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.myPetsCard > div:nth-of-type(1) > div:hover .addPetBtn{
+.myPetsCard > div:nth-of-type(1) > div:hover .addPetBtn, .addPetBtn:hover{
     background-color: #FFD600;
     color: var(--color-neutral-0);
 }

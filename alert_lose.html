@@ -355,6 +355,25 @@
             };
 
             map = new google.maps.Map(document.getElementById("mi_mapa"), mapOptions);
+            ubicacionSelectMarker = new google.maps.Marker({
+                position: centerMap,
+                map: map,
+                draggable: true, // Hace el marcador arrastrable
+                title: "Arrástrame!",
+                icon: {
+                    url: `./img/sniffnearmarkergreen.png`,
+                    scaledSize: new google.maps.Size(30, 44),
+                },
+
+            });
+
+            google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                informacionAlerta.latitude = parseFloat(evt.latLng.lat().toFixed(6));
+                informacionAlerta.longitude = parseFloat(evt.latLng.lng().toFixed(6));
+                console.log('se actualizaron las coordenadas', informacionAlerta.latitude, informacionAlerta.longitude)
+            });
+
+            
 
         }
 
@@ -370,6 +389,8 @@
             if (map) {
                 let newCenter = new google.maps.LatLng(lat, lng);
                 map.setCenter(newCenter);
+
+                console.log('coordenadas que se estan ejecutando', lat, lng)
 
                 // Crea un marcador arrastrable en la nueva ubicación
                 if (ubicacionSelectMarker) { // Si ya existe, actualiza su posición
@@ -400,9 +421,47 @@
 
         }
 
+        let coordenadasGuardadas = getSavedLocationOrDefault();
+        console.log(coordenadasGuardadas, 'coordenadasGuardadas');
+
+        informacionAlerta.latitude = parseFloat(coordenadasGuardadas.lat);
+        informacionAlerta.longitude = parseFloat(coordenadasGuardadas.lng);
 
         function errorUbicacion(error) {
             console.error(`Error obteniendo la ubicación: ${error.message}`);
+
+            if (map) {
+                let newCenter = new google.maps.LatLng( informacionAlerta.latitude, informacionAlerta.longitude);
+                console.log(newCenter, 'newCenter');
+
+
+                map.setCenter(newCenter);
+
+                // Crea un marcador arrastrable en la nueva ubicación
+                if (ubicacionSelectMarker) { // Si ya existe, actualiza su posición
+                    ubicacionSelectMarker.setPosition(newCenter);
+                } else { // Si no existe, crea uno nuevo
+                    ubicacionSelectMarker = new google.maps.Marker({
+                        position: coordenadasGuardadas,
+                        map: map,
+                        draggable: true, // Hace el marcador arrastrable
+                        title: "Arrástrame!",
+                        icon: {
+                            url: `./img/sniffnearmarkergreen.png`,
+                            scaledSize: new google.maps.Size(30, 44),
+                        },
+
+                    });
+
+                    // // Añade un 'listener' para actualizar las coordenadas en los inputs cuando el marcador es arrastrado
+                    google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                        informacionAlerta.latitude = parseFloat(evt.latLng.lat().toFixed(6));
+                        informacionAlerta.longitude = parseFloat(evt.latLng.lng().toFixed(6));
+                        console.log('se actualizaron las coordenadas', informacionAlerta.latitude, informacionAlerta.longitude)
+                    });
+                }
+            }
+
         }
         
         if ("geolocation" in navigator) {
@@ -898,6 +957,14 @@
         }
 
         getUser();
+
+        const addPetBtn = document.querySelector('.addPetBtn');
+        const addPetBtnDiv = addPetBtn.parentElement;
+        // console.log(addPetBtnDiv);
+
+        addPetBtnDiv.addEventListener('click', () => {
+            window.location.href = 'add-pet.html';
+        });
 
 
 
