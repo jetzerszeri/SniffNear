@@ -1,3 +1,5 @@
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.3.0/firebase-storage.js';
+
 //funcion para marcar algo como seleccionado sin usar un select, y usando un input hidden para guardar el valor.
 function markSomethingAsSelectedWithHideInput(array, input, funcion, textToDisplay, validar){
     array.forEach(element => {
@@ -199,8 +201,9 @@ function getCurrentTimestamp() {
 
 
 // funcion para agregar datos a la base de datos
-async function postFormInfoToDB ( endpoint, datos, redirect ) {
+async function postFormInfoToDB ( endpoint, datos, redirect, redirectType ) {
     try {
+        createLoader();
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: {
@@ -211,12 +214,21 @@ async function postFormInfoToDB ( endpoint, datos, redirect ) {
 
         const json = await response.json();
         console.log(json);
+        let redirección;
 
-        let redirección = redirect + '?petId=' + json.pet._id;
-        console.log(redirección);
+        if (redirectType === 'alert') {
+            redirección = redirect + '?alertId=' + json.data._id;
+            console.log(redirección);
+        } else {
+
+            redirección = redirect + '?petId=' + json.pet._id;
+            console.log(redirección);
+        }
+
+        
 
         if (response.ok) {  // Si el servidor devuelve una respuesta exitosa (códigos 200-299)
-
+            removeLoader();
             window.location.href = redirección;  // Redireccionar al usuario 
         // console.log(redirect)
         // console.log('console del json', json)
@@ -225,6 +237,7 @@ async function postFormInfoToDB ( endpoint, datos, redirect ) {
         }
 
     } catch (error) {
+        removeLoader();
         console.error('Error:', error);
     }
 }
@@ -308,5 +321,84 @@ function renderAMap(id, lat, lng, zoom, marker){
 
 
 
+//funcion para crear un loader
+function createLoader(texto){
+    let loaderBack = document.createElement('div');
+    loaderBack.classList.add('loadingBackground');
 
-export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap};
+    let loaderContainer = document.createElement('div');
+    loaderContainer.classList.add('loadingContainer');
+
+    let loader = document.createElement('div');
+    loader.classList.add('bouncer');
+    loader.innerHTML = `<div></div><div></div><div></div><div></div>`
+    loaderContainer.appendChild(loader);
+
+    if (texto) {
+        let loaderText = document.createElement('p');
+        loaderText.innerText = texto;
+        loaderContainer.appendChild(loaderText);
+    }
+
+    loaderBack.appendChild(loaderContainer);
+    document.body.appendChild(loaderBack);
+}
+
+// function para remover un loader
+function removeLoader(){
+    let loaderBack = document.querySelectorAll('.loadingBackground');
+    loaderBack.forEach(element => {
+        element.remove();
+    });
+}
+
+
+function addBottomNavBar(active){
+    let btnNav = document.createElement('nav');
+    btnNav.classList.add('bottomNavBar');
+    btnNav.innerHTML = `
+    <ul>
+        <li>
+            <a href="./index.html">
+                <i class="bi bi-house-door"></i>
+            </a>
+        </li>
+        <li>
+            <a href="./mapa_alertas.html">
+                <i class="bi bi-search"></i>
+            </a>
+        </li>
+        <li>
+            <a href="./alert.html">
+                <i class="bi bi-plus"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-shield-exclamation"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="bi bi-person"></i>
+            </a>
+        </li>
+    </ul>
+    `
+    document.body.appendChild(btnNav);
+
+    let listItems = btnNav.querySelectorAll('.bottomNavBar ul li');
+
+    // Verificar que el índice activo esté en el rango de los elementos li
+    if(active >= 1 && active <= listItems.length) {
+        // Quitar la clase 'active' de todos los elementos li por si acaso
+        listItems.forEach(li => li.classList.remove('active'));
+
+        // Añadir la clase 'active' al elemento li correspondiente
+        // Se resta 1 porque los arrays son base 0 y los índices empiezan en 1 en tu pregunta
+        listItems[active - 1].classList.add('active');
+    }
+}
+
+
+export { markSomethingAsSelectedWithHideInput, checkAndUncheckARadioInput, validateInput, addValidationEvent, calculateAge, getCurrentTimestamp, postFormInfoToDB, stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, createLoader, removeLoader, addBottomNavBar};
