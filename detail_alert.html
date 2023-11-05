@@ -16,10 +16,17 @@
         display: block;
         margin: auto;
         max-width: 150px;
+        border-radius: 8px;
     }
 
     .tituloAlerta {
         font-size: 18px;
+       
+    }
+
+    .dataTime {
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .tituloAlerta img {
@@ -33,6 +40,12 @@
     }
     
 
+    .liDetail p::first-letter{ 
+
+        text-transform: capitalize;
+    }
+
+
    .parrafoli {
 
     display: block;
@@ -44,15 +57,27 @@
     display: block;
     
 
-
    }
+
+   .divContactar{
+
+        display: flex;
+        justify-content: end;
+   }
+
+   .divContactar h3{
+
+        margin-left: 10px;
+        font-weight: bold;
+}
+
 </style>
 
 
 </head>
 
 <div class="topNavBar">
-    <a href="./index.html">
+    <a href="./mapa_alertas.html">
         <i class="bi bi-chevron-left"></i>
     </a>
     <svg width="59" height="24" viewBox="0 0 59 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +103,11 @@
             <h1>Detalle de alerta</h1>
 
             <div >
-                <div class="tituloAlerta"><img src="./img/lostIcon.svg" alt="icono"><h2>gato perdido</h2></div>
+                <div class="tituloAlerta">
+                    <img src="./img/lostIcon.svg" alt="icono">
+                    <h2>gato perdido</h2>
+                    <!-- <p class="dataTime"></p> -->
+                </div>
 
                 <img src="img/pet2.jpg" alt="Avatar de la mascota" class="imagenAlerta">
 
@@ -86,32 +115,60 @@
             </div>
 
             <ul class="femalePetInfo">
-                <li class="liDetail">
+                <!-- <li class="liDetail">
                     <h2 class="parrafoli" >Género:  </h2>
                     <p class="generoAlerta"> </p>
-                </li>
+                </li> -->
                 <li class="liDetail">
+                    <h2>Raza:  </h2>
+                    <p class="razaAlerta"></p>
+                </li>
+               <li class="liDetail">
                     <h2>Color:  </h2>
-                    <p class="colorAlerta"><span>Color: </span> </p>
+                    <p class="colorAlerta"></p>
                 </li>
-                <li class="liDetail">
-                    <h2>Descripcion:  </h2>
-                    <p class="descripcionAlerta"><span class="pDetail"></span> </p>
-                </li>
+                
                 <li class="liDetail">
                     <h2>Tamaño:  </h2>
-                    <p class="tamañoAlerta"><span>Tamaño: </span> </p>
+                    <p class="tamañoAlerta"> </p>
                 </li>
                 
                 <li class="liDetail">
                     <h2>Ubicacion:  </h2>
                     <p class="ubicacionAlerta"><span>Ubicación: </span> </p>
                 </li>
-                <li class="liDetail">
-                    <h2>Raza:  </h2>
-                    <p class="razaAlerta"><span>Raza: </span> </p>
+                
+               <li class="liDetail">
+                    <h2>Descripcion:  </h2>
+                    <p class="descripcionAlerta"><span class="pDetail"></span> </p>
                 </li>
             </ul>
+
+
+            <div class="divContactar">
+                <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_454_1119)">
+                    <path opacity="0.946" fill-rule="evenodd" clip-rule="evenodd" d="M28.9717 19.0596C28.9717 19.6638 28.9717 20.2679 28.9717 20.8721C28.7455 22.1839 28.2168 23.3639 27.3857 24.4121C27.7591 24.7852 28.0894 25.1911 28.377 25.6299C28.5346 26.2114 28.3363 26.6174 27.7822 26.8477C26.6116 26.8665 25.4411 26.8854 24.2705 26.9043C20.9822 28.4564 17.6216 28.6263 14.1885 27.4141C13.5387 27.1694 12.9251 26.8579 12.3477 26.4795C12.0998 26.0604 12.1848 25.73 12.6025 25.4883C12.7778 25.4514 12.9477 25.4703 13.1123 25.5449C16.7071 27.4766 20.3321 27.5332 23.9873 25.7148C24.9502 25.696 25.9131 25.6771 26.876 25.6582C26.6211 25.3655 26.3662 25.0729 26.1113 24.7803C26.0261 24.5798 26.0073 24.3722 26.0547 24.1572C26.8837 23.2736 27.4312 22.2351 27.6973 21.042C27.9936 19.3261 27.6159 17.778 26.5645 16.3975C24.6687 14.199 22.2615 13.0567 19.3428 12.9707C17.7375 15.0489 15.6418 16.3705 13.0557 16.9355C12.1186 17.114 11.1746 17.2368 10.2236 17.3037C9.4254 18.8522 9.34044 20.4381 9.96875 22.0615C10.0598 22.7636 9.76717 23.0185 9.09082 22.8262C9.02472 22.7601 8.95868 22.694 8.89258 22.6279C8.17098 20.7931 8.18044 18.9617 8.9209 17.1338C7.42162 17.0186 6.00561 16.6126 4.67285 15.916C3.50228 15.8972 2.33171 15.8782 1.16113 15.8594C0.607023 15.6291 0.40878 15.2231 0.566406 14.6416C0.85392 14.2028 1.18432 13.7969 1.55762 13.4238C0.727532 12.3774 0.198885 11.1974 -0.0283203 9.88379C-0.0283203 9.2796 -0.0283203 8.67548 -0.0283203 8.07129C0.311209 6.17507 1.21746 4.5986 2.69043 3.3418C4.89357 1.58773 7.41409 0.709798 10.252 0.708008C13.1968 0.713802 15.7928 1.64837 18.04 3.51172C20.5125 5.83999 21.1733 8.60598 20.0225 11.8096C22.9123 12.0698 25.3384 13.2593 27.3008 15.3779C28.1661 16.4666 28.7231 17.6939 28.9717 19.0596ZM9.88379 1.89746C12.6924 1.82971 15.1657 2.68876 17.3037 4.47461C19.5966 6.72522 19.9837 9.26459 18.4648 12.0928C17.1343 13.9445 15.3501 15.1433 13.1123 15.6895C10.2723 16.3814 7.55359 16.0605 4.95605 14.7266C3.99316 14.7077 3.03027 14.6888 2.06738 14.6699C2.32227 14.3773 2.57715 14.0847 2.83203 13.792C2.91721 13.5915 2.93609 13.3839 2.88867 13.1689C0.905179 10.9524 0.621976 8.53574 2.03906 5.91895C3.32813 4.10325 5.05567 2.90436 7.22168 2.32227C8.1051 2.10315 8.99249 1.96154 9.88379 1.89746Z" fill="#9A9A9A"/>
+                    <path opacity="0.888" fill-rule="evenodd" clip-rule="evenodd" d="M8.58108 4.89941C9.29555 4.92439 9.51265 5.26423 9.23245 5.91895C8.80584 6.19824 8.46599 6.12274 8.21292 5.69238C8.13753 5.33346 8.26027 5.06914 8.58108 4.89941Z" fill="#9A9A9A"/>
+                    <path opacity="0.891" fill-rule="evenodd" clip-rule="evenodd" d="M11.2999 4.89943C11.93 4.89685 12.1661 5.19893 12.0079 5.80568C11.769 6.09625 11.4764 6.16229 11.13 6.00392C10.9171 5.79192 10.851 5.53701 10.9318 5.23927C11.0164 5.07992 11.1391 4.96663 11.2999 4.89943Z" fill="#9A9A9A"/>
+                    <path opacity="0.893" fill-rule="evenodd" clip-rule="evenodd" d="M6.25884 6.82518C6.89192 6.78735 7.1468 7.07055 7.02349 7.67479C6.77767 8.03525 6.46615 8.10135 6.08892 7.87303C5.92693 7.66454 5.87975 7.42852 5.94732 7.16503C6.02435 7.02212 6.12817 6.90884 6.25884 6.82518Z" fill="#9A9A9A"/>
+                    <path opacity="0.891" fill-rule="evenodd" clip-rule="evenodd" d="M13.5654 6.82517C14.1577 6.76609 14.4126 7.03044 14.33 7.61814C13.9524 8.14677 13.5749 8.14677 13.1972 7.61814C13.1241 7.2549 13.2469 6.99056 13.5654 6.82517Z" fill="#9A9A9A"/>
+                    <path opacity="0.944" fill-rule="evenodd" clip-rule="evenodd" d="M9.20414 7.50488C9.50841 7.54685 9.81048 7.60349 10.1104 7.6748C10.7694 7.4197 11.3924 7.48579 11.9795 7.87305C12.4043 8.29785 12.8291 8.72266 13.2539 9.14746C14.0461 10.3542 13.9423 11.4775 12.9424 12.5176C12.0412 13.1551 11.0971 13.2212 10.1104 12.7158C8.72626 13.37 7.60285 13.0679 6.74027 11.8096C6.35755 10.9287 6.41419 10.0791 6.91019 9.26074C7.39164 8.7793 7.87308 8.29785 8.35453 7.81641C8.62448 7.66053 8.90768 7.55665 9.20414 7.50488ZM9.26078 8.69434C8.77656 9.0932 8.31403 9.52746 7.87308 9.99707C7.69399 10.296 7.63734 10.6169 7.70316 10.96C8.02737 11.7781 8.60324 12.033 9.4307 11.7246C9.74664 11.3359 10.1243 11.2604 10.5635 11.498C10.9172 11.8584 11.3325 11.9528 11.8096 11.7812C12.4499 11.473 12.6858 10.9727 12.5176 10.2803C12.156 9.74842 11.7312 9.26697 11.2432 8.83594C11.147 8.78168 11.0431 8.75336 10.9317 8.75098C10.3657 8.91795 9.80872 8.89904 9.26078 8.69434Z" fill="#9A9A9A"/>
+                    <path opacity="0.945" fill-rule="evenodd" clip-rule="evenodd" d="M16.794 16.9072C17.4686 16.8589 18.0916 17.01 18.6631 17.3603C20.081 16.6075 21.3366 16.8152 22.4297 17.9834C23.1472 19.1162 23.1472 20.249 22.4297 21.3818C21.3441 22.4674 20.2585 23.553 19.1729 24.6386C18.8027 24.8402 18.444 24.8213 18.0967 24.582C17.0677 23.553 16.0388 22.5241 15.0098 21.4951C14.214 20.4028 14.1573 19.27 14.8399 18.0967C15.3412 17.4452 15.9926 17.0487 16.794 16.9072ZM16.9072 18.0967C17.4602 18.07 17.9322 18.2494 18.3233 18.6347C18.5237 18.7199 18.7313 18.7388 18.9463 18.6914C19.7965 17.8899 20.6367 17.8993 21.4668 18.7197C21.8822 19.3616 21.8822 20.0036 21.4668 20.6455C20.5409 21.5808 19.6063 22.506 18.6631 23.4209C17.7576 22.5437 16.8608 21.6563 15.9727 20.7588C15.3359 19.8585 15.4397 19.056 16.2842 18.3515C16.4913 18.2483 16.699 18.1634 16.9072 18.0967Z" fill="#9A9A9A"/>
+                    <path opacity="0.883" fill-rule="evenodd" clip-rule="evenodd" d="M10.5634 23.874C11.183 23.7857 11.4567 24.05 11.3846 24.667C11.0713 25.1413 10.7126 25.179 10.3085 24.7803C10.1476 24.4048 10.2325 24.1027 10.5634 23.874Z" fill="#9A9A9A"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_454_1119">
+                    <rect width="29" height="29" fill="white"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
+
+                    <h3>
+                        Contactar
+                    </h3>
+                    
+            </div>
     </main>
 
 
@@ -147,16 +204,17 @@
     </nav>
 
     <script>
+
         const urlParams = new URLSearchParams(window.location.search);
         const alertId = urlParams.get('id');
         console.log('id de la alerta:',alertId);
         const imagenAlerta = document.querySelector('.imagenAlerta');
-        const generoAlerta = document.querySelector('.generoAlerta');
-        const edadAlerta = document.querySelector('.edadAlerta');
+        const tamañoAlerta = document.querySelector('.tamañoAlerta');
         const descripcionAlerta = document.querySelector('.descripcionAlerta');
         const colorAlerta = document.querySelector('.colorAlerta');
         const ubicacionAlerta = document.querySelector('.ubicacionAlerta');
         const razaAlerta = document.querySelector('.razaAlerta');
+        const dataTime = document.querySelector('.dataTime');
 
         const tituloAlertaIcono = document.querySelector('.tituloAlerta img');
         const tituloAlertaH2 = document.querySelector('.tituloAlerta h2');
@@ -172,19 +230,25 @@
 
                 imagenAlerta.src = data.img;
 
-                generoAlerta.innerHTML = data.type;
+                // generoAlerta.innerHTML = data.type;
+                colorAlerta.innerHTML = data.color1;
+                tamañoAlerta.innerHTML = data.size;
+                razaAlerta.innerHTML = data.breed;
+                
+                
                 descripcionAlerta.innerHTML = data.description;
 
-                console.log (data.type)
+                
                
                 // tituloAlertaIcono.src = data.icon;
 
                 if(data.alertType == 'found'){
                     tituloAlertaIcono.src = './img/foundIcon.svg';
-                    tituloAlertaH2.textContent = `${data.type} encontrado`;
+                    tituloAlertaH2.textContent = `${data.type} encontrado ${convertISOToDate(data.date)}`;
                 } else if(data.alertType == 'lost'){
                     tituloAlertaIcono.src = './img/lostIcon.svg';
-                    tituloAlertaH2.textContent = `${data.type} perdido`;
+                    tituloAlertaH2.textContent = `${data.type} perdido ${convertISOToDate(data.date)}` ;
+
                 }
 
                 // petNameH2.innerHTML = data.name;
@@ -220,6 +284,14 @@
 
         getAlertInfo();
 
+        function convertISOToDate(isoStr) {
+            const date = new Date(isoStr);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Enero es 0
+            const year = date.getFullYear().toString().substr(-2); // Obtener los últimos dos dígitos
+
+            return `${day}/${month}/${year}`;
+        }
 
 
     </script>
