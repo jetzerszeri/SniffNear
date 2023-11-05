@@ -105,7 +105,7 @@
             <div >
                 <div class="tituloAlerta">
                     <img src="./img/lostIcon.svg" alt="icono">
-                    <h2>gato perdido</h2>
+                    <h2>gato perdido -</h2>
                     <!-- <p class="dataTime"></p> -->
                 </div>
 
@@ -244,10 +244,10 @@
 
                 if(data.alertType == 'found'){
                     tituloAlertaIcono.src = './img/foundIcon.svg';
-                    tituloAlertaH2.textContent = `${data.type} encontrado ${convertISOToDate(data.date)}`;
+                    tituloAlertaH2.textContent = `${data.type} encontrado - ${convertISOToDate(data.date)}`;
                 } else if(data.alertType == 'lost'){
                     tituloAlertaIcono.src = './img/lostIcon.svg';
-                    tituloAlertaH2.textContent = `${data.type} perdido ${convertISOToDate(data.date)}` ;
+                    tituloAlertaH2.textContent = `${data.type} perdido - ${convertISOToDate(data.date)}` ;
 
                 }
 
