@@ -15,7 +15,7 @@
     .imagenAlerta{
         display: block;
         margin: auto;
-        
+        max-width: 150px;
     }
 
     .tituloAlerta {
@@ -26,17 +26,26 @@
         width: 18px;
     }
 
-    .femalePetInfo li p{
-      display: block;
-      margin: 0;
-      padding: 0;
+    .liDetail{
+
+  display: block !important;
 
     }
+    
 
-    .parrafoli{
-       
-    }
+   .parrafoli {
 
+    display: block;
+
+   }
+
+   .pDetail{
+
+    display: block;
+    
+
+
+   }
 </style>
 
 
@@ -77,28 +86,29 @@
             </div>
 
             <ul class="femalePetInfo">
-                <li>
-                    <p class="parrafoli" >Género:  </p>
-                    <p class="generoAlerta"><span>Género: </span> </p>
+                <li class="liDetail">
+                    <h2 class="parrafoli" >Género:  </h2>
+                    <p class="generoAlerta"> </p>
                 </li>
-                <li>
-                    <p>Descripcion:  </p>
-                    <p class="descripcionAlerta"><span>Descripcion: </span> </p>
-                </li>
-                <li>
-                    <p>Tamaño:  </p>
-                    <p class="tamañoAlerta"><span>Tamaño: </span> </p>
-                </li>
-                <li>
-                    <p>Color:  </p>
+                <li class="liDetail">
+                    <h2>Color:  </h2>
                     <p class="colorAlerta"><span>Color: </span> </p>
                 </li>
-                <li>
-                    <p>Ubicacion:  </p>
+                <li class="liDetail">
+                    <h2>Descripcion:  </h2>
+                    <p class="descripcionAlerta"><span class="pDetail"></span> </p>
+                </li>
+                <li class="liDetail">
+                    <h2>Tamaño:  </h2>
+                    <p class="tamañoAlerta"><span>Tamaño: </span> </p>
+                </li>
+                
+                <li class="liDetail">
+                    <h2>Ubicacion:  </h2>
                     <p class="ubicacionAlerta"><span>Ubicación: </span> </p>
                 </li>
-                <li>
-                    <p>Raza:  </p>
+                <li class="liDetail">
+                    <h2>Raza:  </h2>
                     <p class="razaAlerta"><span>Raza: </span> </p>
                 </li>
             </ul>
