@@ -134,12 +134,12 @@
                 </li>
                 
                 <li class="liDetail">
-                    <h2>Ubicacion:  </h2>
-                    <p class="ubicacionAlerta"><span>Ubicación: </span> </p>
+                    <h2>Ubicación:  </h2>
+                    <p class="ubicacionAlerta"></p>
                 </li>
                 
                <li class="liDetail">
-                    <h2>Descripcion:  </h2>
+                    <h2>Descripción:  </h2>
                     <p class="descripcionAlerta"><span class="pDetail"></span> </p>
                 </li>
             </ul>
@@ -251,31 +251,10 @@
 
                 }
 
-                // petNameH2.innerHTML = data.name;
-                // petTypeP.innerHTML = data.type;
+                getCityAndCountry(data.latitude, data.longitude, 'AIzaSyDcqXxMijjl-i15NgGHljhsf7tArQU7kDU', ubicacionAlerta);
 
-                // const petsUl = document.createElement('ul');
-                // petsUl.classList.add(`${pet.sex}PetInfo`);
 
-                // createLiOfPetInfo('Género', getGenero(pet), petsUl);
-                // createLiOfPetInfo('Edad', calculateAge(pet.birthdate), petsUl);
-                // createLiOfPetInfo('Tamaño', pet.size, petsUl);
-                // createLiOfPetInfo('Color', pet.color1, petsUl);
-                // createLiOfPetInfo('Ubicación', pet.location, petsUl);
-                // createLiOfPetInfo('Raza', pet.breed, petsUl);
-
-                // sectionPetInfo.appendChild(petsUl);
-
-                // editPetBtn.addEventListener('click', () => {
-                //     window.location.href = `./editar-pet-profile.html?petId=${petIdTest}`;
-                // });
             } else {
-                // sectionPetInfo.innerHTML = `
-                //     <div class="errorMsgPetProfile">
-                //         <p>Hubo un error en el servidor, por favor intenta más tarde.</p>
-
-                //         <a href="/index.html" class="btn">Regresar al Home</a>
-                //     </div>`;
 
                 console.log('Hubo un error en el servidor, por favor intenta más tarde.');
             }
@@ -293,6 +272,55 @@
             return `${day}/${month}/${year}`;
         }
 
+
+        function getCityAndCountry(lat, lng, apiKey, elementToDisplay) {
+            // Construye la URL para la solicitud a la Geocoding API de Google
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
+
+            // Realiza una solicitud HTTP GET
+            fetch(geocodeUrl)
+                .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+                })
+                .then(data => {
+                if (data.results && data.results.length > 0) {
+                    // Encuentra los componentes de la dirección para la ciudad (locality) y el país (country)
+                    const addressComponents = data.results[1].address_components;
+                    let provincia, city, country;
+                    for (const component of addressComponents) {
+                        if (component.types.includes("locality")) {
+                            city = component.short_name;
+                        } else if (component.types.includes("country")) {
+                            country = component.short_name;
+                        }
+                        else if (component.types.includes("sublocality")) {
+                            provincia = component.short_name;
+                        }
+                    }
+                    console.log(`${provincia}, ${city}, ${country}`);
+                    if (elementToDisplay) {
+                        if (provincia == undefined) {
+                            elementToDisplay.innerHTML = `${city}, ${country}`;
+                        } else
+                        elementToDisplay.innerHTML = `${provincia}, ${city}, ${country}`;
+                    }
+                    return { provincia, city, country };
+                } else {
+                    throw new Error('No se encontraron resultados.');
+                }
+                })
+                .catch(error => {
+                console.error(error);
+                }
+            );
+        }
+
+
+
+        
 
     </script>
 
