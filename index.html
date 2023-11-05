@@ -35,7 +35,7 @@
             <img src="img/userAvatar.png" alt="Avatar del usuario">
             <div>
                 <h1>Cargando info...</h1>
-                <p><i class="bi bi-geo-alt"></i> Mendoza, Argentina</p>
+                <p><i class="bi bi-geo-alt"></i> <span class="ubicacionSpan">Mendoza, Argentina</span></p>
             </div>
         </section>
 
@@ -275,6 +275,8 @@
     <script type="module">
         import {createLoader, removeLoader} from './js/functions.js';
 
+        let ubicacionSpan = document.querySelector('.ubicacionSpan');
+
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
@@ -373,6 +375,76 @@
         } else {
             window.location.href = 'login.html';
         }
+
+        function getSavedLocationOrDefault() {
+            // Intenta obtener las últimas coordenadas guardadas del localStorage
+            const savedCoords = localStorage.getItem('lastCoords');
+            if (savedCoords) {
+                // Si hay coordenadas guardadas, las parsea y las devuelve
+                return JSON.parse(savedCoords);
+            } else {
+                // Si no hay coordenadas guardadas, devuelve las coordenadas predeterminadas
+                return { lat: 35.2713493, lng: -80.9588694 };
+            }
+        }
+
+
+        function getCityAndCountry(lat, lng, apiKey, elementToDisplay) {
+            // Construye la URL para la solicitud a la Geocoding API de Google
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${apiKey}`;
+
+            // Realiza una solicitud HTTP GET
+            fetch(geocodeUrl)
+                .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+                })
+                .then(data => {
+                if (data.results && data.results.length > 0) {
+                    // Encuentra los componentes de la dirección para la ciudad (locality) y el país (country)
+                    const addressComponents = data.results[1].address_components;
+                    let provincia, city, country;
+                    for (const component of addressComponents) {
+                        if (component.types.includes("locality")) {
+                            city = component.short_name;
+                        } else if (component.types.includes("country")) {
+                            country = component.short_name;
+                        }
+                        else if (component.types.includes("sublocality")) {
+                            provincia = component.short_name;
+                        }
+                    }
+                    console.log(`${provincia}, ${city}, ${country}`);
+                    if (elementToDisplay) {
+                        if (provincia == undefined) {
+                            elementToDisplay.innerHTML = `${city}, ${country}`;
+                        } else
+                        elementToDisplay.innerHTML = `${provincia}, ${city}, ${country}`;
+                    }
+                    return { provincia, city, country };
+                } else {
+                    throw new Error('No se encontraron resultados.');
+                }
+                })
+                .catch(error => {
+                console.error(error);
+                }
+            );
+        }
+
+        let coordenadasActuales = getSavedLocationOrDefault();
+        console.log('coordenas recogidas:', coordenadasActuales.lat, coordenadasActuales.lng);
+
+
+
+
+
+        let ubicacionActualFormateada = getCityAndCountry(coordenadasActuales.lat, coordenadasActuales.lng, 'AIzaSyDcqXxMijjl-i15NgGHljhsf7tArQU7kDU', ubicacionSpan)
+
+
+
         // getUser();
 
 

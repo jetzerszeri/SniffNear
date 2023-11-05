@@ -368,7 +368,7 @@
                         <div>
                             <p class="foundAt">Encontrado el: <span>${convertISOToDate(data.date)}</span> a las <span>${data.time}</span> apx</p>
                         </div>
-                        <button class="small">Ver detalles</button>
+                        <a class="btn small" href="./detail_alert.html?id=${data._id}">Ver detalles</a>
                     </div>`;
 
                 google.maps.event.addListener(marker, "click", () => {
