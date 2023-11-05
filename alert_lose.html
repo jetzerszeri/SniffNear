@@ -39,24 +39,6 @@
             <section class="myPetsCard">
                 <div class="myPetsLose">
                     <ul>
-                        <li>
-                            <div>
-                                <img src="img/pet1.jpg" alt="Mascota 1">
-                            </div>
-                            <p>Oliver</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/pet2.jpg" alt="Mascota 2">
-                            </div>
-                            <p>Sky</p>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="img/pet3.jpg" alt="Mascota 3">
-                            </div>
-                            <p>Neel</p>
-                        </li>
                     </ul>
                 </div>
             </section>
@@ -70,61 +52,864 @@
                         </span>
                     <p>Agregá</p>
                 </div>
-                  
             </div>
         </section>
 
+
+
+        <form class="addNewPetForm createAlert">
+            <div class="lugarYFecha">
+                <h2>¿Dónde y cuándo la viste por última vez?</h2>
+                <p class="stepSubHeading">Arrastra el marcador</p>
+                <input type="hidden" name="latitude" id="latitude" >
+                <input type="hidden" name="longitude" id="longitude" >
+                <div class="containerFormStepsSelectors">
+                    <div class="mapacontainer"></div>
+                    <div id="mi_mapa"></div>
+                    <div class="inputDiv">
+                        <label for="date">¿Cuándo?</label>
+                        <input type="date" name="date">
+                    </div>
+
+                    <div class="inputDiv">
+                        <label for="time">¿A qué horas?</label>
+                        <select name="time" >
+                            <option value="" disabled selected>Selecciona una hora</option>
+                            <option value="6am">6 AM</option>
+                            <option value="7am">7 AM</option>
+                            <option value="8am">8 AM</option>
+                            <option value="9am">9 AM</option>
+                            <option value="10am">10 AM</option>
+                            <option value="11am">11 AM</option>
+                            <option value="12pm">12 PM</option>
+                            <option value="1pm">1 PM</option>
+                            <option value="2pm">2 PM</option>
+                            <option value="3pm">3 PM</option>
+                            <option value="4pm">4 PM</option>
+                            <option value="5pm">5 PM</option>
+                            <option value="6pm">6 PM</option>
+                            <option value="7pm">7 PM</option>
+                            <option value="8pm">8 PM</option>
+                            <option value="9pm">9 PM</option>
+                        </select>
+                    </div>
+
+                    <div class="inputDiv">
+                        <label for="description">Describe la mascota</label>
+                        <textarea name="description" placeholder="Puedes compartir todos los datos que consideres necesarios" rows="10"></textarea>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+            <div class="verificacion" style="display: none;">
+                <h2>Verificación</h2>
+                <!-- <div class="containerFormStepsSelectors"> -->
+                    <div class="alertPreview">
+                        <p>Muchas gracias por ayudarnos a que el regreso a casa sea una realidad. Por favor verificá que la información sea correcta.</p>
+                        <h3>Información de la mascota</h3>
+                    </div>
+
+                <!-- </div> -->
+            </div>
+
+            <div class="btnStepForm">
+                <button class="btn secundary" id="prev">Regresar</button>
+                <button id="next">Continuar</button>
+            </div>
+        </form>
+
+
+        
+
     </main>
-
-
-    <nav class="bottomNavBar">
-        <ul>
-            <li class="active">
-                <a href="#">
-                    <i class="bi bi-house-door"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bi bi-search"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bi bi-plus"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bi bi-shield-exclamation"></i>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="bi bi-person"></i>
-                </a>
-            </li>
-        </ul>
-
-    </nav>
+    <script defer async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcqXxMijjl-i15NgGHljhsf7tArQU7kDU&callback=initMap">
+    </script>
 
     <script>
+
+        let map;
+        let ubicacionSelectMarker;
+        const form = document.querySelector('.addNewPetForm.createAlert');
+        const {description, date, time} = form;
+        form.style.display = 'none';
+        const nextBtn = document.querySelector('#next');
+        const prevBtn = document.querySelector('#prev');
+
+        let pasoActual = 'inicio';
+        let tipoProceso = 'savedProfile'
+
+        let informacionAlerta = {
+            petName: '',
+            type: '',
+            size: '',
+            color1: '',
+            color2: '',
+            breed: '',
+            description: '',
+            latitude: '',
+            longitude: '',
+            date: '',
+            time: '',
+            img: '',
+            personName: '',
+            email: '',
+            password: '',
+            alertType: 'lost',
+            sex: '',
+            pet:'',
+            creator: '',
+        }
+
+
+
+        let today = new Date();
+        let dateStr = today.toISOString().substring(0, 10);
+        date.value = dateStr;
+        date.max = dateStr;
+        
+        function initMap(){
+            let centerMap = getSavedLocationOrDefault();
+            const mapOptions = {
+                zoom: 16,
+                center: centerMap,
+                disableDefaultUI: true,
+                styles: [
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#e9e9e9"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#dedede"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#333333"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f2f2f2"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    }
+                ],
+            };
+
+            map = new google.maps.Map(document.getElementById("mi_mapa"), mapOptions);
+            ubicacionSelectMarker = new google.maps.Marker({
+                position: centerMap,
+                map: map,
+                draggable: true, // Hace el marcador arrastrable
+                title: "Arrástrame!",
+                icon: {
+                    url: `./img/sniffnearmarkergreen.png`,
+                    scaledSize: new google.maps.Size(30, 44),
+                },
+
+            });
+
+            google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                informacionAlerta.latitude = parseFloat(evt.latLng.lat().toFixed(6));
+                informacionAlerta.longitude = parseFloat(evt.latLng.lng().toFixed(6));
+                console.log('se actualizaron las coordenadas', informacionAlerta.latitude, informacionAlerta.longitude)
+            });
+
+            
+
+        }
+
+        function ubicacionActual(position) {
+            guardarUltimaUbicacion(position);
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            informacionAlerta.latitude = lat;
+            informacionAlerta.longitude = lng;
+            console.log(lat, lng);
+
+            // Si el mapa ya está inicializado, cambia el centro
+            if (map) {
+                let newCenter = new google.maps.LatLng(lat, lng);
+                map.setCenter(newCenter);
+
+                console.log('coordenadas que se estan ejecutando', lat, lng)
+
+                // Crea un marcador arrastrable en la nueva ubicación
+                if (ubicacionSelectMarker) { // Si ya existe, actualiza su posición
+                    ubicacionSelectMarker.setPosition(newCenter);
+                } else { // Si no existe, crea uno nuevo
+                    ubicacionSelectMarker = new google.maps.Marker({
+                        position: newCenter,
+                        map: map,
+                        draggable: true, // Hace el marcador arrastrable
+                        title: "Arrástrame!",
+                        icon: {
+                            url: `./img/sniffnearmarkergreen.png`,
+                            scaledSize: new google.maps.Size(30, 44),
+                        },
+
+                    });
+
+                    // // Añade un 'listener' para actualizar las coordenadas en los inputs cuando el marcador es arrastrado
+                    google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                        informacionAlerta.latitude = parseFloat(evt.latLng.lat().toFixed(6));
+                        informacionAlerta.longitude = parseFloat(evt.latLng.lng().toFixed(6));
+                        console.log('se actualizaron las coordenadas', informacionAlerta.latitude, informacionAlerta.longitude)
+                    });
+                }
+            }
+
+
+
+        }
+
+        let coordenadasGuardadas = getSavedLocationOrDefault();
+        console.log(coordenadasGuardadas, 'coordenadasGuardadas');
+
+        informacionAlerta.latitude = parseFloat(coordenadasGuardadas.lat);
+        informacionAlerta.longitude = parseFloat(coordenadasGuardadas.lng);
+
+        function errorUbicacion(error) {
+            console.error(`Error obteniendo la ubicación: ${error.message}`);
+
+            if (map) {
+                let newCenter = new google.maps.LatLng( informacionAlerta.latitude, informacionAlerta.longitude);
+                console.log(newCenter, 'newCenter');
+
+
+                map.setCenter(newCenter);
+
+                // Crea un marcador arrastrable en la nueva ubicación
+                if (ubicacionSelectMarker) { // Si ya existe, actualiza su posición
+                    ubicacionSelectMarker.setPosition(newCenter);
+                } else { // Si no existe, crea uno nuevo
+                    ubicacionSelectMarker = new google.maps.Marker({
+                        position: coordenadasGuardadas,
+                        map: map,
+                        draggable: true, // Hace el marcador arrastrable
+                        title: "Arrástrame!",
+                        icon: {
+                            url: `./img/sniffnearmarkergreen.png`,
+                            scaledSize: new google.maps.Size(30, 44),
+                        },
+
+                    });
+
+                    // // Añade un 'listener' para actualizar las coordenadas en los inputs cuando el marcador es arrastrado
+                    google.maps.event.addListener(ubicacionSelectMarker, 'dragend', function(evt) {
+                        informacionAlerta.latitude = parseFloat(evt.latLng.lat().toFixed(6));
+                        informacionAlerta.longitude = parseFloat(evt.latLng.lng().toFixed(6));
+                        console.log('se actualizaron las coordenadas', informacionAlerta.latitude, informacionAlerta.longitude)
+                    });
+                }
+            }
+
+        }
+        
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(ubicacionActual, errorUbicacion);
+        } else {
+            console.log("Geolocalización no está disponible en este navegador.");
+        }
+
+        function initSecondMap() {
+            // let latitudeUpdated  = document.getElementById('latitude');
+            // let longitudeUpdated = document.getElementById('longitude');
+            let secondMapCenter = { lat: informacionAlerta.latitude, lng: informacionAlerta.longitude }; // Ejemplo de coordenadas
+            const secondMapOptions = {
+                zoom: 16,
+                center: secondMapCenter,
+                disableDefaultUI: true,
+                styles: [
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#e9e9e9"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#dedede"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "on"
+                            },
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#333333"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f2f2f2"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    }
+                ],
+            };
+            
+            const secondMap = new google.maps.Map(document.getElementById("mi_mapa2"), secondMapOptions);
+
+            // Crear un marcador fijo para el segundo mapa
+            const secondMapMarker = new google.maps.Marker({
+                position: secondMapCenter,
+                map: secondMap,
+                icon: {
+                    url: `./img/sniffnearmarkergreen.png`,
+                    scaledSize: new google.maps.Size(30, 44),
+                },
+            });
+        }
+
+
+        function guardarUltimaUbicacion(position) {
+            // Obtén las coordenadas actuales
+            const currentCoords = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+
+            // Verifica si ya existen coordenadas guardadas en el localStorage
+            const savedCoords = localStorage.getItem('lastCoords');
+
+            // Verifica si las coordenadas guardadas son diferentes a las actuales
+            if (savedCoords) {
+                const lastCoords = JSON.parse(savedCoords);
+
+                // Compara las coordenadas actuales con las guardadas
+                if (lastCoords.lat !== currentCoords.lat || lastCoords.lng !== currentCoords.lng) {
+                    // Si son diferentes, actualiza el localStorage con las nuevas coordenadas
+                    localStorage.setItem('lastCoords', JSON.stringify(currentCoords));
+                    console.log('Nuevas coordenadas guardadas:', currentCoords);
+                } else {
+                    console.log('Las coordenadas no han cambiado.');
+                }
+            } else {
+                // Si no hay coordenadas guardadas, guarda las actuales
+                localStorage.setItem('lastCoords', JSON.stringify(currentCoords));
+                console.log('Coordenadas guardadas por primera vez:', currentCoords);
+            }
+        }
+
+
+        function getSavedLocationOrDefault() {
+            // Intenta obtener las últimas coordenadas guardadas del localStorage
+            const savedCoords = localStorage.getItem('lastCoords');
+            if (savedCoords) {
+                // Si hay coordenadas guardadas, las parsea y las devuelve
+                return JSON.parse(savedCoords);
+            } else {
+                // Si no hay coordenadas guardadas, devuelve las coordenadas predeterminadas
+                return { lat: 35.2713493, lng: -80.9588694 };
+            }
+        }
+
+        function displaySteps(pasoActual){
+            switch (pasoActual){
+                case 'inicio':
+                    document.querySelector('form').style.display = 'none';
+                    document.querySelector('.alert_lose').style.display = 'block';
+                    document.querySelector('.verificacion').style.display = 'none';
+                    break;
+                case 'lugarYFecha':
+                    document.querySelector('form').style.display = 'block';
+                    document.querySelector('.alert_lose').style.display = 'none';
+                    document.querySelector('.verificacion').style.display = 'none';
+                    document.querySelector('.lugarYFecha').style.display = 'block';
+                break;
+                case 'verificacion':
+                    document.querySelector('form').style.display = 'block';
+                    document.querySelector('.alert_lose').style.display = 'none';
+                    document.querySelector('.verificacion').style.display = 'block';
+                    document.querySelector('.lugarYFecha').style.display = 'none';
+                    displayPreviewData();
+                break;
+            }
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextBtn.textContent = 'Continuar';
+            if (pasoActual === 'inicio'){
+                pasoActual = 'lugarYFecha';
+                displaySteps(pasoActual);
+            }
+            if (pasoActual === 'lugarYFecha'){
+                pasoActual = 'inicio';
+                displaySteps(pasoActual);
+            }
+
+            if (pasoActual === 'verificacion'){
+                pasoActual = 'lugarYFecha';
+                displaySteps(pasoActual);
+            }
+        })
+
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (pasoActual == 'lugarYFecha'){
+
+                informacionAlerta.date = date.value;
+                informacionAlerta.description = description.value;
+                pasoActual = 'verificacion';
+                displaySteps(pasoActual);
+                console.log(informacionAlerta);
+                nextBtn.textContent = 'Publicar alerta';
+            } else if (pasoActual === 'verificacion'){
+                postFormInfoToDB('https://sniffnear-api.onrender.com/api/alerts/', informacionAlerta, './mapa_alertas.html', 'alert')
+            }
+        })
+        
+
+        function displayPreviewData (){
+            const alertPreview = document.querySelector('.alertPreview');
+            alertPreview.innerHTML = '';
+            const parrafoInicial = document.createElement('p');
+            parrafoInicial.textContent = `Lamentamos mucho que ${informacionAlerta.petName} se haya extraviado, pero no será por mucho tiempo. Por favor verifica que la información sea correcta.`;
+            alertPreview.appendChild(parrafoInicial);
+            const h3InfoMascota = document.createElement('h3');
+            h3InfoMascota.textContent = `Información de ${informacionAlerta.petName}`;
+            alertPreview.appendChild(h3InfoMascota);
+            const prevInfoContainter = document.createElement('div');
+            prevInfoContainter.classList.add('prevInfoContainter');
+            const imgPrevContainer = document.createElement('div');
+            imgPrevContainer.classList.add('imgPrevContainer');
+            // imgPrevContainer.style.backgroundImage = `url(${img.value})`;
+            // addPreviewImgOnReview(informacionAlerta.img, imgPrevContainer);
+            imgPrevContainer.style.backgroundImage = `url(${informacionAlerta.img})`;
+            // imgPrevContainer.innerHTML = '';
+            const prevInfo = document.createElement('div');
+            const prevInfoUl = document.createElement('ul');
+            const colorValue = informacionAlerta.color2 ? `${informacionAlerta.color1}, ${informacionAlerta.color2}` : informacionAlerta.color1;
+            const breedValue = informacionAlerta.breed ? informacionAlerta.breed : 'Sin especificar';
+            prevInfoUl.innerHTML = `
+                <li>Tipo de animal: <span>${informacionAlerta.type}</span></li>
+                <li>Tamaño: <span>${informacionAlerta.size}</span></li>
+                <li>Color: <span>${colorValue}</span></li>
+                <li>Raza: <span>${breedValue}</span></li>
+                <li>Visto por última vez en <span>${informacionAlerta.latitude}, ${informacionAlerta.longitude}</span>, a las <span>${informacionAlerta.time}</span></li>
+                <li>Descripción: ${informacionAlerta.description}</li>
+            `;
+            prevInfo.appendChild(prevInfoUl);
+            prevInfoContainter.appendChild(imgPrevContainer);
+            prevInfoContainter.appendChild(prevInfo);
+
+            alertPreview.appendChild(prevInfoContainter);
+
+
+            const previewMap = document.createElement('div');
+            previewMap.id = 'mi_mapa2';
+            previewMap.classList.add('previewMap');
+            alertPreview.appendChild(previewMap);
+
+            const infoContactoH3 = document.createElement('h3');
+            infoContactoH3.textContent = 'Información de contacto';
+            const infoContactoP = document.createElement('p');
+            infoContactoP.textContent = `${informacionAlerta.personName}, ${informacionAlerta.email}`;
+            infoContactoP.classList.add('infoContactoP');
+            alertPreview.appendChild(infoContactoH3);
+            alertPreview.appendChild(infoContactoP);
+
+            // const editLink = document.createElement('p');
+            // editLink.classList.add('editLink');
+            // editLink.textContent = 'Editar';
+
+            // editLink.addEventListener('click', () => {
+            //     currentStep = 1;
+            //     displaySteps();
+            // });
+
+            // alertPreview.appendChild(editLink);
+            initSecondMap();
+        }
+
+
+
+                // subiendo la alerta a la bd
+        // async function addFormInfoToDB(){
+
+
+        //     console.log(data);
+
+            
+
+
+        //     // intentando agregar la imagen a firebase
+        //     const file = img.files[0];
+
+
+        //     // Comprobar si hay un archivo seleccionado
+        //     if (file && file.size > 0) {
+        //         const customName = name.value;
+        //         uploadImage(storage, file, customName).then(async (url) => {
+        //             console.log('File URL:', url);
+
+        //             data.img = url;
+        //             console.log(data);
+
+        //             postFormInfoToDB('https://sniffnear-api.onrender.com/api/alerts/', data, './mapa_alertas.html', 'alert');
+        //         });
+        //     } 
+        //     // else {
+        //     //     data.img = '';
+        //     //     // Si no hay archivo, ejecutar directamente postFormInfoToDB
+        //     //     postFormInfoToDB('https://sniffnear-api.onrender.com/api/pets/', data, './pet-profile.html');
+        //     // }
+        
+
+        // }
+
+
+
+    </script>
+
+    
+
+    <script type="module">
+        import {stepsProgressBar, markSomethingAsSelectedWithHideInputGetting, validateInput, uploadImage, previewImage, addPreviewImgOnReview, renderAMap, postFormInfoToDB, createLoader, removeLoader} from './js/functions.js';
+
+        window.addPreviewImgOnReview = addPreviewImgOnReview
+        window.postFormInfoToDB = postFormInfoToDB;
+
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
         const petsUl = document.querySelector('.myPetsCard ul');
         console.log(petsUl);
 
+
+
+
+        date.addEventListener('change', (e) => {
+            informacionAlerta.date = e.target.value;
+            console.log(informacionAlerta);
+        })
+
+        time.addEventListener('change', (e) => {
+            informacionAlerta.time = e.target.value;
+            console.log(informacionAlerta);
+        })
+
         async function getUser(){
             const response = await fetch(`https://sniffnear-api.onrender.com/api/users/${storedUserId}`);
 
             petsUl.innerHTML = '';
+
             
 
             if(response.ok){
                 const data = await response.json();
+                let user = data.user;
+                informacionAlerta.creator = user._id;
 
-                user = data.user;
-                pets = data.pets;
+                let pets = data.pets;
                 console.log(user);
                 console.log(pets);
 
@@ -139,7 +924,30 @@
 
                     //aquí habría que agregar un evento click para que al seleccionar a la mascota continúe con la alerta y lleve los datos de la mascota seleccionada
 
+                    petLi.addEventListener('click', () => {
+                        informacionAlerta.petName = pet.name;
+                        informacionAlerta.type = pet.type;
+                        informacionAlerta.size = pet.size;
+                        informacionAlerta.color1 = pet.color1;
+                        informacionAlerta.color2 = pet.color2;
+                        informacionAlerta.breed = pet.breed;
+                        informacionAlerta.description = pet.description;
+                        informacionAlerta.img = pet.img;
+                        informacionAlerta.personName = user.name;
+                        informacionAlerta.email = user.email;
+                        informacionAlerta.sex = pet.sex;
+                        informacionAlerta.pet = pet._id;
+
+                        document.querySelector('.alert_lose').style.display = 'none';
+                        form.style.display = 'block';
+                        pasoActual = 'lugarYFecha';
+                        // console.log(informacionAlerta);
+                    })
+                  
+                    
                     petsUl.appendChild(petLi);
+
+                    
                 });
 
 
@@ -149,6 +957,15 @@
         }
 
         getUser();
+
+        const addPetBtn = document.querySelector('.addPetBtn');
+        const addPetBtnDiv = addPetBtn.parentElement;
+        // console.log(addPetBtnDiv);
+
+        addPetBtnDiv.addEventListener('click', () => {
+            window.location.href = 'add-pet.html';
+        });
+
 
 
         

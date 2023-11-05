@@ -347,7 +347,7 @@ main section{
 }
 
 
-.myPetsCard .addPetBtn{
+ .addPetBtn{
     width: 60px;
     height: 60px;
     display: block;
@@ -361,9 +361,10 @@ main section{
     font-size: 3em;
     font-weight: bolder;
     transition: all 0.2s ease;
+    cursor: pointer;
 }
 
-.myPetsCard > div:nth-of-type(1) > div:hover .addPetBtn{
+.myPetsCard > div:nth-of-type(1) > div:hover .addPetBtn, .addPetBtn:hover{
     background-color: #FFD600;
     color: var(--color-neutral-0);
 }
@@ -1188,18 +1189,28 @@ input.error, select.error{
     font-size: 16px;
     font-weight: 500;
 }
-.alert_lose p {
+.alert_lose> p {
     font-family: 'Rubik', sans-serif;
     font-size: 14px;
     font-weight: 400px;
     text-align: center;
 }
+
 .myPetsLose{
     display: flex;
-    justify-content: center;
+    background-color: var(--color-neutral-10);
+    border-radius: 8px;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.15);
+    /* justify-content: center; */
 }
-
-.alert_lose h2{
+.myPetsLose p{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.alert_lose > h2{
     color: rgba(0, 0, 0, 0.50);
 font-family: Rubik;
 font-size: 13px;
