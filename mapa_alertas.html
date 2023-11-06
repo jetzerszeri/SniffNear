@@ -359,14 +359,14 @@
                         <div>
                             <img src="${data.img}">
                             <div >
-                                <p><span class="petType">${data.type}</span> encontrado</p>
+                                <p><span class="petType">${data.type}</span> ${data.alertType === 'found' ? 'encontrado' : 'perdido'}</p>
                                 <p>en Mendoza, Argentina</p>
                                 <p><span>${data.size}</span></p><p>color: <span>${data.color1} </span></p>
 
                             </div>
                         </div>
                         <div>
-                            <p class="foundAt">Encontrado el: <span>${convertISOToDate(data.date)}</span> a las <span>${data.time}</span> apx</p>
+                            <p class="foundAt">${data.alertType === 'found' ? 'Encontrado' : 'Extraviado'} el: <span>${convertISOToDate(data.date)}</span> a las <span>${data.time}</span> apx</p>
                         </div>
                         <a class="btn small" href="./detail_alert.html?id=${data._id}">Ver detalles</a>
                     </div>`;
