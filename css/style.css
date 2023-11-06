@@ -624,7 +624,7 @@ main section{
 .singUpView > div:nth-of-type(1){
     transform: translateY(-50%);
     background-color: var(--color-neutral-0);
-    /* width: fit-content; */
+    width: fit-content;
     margin: auto;
     padding: 12px;
     border-radius: 50%;
