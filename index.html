@@ -280,6 +280,8 @@
         const storedUserId = localStorage.getItem('userId');
         console.log(storedUserId);
 
+
+
         //validar si hay un userId, sino mandarlo al login
         const welcomeMsg = document.querySelector('.welcomeCard h1');
         // console.log(welcomeMsg);
@@ -364,6 +366,12 @@
                 removeLoader();
                 // console.log(data);
             } else {
+
+                if(storedUserId){
+                    localStorage.removeItem('userId');
+                    window.location.href = 'login.html';
+                } 
+                
                 console.log('Error en la petición');
                 removeLoader();
             }
