@@ -1599,3 +1599,61 @@ padding-bottom: 60px;
     color: var(--color-neutral-50);
     text-align: center;
 }
+
+
+
+
+/* estilos de welcomepage */
+
+.welcomePage{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    /* background: url(../img/tramablanca.svg); */
+}
+
+.welcomePage div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+justify-content: center;
+align-self: center;
+}
+
+.welcomePage h1{
+    font-size: 1em;
+    font-weight: 400;
+}
+
+.welcomePage h1 span{
+    font-size: 0;
+    display: block;
+    width: 132px;
+    height: 32px;
+    background: url(../img/logoHorizontalCompleto.svg) no-repeat center;
+    margin: 10px auto 0;
+}
+
+.welcomePage h1 + p{
+    width: 70%;
+    margin: auto;
+
+}
+
+
+.welcomePage img{
+    max-width: 280px;
+    margin: 30px auto 20px;
+    display: block;
+}
+
+.welcomePage div:nth-of-type(2) p{
+    font-size: 0.9em;
+    color: var(--color-neutral-90);
+    margin-top: 10px;
+}
