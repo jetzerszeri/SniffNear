@@ -101,7 +101,7 @@
 
                 <div>
                     <label for="name">Nombre</label>
-                    <input type="text" name="name" placeholder="Ingresa el nombre de tu mascota">
+                    <input type="text" name="name" placeholder="Ingresa el nombre de tu mascota" value="Milo">
                 </div>
 
                 <div>
@@ -109,14 +109,14 @@
                         <label for="birthdate">Fecha de nacimiento</label>
                         <p>Puede ser un aproximado*</p>
                     </div>
-                    <input type="date" name="birthdate">
+                    <input type="date" name="birthdate" >
                 </div>
 
                 <div>
                     <label for="breed">Raza</label>
                     <select name="breed" >
-                        <option value="" disabled selected>Selecciona una raza</option>
-                        <option value="1">Raza 1</option>
+                        <option value="" disabled >Selecciona una raza</option>
+                        <option value="1" selected>Bulldog</option>
                         <option value="2">Raza 2</option>
                         <option value="3">Raza 3</option>
                     </select>
@@ -124,7 +124,7 @@
 
                 <div>
                     <label for="sex">Género</label>
-                    <input type="hidden" name="sex" id="sex" >
+                    <input type="hidden" name="sex" id="sex">
                     <div class="sexSelector">
                         <div data-value="male">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
